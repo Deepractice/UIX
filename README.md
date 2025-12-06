@@ -315,30 +315,13 @@ fontFamily.sans  // ['Inter', ...]
 
 ## Roadmap
 
-### Phase 1: AI Agent Core (Current)
 - [x] Design token system (colors, typography, spacing)
 - [x] Tailwind CSS integration
 - [x] Button component
-- [ ] ChatBubble - Message container with role support
-- [ ] StreamText - Streaming text with cursor
-- [ ] ThinkingIndicator - Agent thinking state
-- [ ] AgentAvatar - Avatar with status indicator
-
-### Phase 2: Chat Experience
-- [ ] ChatInput - Input with @mention support
-- [ ] ChatList - Conversation list sidebar
-- [ ] ChatWindow - Main chat area layout
-- [ ] MentionPopover - Agent mention selector
-
-### Phase 3: Foundation Components
+- [ ] AI Agent components (ChatBubble, StreamText, ThinkingIndicator)
 - [ ] Input component
 - [ ] Card component
-- [ ] CodeBlock - Syntax highlighted code
-- [ ] Badge component
-
-### Phase 4: Documentation
 - [ ] Storybook documentation site
-- [ ] Visual design guidelines
 - [ ] npm package publication
 
 ---
