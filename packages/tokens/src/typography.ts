@@ -52,7 +52,16 @@ export const letterSpacing = {
   wider: '0.05em',
 } as const
 
+// Aggregated typography object for convenience
+export const typography = {
+  fontFamily,
+  fontSize,
+  fontWeight,
+  letterSpacing,
+} as const
+
 export type FontFamily = typeof fontFamily
 export type FontSize = typeof fontSize
 export type FontWeight = typeof fontWeight
 export type LetterSpacing = typeof letterSpacing
+export type Typography = typeof typography
