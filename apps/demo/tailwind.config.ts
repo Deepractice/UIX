@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 // Import tokens directly using relative path for monorepo compatibility
-import { colors } from '../../packages/tokens/src/colors'
+import { colors, rational, sentient } from '../../packages/tokens/src/colors'
 import { fontFamily, fontSize, fontWeight, letterSpacing } from '../../packages/tokens/src/typography'
 import { spacing } from '../../packages/tokens/src/spacing'
 import { radius } from '../../packages/tokens/src/radius'
@@ -17,12 +17,18 @@ export default {
     extend: {
       colors: {
         ...colors,
+        // Dual themes
+        rational,
+        sentient,
+        // Default primary uses rational theme
+        primary: rational,
+        // Semantic color aliases
         background: colors.white,
         foreground: colors.gray[900],
         muted: colors.gray[100],
         'muted-foreground': colors.gray[600],
         border: colors.gray[200],
-        ring: colors.primary[500],
+        ring: rational[500],
       },
       fontFamily: {
         sans: fontFamily.sans,

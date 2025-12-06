@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { colors, spacing, radius, shadows, typography } from '@lucidui/tokens'
+import { colors, spacing, radius, shadows, typography, rational, sentient } from '@lucidui/tokens'
 import { Button } from '@lucidui/react'
 
 type Section = 'philosophy' | 'colors' | 'typography' | 'spacing' | 'buttons' | 'patterns'
@@ -86,48 +86,97 @@ function PhilosophySection() {
         <h2 className="text-2xl font-semibold text-gray-900 mb-6">Design Philosophy</h2>
         <div className="prose prose-gray max-w-none">
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            <strong>Lucid</strong> means clear, easily understood, and mentally sound.
-            In an era where AI interfaces are often shrouded in mystique and complexity,
-            we choose clarity as our guiding principle.
+            <strong>Lucid</strong> 意为清晰、易懂、理性。在 AI 产品充斥着神秘主义和复杂性的时代,
+            我们选择清晰作为指导原则。基于 shadcn/ui 的设计系统,我们提供双主题方案:
+            理性蓝(Rational)代表效率、精准、计算;感性金(Sentient)代表智慧、思维、人文。
           </p>
-          <blockquote className="border-l-4 border-primary-500 pl-6 my-6 text-gray-600 italic">
-            "The best interface is one that disappears, letting users focus on what matters."
+          <blockquote className="border-l-4 border-rational-500 pl-6 my-6 text-gray-600 italic">
+            "最好的界面会消失,让用户专注于真正重要的事情。"
           </blockquote>
         </div>
       </div>
 
-      {/* Three Pillars */}
+      {/* Dual Theme System */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 mb-6">Three Pillars</h2>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-6">双主题系统 Dual Theme System</h2>
+        <div className="grid grid-cols-2 gap-8">
+          {/* Rational Theme */}
+          <div className="bg-gradient-to-br from-rational-50 to-rational-100 border-2 border-rational-300 rounded-xl p-8">
+            <div className="w-16 h-16 bg-rational-500 rounded-xl flex items-center justify-center mb-4 shadow-lg">
+              <span className="text-3xl">💎</span>
+            </div>
+            <h3 className="text-2xl font-bold text-rational-900 mb-3">Rational 理性蓝</h3>
+            <p className="text-rational-700 mb-4">
+              科技 · 效率 · 精准 · 计算
+            </p>
+            <div className="flex gap-2 mb-4">
+              {([50, 100, 300, 500, 700, 900] as const).map(shade => (
+                <div
+                  key={shade}
+                  className="w-8 h-8 rounded-md shadow"
+                  style={{ backgroundColor: rational[shade] }}
+                />
+              ))}
+            </div>
+            <p className="text-sm text-rational-600">
+              代表理性思考、精准计算、科技感。适用于数据分析、效率工具、技术产品。
+            </p>
+          </div>
+
+          {/* Sentient Theme */}
+          <div className="bg-gradient-to-br from-sentient-50 to-sentient-100 border-2 border-sentient-300 rounded-xl p-8">
+            <div className="w-16 h-16 bg-sentient-500 rounded-xl flex items-center justify-center mb-4 shadow-lg">
+              <span className="text-3xl">🧠</span>
+            </div>
+            <h3 className="text-2xl font-bold text-sentient-900 mb-3">Sentient 感性金</h3>
+            <p className="text-sentient-700 mb-4">
+              智慧 · 思维 · 人文 · 概率
+            </p>
+            <div className="flex gap-2 mb-4">
+              {([50, 100, 300, 500, 700, 900] as const).map(shade => (
+                <div
+                  key={shade}
+                  className="w-8 h-8 rounded-md shadow"
+                  style={{ backgroundColor: sentient[shade] }}
+                />
+              ))}
+            </div>
+            <p className="text-sm text-sentient-600">
+              代表感性思维、人文关怀、智慧洞察。适用于创意工具、人文产品、思考辅助。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Design Principles */}
+      <div>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-6">核心原则 Core Principles</h2>
         <div className="grid grid-cols-3 gap-6">
           <div className="bg-white border border-gray-200 rounded-lg p-6">
             <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
               <span className="text-2xl">⚪</span>
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">White & Gray Foundation</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">White Foundation</h3>
             <p className="text-gray-600 text-sm">
-              White provides breathing space. Gray creates hierarchy without distraction.
-              Together they form a neutral canvas that lets content shine.
-            </p>
-          </div>
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-              <span className="text-2xl">💧</span>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Cool Blue Accent</h3>
-            <p className="text-gray-600 text-sm">
-              Blue represents clarity, trust, and intelligence. Used sparingly as an accent,
-              it guides attention without overwhelming the experience.
+              白色为底,灰阶层级。为大众产品提供清晰的视觉基础,避免深色的小众感。
             </p>
           </div>
           <div className="bg-white border border-gray-200 rounded-lg p-6">
             <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
               <span className="text-2xl">🚫</span>
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">No AI Purple</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">No Purple, No Black</h3>
             <p className="text-gray-600 text-sm">
-              We reject the overused purple gradients of AI products.
-              Our technology speaks for itself without theatrical visual effects.
+              拒绝 AI 紫色的陈词滥调,避免深色主题的小众性。清晰胜过神秘。
+            </p>
+          </div>
+          <div className="bg-white border border-gray-200 rounded-lg p-6">
+            <div className="w-12 h-12 bg-gradient-to-br from-rational-500 to-sentient-500 rounded-lg flex items-center justify-center mb-4">
+              <span className="text-2xl text-white">⚖️</span>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Dual Modes</h3>
+            <p className="text-gray-600 text-sm">
+              理性与感性并存,科技与人文平衡,为不同场景提供合适的视觉语言。
             </p>
           </div>
         </div>
@@ -229,13 +278,62 @@ function ColorsSection() {
       <div>
         <h2 className="text-2xl font-semibold text-gray-900 mb-2">Color System</h2>
         <p className="text-gray-600 mb-8">
-          White and gray as foundation, cool blue as accent. No AI purple.
+          基于 shadcn/ui 的双主题色彩系统:理性蓝与感性金,白色基底,无紫色无黑色。
         </p>
       </div>
 
-      {/* Gray Scale - The Core */}
+      {/* Dual Theme Comparison */}
+      <div className="grid grid-cols-2 gap-8">
+        {/* Rational Theme */}
+        <div>
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Rational 理性蓝 - 科技·效率·精准</h3>
+          <div className="grid grid-cols-6 gap-2">
+            {([50, 100, 300, 500, 700, 900] as const).map(shade => (
+              <div key={shade} className="text-center">
+                <div
+                  className="h-16 rounded-md border border-gray-200 mb-2 shadow-sm"
+                  style={{ backgroundColor: rational[shade] }}
+                />
+                <p className="text-xs font-medium text-gray-700">{shade}</p>
+                <p className="text-xs text-gray-500">{rational[shade].slice(0, 7)}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 p-4 bg-rational-50 border border-rational-200 rounded-lg">
+            <p className="text-sm text-rational-700">
+              主色调 <span className="font-mono font-semibold">{rational[500]}</span> -
+              适用于数据分析、技术产品、效率工具
+            </p>
+          </div>
+        </div>
+
+        {/* Sentient Theme */}
+        <div>
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Sentient 感性金 - 智慧·思维·人文</h3>
+          <div className="grid grid-cols-6 gap-2">
+            {([50, 100, 300, 500, 700, 900] as const).map(shade => (
+              <div key={shade} className="text-center">
+                <div
+                  className="h-16 rounded-md border border-gray-200 mb-2 shadow-sm"
+                  style={{ backgroundColor: sentient[shade] }}
+                />
+                <p className="text-xs font-medium text-gray-700">{shade}</p>
+                <p className="text-xs text-gray-500">{sentient[shade].slice(0, 7)}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 p-4 bg-sentient-50 border border-sentient-200 rounded-lg">
+            <p className="text-sm text-sentient-700">
+              主色调 <span className="font-mono font-semibold">{sentient[500]}</span> -
+              适用于创意工具、人文产品、思考辅助
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Gray Scale - The Foundation */}
       <div>
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Gray Scale (Core)</h3>
+        <h3 className="text-lg font-medium text-gray-900 mb-4">Gray Scale 灰阶 - 视觉基底</h3>
         <div className="grid grid-cols-11 gap-2">
           {Object.entries(colors.gray).map(([shade, value]) => (
             <div key={shade} className="text-center">
@@ -248,22 +346,10 @@ function ColorsSection() {
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Primary - Cool Blue */}
-      <div>
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Primary (Cool Blue)</h3>
-        <div className="grid grid-cols-11 gap-2">
-          {Object.entries(colors.primary).map(([shade, value]) => (
-            <div key={shade} className="text-center">
-              <div
-                className="h-16 rounded-md border border-gray-200 mb-2"
-                style={{ backgroundColor: value }}
-              />
-              <p className="text-xs font-medium text-gray-700">{shade}</p>
-              <p className="text-xs text-gray-500">{value}</p>
-            </div>
-          ))}
+        <div className="mt-4 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+          <p className="text-sm text-gray-600">
+            白色与灰阶构成视觉基底,为大众产品提供清晰的层级感,避免深色主题的小众性。
+          </p>
         </div>
       </div>
 
@@ -275,11 +361,11 @@ function ColorsSection() {
           <div>
             <h4 className="text-sm font-medium text-gray-700 mb-3">Success</h4>
             <div className="grid grid-cols-5 gap-1">
-              {['100', '300', '500', '700', '900'].map((shade) => (
+              {([100, 300, 500, 700, 900] as const).map((shade) => (
                 <div key={shade} className="text-center">
                   <div
                     className="h-10 rounded border border-gray-200 mb-1"
-                    style={{ backgroundColor: colors.success[shade as keyof typeof colors.success] }}
+                    style={{ backgroundColor: colors.success[shade] }}
                   />
                   <p className="text-xs text-gray-500">{shade}</p>
                 </div>
@@ -290,11 +376,11 @@ function ColorsSection() {
           <div>
             <h4 className="text-sm font-medium text-gray-700 mb-3">Warning</h4>
             <div className="grid grid-cols-5 gap-1">
-              {['100', '300', '500', '700', '900'].map((shade) => (
+              {([100, 300, 500, 700, 900] as const).map((shade) => (
                 <div key={shade} className="text-center">
                   <div
                     className="h-10 rounded border border-gray-200 mb-1"
-                    style={{ backgroundColor: colors.warning[shade as keyof typeof colors.warning] }}
+                    style={{ backgroundColor: colors.warning[shade] }}
                   />
                   <p className="text-xs text-gray-500">{shade}</p>
                 </div>
@@ -305,11 +391,11 @@ function ColorsSection() {
           <div>
             <h4 className="text-sm font-medium text-gray-700 mb-3">Error</h4>
             <div className="grid grid-cols-5 gap-1">
-              {['100', '300', '500', '700', '900'].map((shade) => (
+              {([100, 300, 500, 700, 900] as const).map((shade) => (
                 <div key={shade} className="text-center">
                   <div
                     className="h-10 rounded border border-gray-200 mb-1"
-                    style={{ backgroundColor: colors.error[shade as keyof typeof colors.error] }}
+                    style={{ backgroundColor: colors.error[shade] }}
                   />
                   <p className="text-xs text-gray-500">{shade}</p>
                 </div>
@@ -319,25 +405,60 @@ function ColorsSection() {
         </div>
       </div>
 
-      {/* Live Example */}
-      <div className="bg-gray-50 rounded-lg p-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Live Example</h3>
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-10 h-10 rounded-full bg-primary-500 flex items-center justify-center text-white font-medium">
-              A
-            </div>
-            <div>
-              <p className="font-medium text-gray-900">AI Assistant</p>
-              <p className="text-sm text-gray-500">Online</p>
+      {/* Live Examples - Dual Theme */}
+      <div>
+        <h3 className="text-lg font-medium text-gray-900 mb-4">应用示例 Live Examples</h3>
+        <div className="grid grid-cols-2 gap-6">
+          {/* Rational Example */}
+          <div className="bg-gradient-to-br from-rational-50 to-white rounded-xl border-2 border-rational-200 p-6">
+            <div className="bg-white rounded-lg border border-rational-200 p-6 shadow-sm">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 rounded-xl bg-rational-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
+                  R
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">Rational Assistant</p>
+                  <p className="text-sm text-gray-500">数据分析助手</p>
+                </div>
+              </div>
+              <p className="text-gray-600 mb-4 text-sm">
+                为效率而生,精准计算,理性决策。适用于技术产品和数据分析场景。
+              </p>
+              <div className="flex gap-2">
+                <button className="px-3 py-1.5 bg-rational-500 text-white text-sm rounded-md hover:bg-rational-600 transition-colors font-medium">
+                  开始分析
+                </button>
+                <button className="px-3 py-1.5 border border-rational-300 text-rational-700 text-sm rounded-md hover:bg-rational-50 transition-colors">
+                  查看数据
+                </button>
+              </div>
             </div>
           </div>
-          <p className="text-gray-600 mb-4">
-            This example demonstrates how our color system creates clear visual hierarchy.
-          </p>
-          <div className="flex gap-2">
-            <span className="px-2 py-1 bg-success-100 text-success-700 text-xs rounded">Active</span>
-            <span className="px-2 py-1 bg-primary-100 text-primary-700 text-xs rounded">Premium</span>
+
+          {/* Sentient Example */}
+          <div className="bg-gradient-to-br from-sentient-50 to-white rounded-xl border-2 border-sentient-200 p-6">
+            <div className="bg-white rounded-lg border border-sentient-200 p-6 shadow-sm">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 rounded-xl bg-sentient-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
+                  S
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">Sentient Assistant</p>
+                  <p className="text-sm text-gray-500">思维助手</p>
+                </div>
+              </div>
+              <p className="text-gray-600 mb-4 text-sm">
+                激发灵感,探索思维,人文关怀。适用于创意工具和思考辅助场景。
+              </p>
+              <div className="flex gap-2">
+                <button className="px-3 py-1.5 bg-sentient-500 text-white text-sm rounded-md hover:bg-sentient-600 transition-colors font-medium">
+                  开始创作
+                </button>
+                <button className="px-3 py-1.5 border border-sentient-300 text-sentient-700 text-sm rounded-md hover:bg-sentient-50 transition-colors">
+                  探索想法
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
