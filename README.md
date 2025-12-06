@@ -1,16 +1,17 @@
 <div align="center">
   <h1>Lucid UI · Design System for AI Generation</h1>
   <p>
-    <strong>清晰明澈的 AI 时代设计系统</strong>
+    <strong>A clear and professional design system for the AI era</strong>
   </p>
   <p>
-    <strong>Design Philosophy:</strong> 白灰主色调 | 冷蓝点缀 | 拒绝 AI 紫
+    <strong>Key Features:</strong> White & Gray Dominant | Cool Blue Accent | No AI Purple
   </p>
 
   <hr/>
 
   <p>
     <a href="https://github.com/Deepractice/Lucid-UI"><img src="https://img.shields.io/github/stars/Deepractice/Lucid-UI?style=social" alt="Stars"/></a>
+    <img src="https://komarev.com/ghpvc/?username=LucidUI&label=views&color=0e75b6&style=flat&abbreviated=true" alt="Views"/>
     <a href="LICENSE"><img src="https://img.shields.io/github/license/Deepractice/Lucid-UI?color=blue" alt="License"/></a>
     <a href="https://www.npmjs.com/package/@lucidui/react"><img src="https://img.shields.io/npm/v/@lucidui/react?color=cb3837&logo=npm" alt="npm"/></a>
   </p>
@@ -27,24 +28,24 @@
 
 ## Philosophy
 
-**Lucid** = 清晰、透明、易懂
+**Lucid** = Clear, Transparent, Understandable
 
-在 AI 时代，用户界面应该是：
-- **清晰可读** - 让信息一目了然
-- **透明直观** - 让交互逻辑显而易见
-- **简洁专业** - 让设计服务于内容
+In the AI era, user interfaces should be:
+- **Clear & Readable** - Information at a glance
+- **Transparent & Intuitive** - Self-evident interaction logic
+- **Simple & Professional** - Design serves content
 
 ### Design Principles
 
-1. **Clarity over decoration** - 功能优先于装饰
-2. **Consistency over novelty** - 一致性优先于新奇
-3. **Accessibility by default** - 无障碍是默认而非可选
+1. **Clarity over decoration** - Function before form
+2. **Consistency over novelty** - Predictability before surprise
+3. **Accessibility by default** - Not an afterthought
 
 ### Color Philosophy
 
-- **白灰为主** - 以白色、灰色为主色调
-- **冷蓝点缀** - 主色使用冷蓝 (#0EA5E9),克制使用
-- **拒绝 AI 紫** - 刻意避免紫色渐变等"AI 味"设计
+- **White & Gray Dominant** - Neutral foundation for clarity
+- **Cool Blue Accent** - Primary color (#0EA5E9), used sparingly
+- **No AI Purple** - Deliberately avoiding "AI aesthetic" gradients
 
 ---
 
@@ -157,9 +158,9 @@ All design tokens are available in `@lucidui/tokens`:
 import { tokens } from '@lucidui/tokens'
 
 // Colors
-tokens.colors.primary[500]  // '#0EA5E9' (冷蓝)
-tokens.colors.gray[100]     // '#F5F5F5' (浅灰)
-tokens.colors.error[500]    // '#EF4444' (错误红)
+tokens.colors.primary[500]  // '#0EA5E9' (Cool Blue)
+tokens.colors.gray[100]     // '#F5F5F5' (Light Gray)
+tokens.colors.error[500]    // '#EF4444' (Error Red)
 
 // Spacing (based on 4px grid)
 tokens.spacing[4]   // '1rem' (16px)
@@ -182,12 +183,12 @@ tokens.fontFamily.sans  // ['Inter', ...]
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| `bg-background` | #FFFFFF | 主背景 |
-| `bg-muted` | #F5F5F5 | 次级背景 |
-| `text-foreground` | #171717 | 主文字 |
-| `text-muted-foreground` | #737373 | 次级文字 |
-| `border-border` | #E5E5E5 | 边框 |
-| `bg-primary-500` | #0EA5E9 | 主色 |
+| `bg-background` | #FFFFFF | Main background |
+| `bg-muted` | #F5F5F5 | Subtle background |
+| `text-foreground` | #171717 | Primary text |
+| `text-muted-foreground` | #737373 | Secondary text |
+| `border-border` | #E5E5E5 | Borders |
+| `bg-primary-500` | #0EA5E9 | Primary color |
 
 ---
 
@@ -253,18 +254,18 @@ tokens.fontFamily.sans  // ['Inter', ...]
 
 | Package | Description |
 |---------|-------------|
-| `@lucidui/tokens` | Design Tokens - 颜色、字体、间距等设计变量 |
-| `@lucidui/react` | React Components - 基础 UI 组件 |
-| `@lucidui/agent` | Agent Components - 对话、流式输出等（计划中） |
+| `@lucidui/tokens` | Design Tokens - Colors, typography, spacing, etc. |
+| `@lucidui/react` | React Components - Core UI components |
+| `@lucidui/agent` | Agent Components - Chat, streaming, code blocks (planned) |
 
 ---
 
 ## Tech Stack
 
 - **React 18** + TypeScript
-- **Radix UI Primitives** - 无障碍组件基础
-- **Tailwind CSS** - 样式系统
-- **class-variance-authority** - 变体管理
+- **Radix UI Primitives** - Accessible component foundation
+- **Tailwind CSS** - Styling system
+- **class-variance-authority** - Variant management
 - **Vite** + pnpm workspace
 
 ---
@@ -316,6 +317,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 MIT - see [LICENSE](LICENSE)
 
-**Built with care by [Deepractice](https://deepractice.ai)**
+---
 
-*Making AI Generation Beautiful*
+<div align="center">
+  <strong>Built with care by <a href="https://deepractice.ai">Deepractice</a></strong>
+  <br/>
+  <em>Making AI Generation Beautiful</em>
+</div>

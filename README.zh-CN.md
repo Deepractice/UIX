@@ -4,13 +4,14 @@
     <strong>清晰明澈的 AI 时代设计系统</strong>
   </p>
   <p>
-    <strong>Design Philosophy:</strong> 白灰主色调 | 冷蓝点缀 | 拒绝 AI 紫
+    <strong>核心特性：</strong> 白灰主色调 | 冷蓝点缀 | 拒绝 AI 紫
   </p>
 
   <hr/>
 
   <p>
     <a href="https://github.com/Deepractice/Lucid-UI"><img src="https://img.shields.io/github/stars/Deepractice/Lucid-UI?style=social" alt="Stars"/></a>
+    <img src="https://komarev.com/ghpvc/?username=LucidUI&label=views&color=0e75b6&style=flat&abbreviated=true" alt="Views"/>
     <a href="LICENSE"><img src="https://img.shields.io/github/license/Deepractice/Lucid-UI?color=blue" alt="License"/></a>
     <a href="https://www.npmjs.com/package/@lucidui/react"><img src="https://img.shields.io/npm/v/@lucidui/react?color=cb3837&logo=npm" alt="npm"/></a>
   </p>
@@ -21,7 +22,7 @@
   </p>
 </div>
 
-> 💡 **For AI Assistants:** This README is optimized for both human and AI readers. All code examples are ready to use.
+> 💡 **给 AI 助手：** 本文档同时为人类和 AI 优化，所有代码示例可直接使用。
 
 ---
 
@@ -316,6 +317,10 @@ pnpm tsc --noEmit
 
 MIT - 查看 [LICENSE](LICENSE)
 
-**用心打造 by [Deepractice](https://deepractice.ai)**
+---
 
-*让 AI 时代更美好*
+<div align="center">
+  <strong>用心打造 by <a href="https://deepractice.ai">Deepractice</a></strong>
+  <br/>
+  <em>让 AI 时代更美好</em>
+</div>
