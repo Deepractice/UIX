@@ -17,11 +17,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tokens
       react:
-        specifier: ^19.2.0
-        version: 19.2.1
+        specifier: ^18.2.0
+        version: 18.3.1
       react-dom:
-        specifier: ^19.2.0
-        version: 19.2.1(react@19.2.1)
+        specifier: ^18.2.0
+        version: 18.3.1(react@18.3.1)
     devDependencies:
       '@eslint/js':
         specifier: ^9.39.1
@@ -30,11 +30,11 @@ importers:
         specifier: ^24.10.1
         version: 24.10.1
       '@types/react':
-        specifier: ^19.2.5
-        version: 19.2.7
+        specifier: ^18.2.0
+        version: 18.3.27
       '@types/react-dom':
-        specifier: ^19.2.3
-        version: 19.2.3(@types/react@19.2.7)
+        specifier: ^18.2.0
+        version: 18.3.7(@types/react@18.3.27)
       '@vitejs/plugin-react':
         specifier: ^5.1.1
         version: 5.1.1(vite@7.2.6(@types/node@24.10.1)(jiti@1.21.7))
@@ -767,16 +767,8 @@ packages:
     peerDependencies:
       '@types/react': ^18.0.0
 
-  '@types/react-dom@19.2.3':
-    resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
-    peerDependencies:
-      '@types/react': ^19.2.0
-
   '@types/react@18.3.27':
     resolution: {integrity: sha512-cisd7gxkzjBKU2GgdYrTdtQx1SORymWyaAFhaxQPK9bYO9ot3Y5OikQRvY0VYQtvwjeQnizCINJAenh/V7MK2w==}
-
-  '@types/react@19.2.7':
-    resolution: {integrity: sha512-MWtvHrGZLFttgeEj28VXHxpmwYbor/ATPYbBfSFZEIRK0ecCFLl2Qo55z52Hss+UV9CRN7trSeq1zbgx7YDWWg==}
 
   '@typescript-eslint/eslint-plugin@8.48.1':
     resolution: {integrity: sha512-X63hI1bxl5ohelzr0LY5coufyl0LJNthld+abwxpCoo6Gq+hSqhKwci7MUWkXo67mzgUK6YFByhmaHmUcuBJmA==}
@@ -1443,21 +1435,12 @@ packages:
     peerDependencies:
       react: ^18.3.1
 
-  react-dom@19.2.1:
-    resolution: {integrity: sha512-ibrK8llX2a4eOskq1mXKu/TGZj9qzomO+sNfO98M6d9zIPOEhlBkMkBUBLd1vgS0gQsLDBzA+8jJBVXDnfHmJg==}
-    peerDependencies:
-      react: ^19.2.1
-
   react-refresh@0.18.0:
     resolution: {integrity: sha512-QgT5//D3jfjJb6Gsjxv0Slpj23ip+HtOpnNgnb2S5zU3CB26G/IDPGoy4RJB42wzFE46DRsstbW6tKHoKbhAxw==}
     engines: {node: '>=0.10.0'}
 
   react@18.3.1:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
-    engines: {node: '>=0.10.0'}
-
-  react@19.2.1:
-    resolution: {integrity: sha512-DGrYcCWK7tvYMnWh79yrPHt+vdx9tY+1gPZa7nJQtO/p8bLTDaHp4dzwEhQB7pZ4Xe3ok4XKuEPrVuc+wlpkmw==}
     engines: {node: '>=0.10.0'}
 
   read-cache@1.0.0:
@@ -1498,9 +1481,6 @@ packages:
 
   scheduler@0.23.2:
     resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
-
-  scheduler@0.27.0:
-    resolution: {integrity: sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q==}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -2177,17 +2157,9 @@ snapshots:
     dependencies:
       '@types/react': 18.3.27
 
-  '@types/react-dom@19.2.3(@types/react@19.2.7)':
-    dependencies:
-      '@types/react': 19.2.7
-
   '@types/react@18.3.27':
     dependencies:
       '@types/prop-types': 15.7.15
-      csstype: 3.2.3
-
-  '@types/react@19.2.7':
-    dependencies:
       csstype: 3.2.3
 
   '@typescript-eslint/eslint-plugin@8.48.1(@typescript-eslint/parser@8.48.1(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)':
@@ -2885,18 +2857,11 @@ snapshots:
       react: 18.3.1
       scheduler: 0.23.2
 
-  react-dom@19.2.1(react@19.2.1):
-    dependencies:
-      react: 19.2.1
-      scheduler: 0.27.0
-
   react-refresh@0.18.0: {}
 
   react@18.3.1:
     dependencies:
       loose-envify: 1.4.0
-
-  react@19.2.1: {}
 
   read-cache@1.0.0:
     dependencies:
@@ -2955,8 +2920,6 @@ snapshots:
   scheduler@0.23.2:
     dependencies:
       loose-envify: 1.4.0
-
-  scheduler@0.27.0: {}
 
   semver@6.3.1: {}
 
