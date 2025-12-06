@@ -11,45 +11,57 @@ function App() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-xl font-semibold text-gray-900">Lucid UI</h1>
-              <p className="text-sm text-gray-500">Design System for AI Generation</p>
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          {/* Logo with Sentient Gold accent */}
+          <div className="flex items-center gap-8">
+            <h1 className="text-xl font-semibold">
+              <span className="text-gray-900">Lucid</span>
+              <span className="text-sentient-500">UI</span>
+            </h1>
+            <span className="text-sm text-gray-500">Documentation</span>
+          </div>
+
+          {/* Right side actions */}
+          <div className="flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-1 px-3 py-1.5 bg-gray-100 rounded-md text-sm text-gray-500">
+              <span>Search documentation...</span>
+              <kbd className="ml-2 px-1.5 py-0.5 bg-white border border-gray-200 rounded text-xs">⌘K</kbd>
             </div>
             <a
               href="https://github.com/Deepractice/Lucid-UI"
               target="_blank"
-              className="text-gray-500 hover:text-gray-900 transition-colors"
+              className="p-2 text-gray-500 hover:text-gray-900 transition-colors"
+              title="GitHub"
             >
-              GitHub
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+              </svg>
             </a>
           </div>
         </div>
       </header>
 
       <div className="flex">
-        {/* Sidebar Navigation */}
-        <nav className="w-64 border-r border-gray-200 min-h-[calc(100vh-73px)] bg-gray-50 p-4 sticky top-[73px]">
+        {/* Sidebar */}
+        <nav className="w-56 border-r border-gray-200 min-h-[calc(100vh-64px)] bg-white p-4 sticky top-16 self-start">
           <div className="space-y-1">
             {[
-              { id: 'philosophy', label: 'Philosophy', icon: '💎' },
-              { id: 'colors', label: 'Colors', icon: '🎨' },
-              { id: 'typography', label: 'Typography', icon: '📝' },
-              { id: 'spacing', label: 'Spacing & Radius', icon: '📐' },
-              { id: 'buttons', label: 'Buttons', icon: '🔘' },
-              { id: 'patterns', label: 'Patterns', icon: '🧩' },
+              { id: 'philosophy', label: 'Introduction' },
+              { id: 'colors', label: 'Colors' },
+              { id: 'typography', label: 'Typography' },
+              { id: 'spacing', label: 'Spacing & Radius' },
+              { id: 'buttons', label: 'Buttons' },
+              { id: 'patterns', label: 'Patterns' },
             ].map(item => (
               <button
                 key={item.id}
                 onClick={() => setActiveSection(item.id as Section)}
-                className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
                   activeSection === item.id
-                    ? 'bg-primary-100 text-primary-700'
-                    : 'text-gray-600 hover:bg-gray-100'
+                    ? 'bg-rational-50 text-rational-600 font-medium border-l-2 border-rational-500'
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                 }`}
               >
-                <span className="mr-2">{item.icon}</span>
                 {item.label}
               </button>
             ))}
@@ -57,7 +69,7 @@ function App() {
         </nav>
 
         {/* Main Content */}
-        <main className="flex-1 p-8">
+        <main className="flex-1 p-8 max-w-4xl">
           {activeSection === 'philosophy' && <PhilosophySection />}
           {activeSection === 'colors' && <ColorsSection />}
           {activeSection === 'typography' && <TypographySection />}
@@ -72,201 +84,88 @@ function App() {
 
 function PhilosophySection() {
   return (
-    <div className="space-y-12 max-w-4xl">
-      {/* Hero */}
-      <div className="text-center py-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Lucid Design Language</h1>
-        <p className="text-xl text-gray-600">
-          The design language of Deepractice
+    <div className="space-y-8">
+      {/* Breadcrumb */}
+      <div className="text-sm text-gray-500">
+        Documentation &gt; <span className="text-gray-900">Introduction</span>
+      </div>
+
+      {/* Page Title */}
+      <div>
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">Introduction</h1>
+        <p className="text-lg text-gray-600">
+          Welcome to Lucid UI documentation!
         </p>
       </div>
 
-      {/* Core Philosophy */}
-      <div className="bg-gray-50 rounded-xl p-8">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-6">Design Philosophy</h2>
-        <div className="prose prose-gray max-w-none">
-          <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            <strong>Lucid</strong> 意为清晰、易懂、理性。在 AI 产品充斥着神秘主义和复杂性的时代,
-            我们选择清晰作为指导原则。基于 shadcn/ui 的设计系统,我们提供双主题方案:
-            理性蓝(Rational)代表效率、精准、计算;感性金(Sentient)代表智慧、思维、人文。
-          </p>
-          <blockquote className="border-l-4 border-rational-500 pl-6 my-6 text-gray-600 italic">
-            "最好的界面会消失,让用户专注于真正重要的事情。"
-          </blockquote>
-        </div>
+      {/* What is Lucid UI */}
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold text-gray-900">What is Lucid UI?</h2>
+        <p className="text-gray-600 leading-relaxed">
+          Lucid UI is a <strong>Design System for AI Agent Platforms</strong> built on the Model Context Protocol (MCP).
+          It enables AI applications to have clear, consistent visual language:
+        </p>
+        <ul className="space-y-2 text-gray-600">
+          <li className="flex items-start gap-2">
+            <span className="text-rational-500">•</span>
+            <span><strong>Dual Theme System</strong> - Rational Blue for efficiency, Sentient Gold for creativity</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-rational-500">•</span>
+            <span><strong>White Foundation</strong> - Clear visual base for mainstream products</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-rational-500">•</span>
+            <span><strong>AI-Readable Specs</strong> - Documentation designed for AI to read and apply</span>
+          </li>
+        </ul>
       </div>
 
-      {/* Dual Theme System */}
-      <div>
-        <h2 className="text-2xl font-semibold text-gray-900 mb-6">双主题系统 Dual Theme System</h2>
-        <div className="grid grid-cols-2 gap-8">
-          {/* Rational Theme */}
-          <div className="bg-gradient-to-br from-rational-50 to-rational-100 border-2 border-rational-300 rounded-xl p-8">
-            <div className="w-16 h-16 bg-rational-500 rounded-xl flex items-center justify-center mb-4 shadow-lg">
-              <span className="text-3xl">💎</span>
-            </div>
-            <h3 className="text-2xl font-bold text-rational-900 mb-3">Rational 理性蓝</h3>
-            <p className="text-rational-700 mb-4">
-              科技 · 效率 · 精准 · 计算
-            </p>
-            <div className="flex gap-2 mb-4">
-              {([50, 100, 300, 500, 700, 900] as const).map(shade => (
-                <div
-                  key={shade}
-                  className="w-8 h-8 rounded-md shadow"
-                  style={{ backgroundColor: rational[shade] }}
-                />
-              ))}
-            </div>
-            <p className="text-sm text-rational-600">
-              代表理性思考、精准计算、科技感。适用于数据分析、效率工具、技术产品。
-            </p>
-          </div>
+      {/* Key Features */}
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold text-gray-900">Key Features</h2>
 
-          {/* Sentient Theme */}
-          <div className="bg-gradient-to-br from-sentient-50 to-sentient-100 border-2 border-sentient-300 rounded-xl p-8">
-            <div className="w-16 h-16 bg-sentient-500 rounded-xl flex items-center justify-center mb-4 shadow-lg">
-              <span className="text-3xl">🧠</span>
-            </div>
-            <h3 className="text-2xl font-bold text-sentient-900 mb-3">Sentient 感性金</h3>
-            <p className="text-sentient-700 mb-4">
-              智慧 · 思维 · 人文 · 概率
-            </p>
-            <div className="flex gap-2 mb-4">
-              {([50, 100, 300, 500, 700, 900] as const).map(shade => (
-                <div
-                  key={shade}
-                  className="w-8 h-8 rounded-md shadow"
-                  style={{ backgroundColor: sentient[shade] }}
-                />
-              ))}
-            </div>
-            <p className="text-sm text-sentient-600">
-              代表感性思维、人文关怀、智慧洞察。适用于创意工具、人文产品、思考辅助。
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Design Principles */}
-      <div>
-        <h2 className="text-2xl font-semibold text-gray-900 mb-6">核心原则 Core Principles</h2>
-        <div className="grid grid-cols-3 gap-6">
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
-              <span className="text-2xl">⚪</span>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">White Foundation</h3>
-            <p className="text-gray-600 text-sm">
-              白色为底,灰阶层级。为大众产品提供清晰的视觉基础,避免深色的小众感。
-            </p>
-          </div>
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
-              <span className="text-2xl">🚫</span>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">No Purple, No Black</h3>
-            <p className="text-gray-600 text-sm">
-              拒绝 AI 紫色的陈词滥调,避免深色主题的小众性。清晰胜过神秘。
-            </p>
-          </div>
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <div className="w-12 h-12 bg-gradient-to-br from-rational-500 to-sentient-500 rounded-lg flex items-center justify-center mb-4">
-              <span className="text-2xl text-white">⚖️</span>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Dual Modes</h3>
-            <p className="text-gray-600 text-sm">
-              理性与感性并存,科技与人文平衡,为不同场景提供合适的视觉语言。
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Why Not Purple */}
-      <div className="bg-gray-900 text-white rounded-xl p-8">
-        <h2 className="text-2xl font-semibold mb-6">Why We Reject AI Purple</h2>
-        <div className="grid grid-cols-2 gap-8">
+        <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-medium mb-3 text-gray-300">The Problem</h3>
-            <ul className="space-y-2 text-gray-400">
-              <li>• Purple gradients have become a cliché in AI products</li>
-              <li>• They create artificial mystique rather than clarity</li>
-              <li>• They prioritize aesthetics over usability</li>
-              <li>• They make all AI products look the same</li>
-            </ul>
+            <h3 className="font-medium text-gray-900 mb-2">Dual Theme System</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Two complementary themes for different scenarios: <span className="text-rational-500 font-medium">Rational Blue</span> for
+              tech-focused interfaces (data analysis, efficiency tools), and <span className="text-sentient-500 font-medium">Sentient Gold</span> for
+              creative interfaces (thinking aids, human-centric products).
+            </p>
           </div>
+
           <div>
-            <h3 className="text-lg font-medium mb-3 text-gray-300">Our Approach</h3>
-            <ul className="space-y-2 text-gray-400">
-              <li>• Clarity over mystique</li>
-              <li>• Function over decoration</li>
-              <li>• Trust through transparency</li>
-              <li>• Differentiation through simplicity</li>
-            </ul>
+            <h3 className="font-medium text-gray-900 mb-2">No Purple, No Black</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              We deliberately reject the overused AI purple gradients and niche dark themes.
+              Clarity over mystique. Trust through transparency.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="font-medium text-gray-900 mb-2">Based on shadcn/ui</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Built on top of shadcn/ui patterns with Radix UI primitives, Tailwind CSS, and class-variance-authority.
+              Familiar patterns, AI-optimized documentation.
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Brand Values */}
-      <div>
-        <h2 className="text-2xl font-semibold text-gray-900 mb-6">Brand Values</h2>
-        <div className="grid grid-cols-4 gap-4">
-          {[
-            { value: 'Professional', desc: 'Enterprise-grade quality' },
-            { value: 'Trustworthy', desc: 'Reliable and consistent' },
-            { value: 'Clear', desc: 'Easy to understand' },
-            { value: 'Efficient', desc: 'Respects user time' },
-          ].map(item => (
-            <div key={item.value} className="text-center p-4 bg-gray-50 rounded-lg">
-              <p className="text-lg font-semibold text-gray-900">{item.value}</p>
-              <p className="text-sm text-gray-500">{item.desc}</p>
-            </div>
-          ))}
+      {/* Next Steps */}
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold text-gray-900">Next Steps</h2>
+        <div className="grid grid-cols-2 gap-4">
+          <a href="https://github.com/Deepractice/Lucid-UI" target="_blank" className="group block p-4 border border-gray-200 rounded-lg hover:border-rational-300 hover:bg-rational-50/50 transition-colors">
+            <p className="font-medium text-gray-900 group-hover:text-rational-600">GitHub Repository →</p>
+            <p className="text-sm text-gray-500">View source code and contribute</p>
+          </a>
+          <a href="https://www.npmjs.com/package/@lucidui/react" target="_blank" className="group block p-4 border border-gray-200 rounded-lg hover:border-rational-300 hover:bg-rational-50/50 transition-colors">
+            <p className="font-medium text-gray-900 group-hover:text-rational-600">npm Package →</p>
+            <p className="text-sm text-gray-500">Install @lucidui/react</p>
+          </a>
         </div>
-      </div>
-
-      {/* Design Principles */}
-      <div>
-        <h2 className="text-2xl font-semibold text-gray-900 mb-6">Design Principles</h2>
-        <div className="space-y-4">
-          {[
-            {
-              num: '01',
-              title: 'Content First',
-              desc: 'Design should elevate content, not compete with it. Every visual element must serve a purpose.'
-            },
-            {
-              num: '02',
-              title: 'Consistent Hierarchy',
-              desc: 'Use typography, spacing, and color consistently to create clear visual hierarchy across all interfaces.'
-            },
-            {
-              num: '03',
-              title: 'Accessible by Default',
-              desc: 'Design for everyone. Ensure sufficient contrast, clear focus states, and semantic structure.'
-            },
-            {
-              num: '04',
-              title: 'Restrained Decoration',
-              desc: 'Avoid gratuitous animations, shadows, and effects. Each embellishment must earn its place.'
-            },
-          ].map(item => (
-            <div key={item.num} className="flex gap-6 p-4 border-b border-gray-100">
-              <span className="text-3xl font-bold text-gray-200">{item.num}</span>
-              <div>
-                <h3 className="font-semibold text-gray-900">{item.title}</h3>
-                <p className="text-gray-600">{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Deepractice Identity */}
-      <div className="text-center py-8 border-t border-gray-200">
-        <p className="text-gray-500 mb-2">A Design Language by</p>
-        <p className="text-2xl font-bold text-gray-900">Deepractice</p>
-        <p className="text-gray-600 mt-2">Making AI Generation Beautiful</p>
       </div>
     </div>
   )
