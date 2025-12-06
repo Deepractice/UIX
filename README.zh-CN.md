@@ -4,7 +4,7 @@
     <strong>清晰明澈的 AI 时代设计系统</strong>
   </p>
   <p>
-    <strong>核心特性：</strong> 白灰主色调 | 冷蓝点缀 | 拒绝 AI 紫
+    <strong>核心特性：</strong> 双主题系统 | 基于 shadcn/ui | 白色基底 | 拒绝紫色和黑色
   </p>
 
   <hr/>
@@ -26,26 +26,37 @@
 
 ---
 
-## Philosophy
+## 设计哲学 Philosophy
 
 **Lucid** = 清晰、透明、易懂
 
-在 AI 时代，用户界面应该是：
-- **清晰可读** - 让信息一目了然
-- **透明直观** - 让交互逻辑显而易见
-- **简洁专业** - 让设计服务于内容
+基于 **shadcn/ui**,我们提供双主题系统,适配不同使用场景:
 
-### Design Principles
+### 双主题系统 Dual Theme System
 
-1. **Clarity over decoration** - 功能优先于装饰
-2. **Consistency over novelty** - 一致性优先于新奇
-3. **Accessibility by default** - 无障碍是默认而非可选
+**🔷 Rational 理性蓝** - 科技蓝 `#3B82F6`
+- 代表:效率、精准、计算
+- 适用:数据分析、技术产品、效率工具
 
-### Color Philosophy
+**🔶 Sentient 感性金** - 智慧金 `#D4A012`
+- 代表:智慧、思维、人文、概率
+- 适用:创意工具、人文产品、思考辅助
 
-- **白灰为主** - 以白色、灰色为主色调
-- **冷蓝点缀** - 主色使用冷蓝 (#0EA5E9),克制使用
-- **拒绝 AI 紫** - 刻意避免紫色渐变等"AI 味"设计
+### 设计原则 Design Principles
+
+1. **白色基底** - 为大众产品提供清晰的视觉基础
+2. **双模并存** - 理性科技 vs 感性创造
+3. **拒绝紫色和黑色** - 拒绝 AI 陈词滥调和小众深色主题
+4. **功能优先于装饰** - 清晰胜过繁复
+5. **无障碍默认** - 可访问性是标配而非可选
+
+### 色彩哲学 Color Philosophy
+
+- **白灰基底** - 所有产品的中性视觉基础
+- **理性蓝** - 默认主色,面向技术界面
+- **感性金** - 备选主色,面向创意界面
+- **拒绝 AI 紫** - 刻意避免泛滥的 AI 渐变风格
+- **拒绝深色模式** - 优先大众化的白色背景
 
 ---
 
@@ -150,45 +161,69 @@ import { Button } from '@lucidui/react'
 
 ---
 
-## Design Tokens
+## 设计令牌 Design Tokens
 
-All design tokens are available in `@lucidui/tokens`:
+所有设计令牌都可以从 `@lucidui/tokens` 获取:
 
 ```typescript
-import { tokens } from '@lucidui/tokens'
+import { rational, sentient, colors } from '@lucidui/tokens'
 
-// Colors
-tokens.colors.primary[500]  // '#0EA5E9' (冷蓝)
-tokens.colors.gray[100]     // '#F5F5F5' (浅灰)
-tokens.colors.error[500]    // '#EF4444' (错误红)
+// 双主题颜色
+rational[500]   // '#3B82F6' (理性蓝 - 默认主色)
+sentient[500]   // '#D4A012' (感性金 - 创意主色)
 
-// Spacing (based on 4px grid)
-tokens.spacing[4]   // '1rem' (16px)
-tokens.spacing[8]   // '2rem' (32px)
+// 基础颜色
+colors.gray[100]     // '#F5F5F5' (浅灰)
+colors.white         // '#FFFFFF' (白色背景)
+colors.success[500]  // '#10B981' (成功绿)
+colors.error[500]    // '#EF4444' (错误红)
 
-// Typography
-tokens.fontSize.base  // ['1rem', { lineHeight: '1.5rem' }]
-tokens.fontFamily.sans  // ['Inter', ...]
+// 间距 (基于 4px 网格)
+spacing[4]   // '1rem' (16px)
+spacing[8]   // '2rem' (32px)
+
+// 排版
+fontSize.base  // ['1rem', { lineHeight: '1.5rem' }]
+fontFamily.sans  // ['Inter', ...]
 ```
 
-### Semantic Colors
+### 主题使用 Using Themes
 
 ```tsx
-// Tailwind classes (recommended)
+// 默认 - 理性主题 (科技蓝)
+<Button className="bg-primary-500">分析数据</Button>
+
+// 显式理性主题
+<Button className="bg-rational-500 hover:bg-rational-600">
+  计算
+</Button>
+
+// 感性主题 (智慧金)
+<Button className="bg-sentient-500 hover:bg-sentient-600">
+  创作想法
+</Button>
+```
+
+### 语义化颜色 Semantic Colors
+
+```tsx
+// Tailwind 类名 (推荐)
 <div className="bg-background text-foreground">
-  <p className="text-muted-foreground">Secondary text</p>
-  <div className="border border-border">Content</div>
+  <p className="text-muted-foreground">次级文字</p>
+  <div className="border border-border">内容</div>
 </div>
 ```
 
-| Token | Value | Usage |
+| 令牌 Token | 值 Value | 用途 Usage |
 |-------|-------|-------|
 | `bg-background` | #FFFFFF | 主背景 |
 | `bg-muted` | #F5F5F5 | 次级背景 |
 | `text-foreground` | #171717 | 主文字 |
 | `text-muted-foreground` | #737373 | 次级文字 |
 | `border-border` | #E5E5E5 | 边框 |
-| `bg-primary-500` | #0EA5E9 | 主色 |
+| `bg-primary-500` | #3B82F6 | 理性蓝 (默认) |
+| `bg-rational-500` | #3B82F6 | 技术/效率主题 |
+| `bg-sentient-500` | #D4A012 | 创意/智慧主题 |
 
 ---
 

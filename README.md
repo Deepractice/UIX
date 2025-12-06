@@ -4,7 +4,7 @@
     <strong>A clear and professional design system for the AI era</strong>
   </p>
   <p>
-    <strong>Key Features:</strong> White & Gray Dominant | Cool Blue Accent | No AI Purple
+    <strong>Key Features:</strong> Dual Theme System | Based on shadcn/ui | White Foundation | No Purple, No Black
   </p>
 
   <hr/>
@@ -30,22 +30,33 @@
 
 **Lucid** = Clear, Transparent, Understandable
 
-In the AI era, user interfaces should be:
-- **Clear & Readable** - Information at a glance
-- **Transparent & Intuitive** - Self-evident interaction logic
-- **Simple & Professional** - Design serves content
+Based on **shadcn/ui**, we provide a dual theme system for different scenarios:
+
+### Dual Theme System
+
+**🔷 Rational Theme (理性蓝)** - Tech Blue `#3B82F6`
+- Represents: Efficiency, Precision, Computation
+- Use for: Data analysis, Technical products, Productivity tools
+
+**🔶 Sentient Theme (感性金)** - Wisdom Gold `#D4A012`
+- Represents: Wisdom, Thinking, Humanity, Probability
+- Use for: Creative tools, Human-centric products, Thinking aids
 
 ### Design Principles
 
-1. **Clarity over decoration** - Function before form
-2. **Consistency over novelty** - Predictability before surprise
-3. **Accessibility by default** - Not an afterthought
+1. **White Foundation** - Clear visual base for mainstream products
+2. **Dual Modes** - Rational tech vs Sentient creativity
+3. **No Purple, No Black** - Reject AI clichés and niche dark themes
+4. **Clarity over decoration** - Function before form
+5. **Accessibility by default** - Not an afterthought
 
 ### Color Philosophy
 
-- **White & Gray Dominant** - Neutral foundation for clarity
-- **Cool Blue Accent** - Primary color (#0EA5E9), used sparingly
-- **No AI Purple** - Deliberately avoiding "AI aesthetic" gradients
+- **White & Gray Foundation** - Neutral base for all products
+- **Rational Blue** - Default primary, for tech-focused interfaces
+- **Sentient Gold** - Alternative primary, for creative interfaces
+- **No AI Purple** - Deliberately avoiding overused AI gradients
+- **No Dark Mode** - Prioritize mainstream white-background clarity
 
 ---
 
@@ -155,20 +166,42 @@ import { Button } from '@lucidui/react'
 All design tokens are available in `@lucidui/tokens`:
 
 ```typescript
-import { tokens } from '@lucidui/tokens'
+import { rational, sentient, colors } from '@lucidui/tokens'
 
-// Colors
-tokens.colors.primary[500]  // '#0EA5E9' (Cool Blue)
-tokens.colors.gray[100]     // '#F5F5F5' (Light Gray)
-tokens.colors.error[500]    // '#EF4444' (Error Red)
+// Dual Theme Colors
+rational[500]   // '#3B82F6' (Rational Blue - default primary)
+sentient[500]   // '#D4A012' (Sentient Gold - creative primary)
+
+// Foundation Colors
+colors.gray[100]     // '#F5F5F5' (Light Gray)
+colors.white         // '#FFFFFF' (White background)
+colors.success[500]  // '#10B981' (Success Green)
+colors.error[500]    // '#EF4444' (Error Red)
 
 // Spacing (based on 4px grid)
-tokens.spacing[4]   // '1rem' (16px)
-tokens.spacing[8]   // '2rem' (32px)
+spacing[4]   // '1rem' (16px)
+spacing[8]   // '2rem' (32px)
 
 // Typography
-tokens.fontSize.base  // ['1rem', { lineHeight: '1.5rem' }]
-tokens.fontFamily.sans  // ['Inter', ...]
+fontSize.base  // ['1rem', { lineHeight: '1.5rem' }]
+fontFamily.sans  // ['Inter', ...]
+```
+
+### Using Themes
+
+```tsx
+// Default - Rational Theme (tech blue)
+<Button className="bg-primary-500">Analyze Data</Button>
+
+// Explicit Rational Theme
+<Button className="bg-rational-500 hover:bg-rational-600">
+  Calculate
+</Button>
+
+// Sentient Theme (wisdom gold)
+<Button className="bg-sentient-500 hover:bg-sentient-600">
+  Create Idea
+</Button>
 ```
 
 ### Semantic Colors
@@ -188,7 +221,9 @@ tokens.fontFamily.sans  // ['Inter', ...]
 | `text-foreground` | #171717 | Primary text |
 | `text-muted-foreground` | #737373 | Secondary text |
 | `border-border` | #E5E5E5 | Borders |
-| `bg-primary-500` | #0EA5E9 | Primary color |
+| `bg-primary-500` | #3B82F6 | Rational blue (default) |
+| `bg-rational-500` | #3B82F6 | Tech/efficiency theme |
+| `bg-sentient-500` | #D4A012 | Creative/wisdom theme |
 
 ---
 
@@ -227,14 +262,14 @@ tokens.fontFamily.sans  // ['Inter', ...]
 
 ```tsx
 <div className="max-w-2xl space-y-4">
-  {/* User message */}
-  <div className="ml-auto max-w-lg rounded-lg bg-primary-500 px-4 py-3 text-white">
-    What is Lucid UI?
+  {/* User message - Rational theme for analytical queries */}
+  <div className="ml-auto max-w-lg rounded-lg bg-rational-500 px-4 py-3 text-white">
+    Analyze this data set
   </div>
 
-  {/* AI response */}
-  <div className="mr-auto max-w-lg rounded-lg border border-border bg-white px-4 py-3">
-    Lucid UI is a design system for AI generation...
+  {/* AI response - Sentient theme for creative suggestions */}
+  <div className="mr-auto max-w-lg rounded-lg bg-sentient-100 border border-sentient-300 px-4 py-3">
+    <p className="text-sentient-900">Let me help you explore the patterns...</p>
   </div>
 </div>
 ```
