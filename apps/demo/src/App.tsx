@@ -2,26 +2,77 @@ import { useState } from 'react'
 import { colors, spacing, radius, shadows, typography, rational, sentient } from '@lucidui/tokens'
 import { Button } from '@lucidui/react'
 
-type Section = 'philosophy' | 'colors' | 'typography' | 'spacing' | 'buttons' | 'patterns'
+type Section =
+  | 'home'
+  | 'philosophy'
+  | 'colors'
+  | 'typography'
+  | 'spacing'
+  | 'button'
+  | 'card'
+  | 'form'
+  | 'chat'
+  | 'ai-status'
+  | 'loading'
+
+interface NavGroup {
+  title: string
+  items: { id: Section; label: string }[]
+}
+
+const navigation: NavGroup[] = [
+  {
+    title: '',
+    items: [
+      { id: 'home', label: 'Home' },
+      { id: 'philosophy', label: 'About' },
+    ]
+  },
+  {
+    title: 'Foundation',
+    items: [
+      { id: 'colors', label: 'Colors' },
+      { id: 'typography', label: 'Typography' },
+      { id: 'spacing', label: 'Spacing' },
+    ]
+  },
+  {
+    title: 'Components',
+    items: [
+      { id: 'button', label: 'Button' },
+      { id: 'card', label: 'Card' },
+      { id: 'form', label: 'Form' },
+    ]
+  },
+  {
+    title: 'Patterns',
+    items: [
+      { id: 'chat', label: 'Chat Interface' },
+      { id: 'ai-status', label: 'AI Status' },
+      { id: 'loading', label: 'Loading States' },
+    ]
+  },
+]
 
 function App() {
-  const [activeSection, setActiveSection] = useState<Section>('philosophy')
+  const [activeSection, setActiveSection] = useState<Section>('home')
 
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          {/* Logo with Sentient Gold accent */}
           <div className="flex items-center gap-8">
-            <h1 className="text-xl font-semibold">
-              <span className="text-gray-900">Lucid</span>
-              <span className="text-sentient-500 animate-breathe-glow">UI</span>
-            </h1>
+            <div className="flex items-center gap-2">
+              <img src="/logo.png" alt="Lucid UI" className="w-8 h-8 rounded" />
+              <h1 className="text-xl font-semibold">
+                <span className="text-gray-900">Lucid</span>
+                <span className="text-sentient-500 animate-breathe-glow">UI</span>
+              </h1>
+            </div>
             <span className="text-sm text-gray-500">Documentation</span>
           </div>
 
-          {/* Right side actions */}
           <div className="flex items-center gap-4">
             <div className="hidden md:flex items-center gap-1 px-3 py-1.5 bg-gray-100 rounded-md text-sm text-gray-500">
               <span>Search documentation...</span>
@@ -44,39 +95,89 @@ function App() {
       <div className="flex">
         {/* Sidebar */}
         <nav className="w-56 border-r border-gray-200 min-h-[calc(100vh-64px)] bg-white p-4 sticky top-16 self-start">
-          <div className="space-y-1">
-            {[
-              { id: 'philosophy', label: 'Introduction' },
-              { id: 'colors', label: 'Colors' },
-              { id: 'typography', label: 'Typography' },
-              { id: 'spacing', label: 'Spacing & Radius' },
-              { id: 'buttons', label: 'Buttons' },
-              { id: 'patterns', label: 'Patterns' },
-            ].map(item => (
-              <button
-                key={item.id}
-                onClick={() => setActiveSection(item.id as Section)}
-                className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
-                  activeSection === item.id
-                    ? 'bg-rational-50 text-rational-600 font-medium border-l-2 border-rational-500'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                }`}
-              >
-                {item.label}
-              </button>
+          <div className="space-y-6">
+            {navigation.map((group, groupIndex) => (
+              <div key={groupIndex}>
+                {group.title && (
+                  <h3 className="px-3 mb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                    {group.title}
+                  </h3>
+                )}
+                <div className="space-y-1">
+                  {group.items.map(item => (
+                    <button
+                      key={item.id}
+                      onClick={() => setActiveSection(item.id)}
+                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
+                        activeSection === item.id
+                          ? 'bg-rational-50 text-rational-600 font-medium border-l-2 border-rational-500'
+                          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </nav>
 
         {/* Main Content */}
         <main className="flex-1 p-8 max-w-4xl">
+          {activeSection === 'home' && <HomeSection />}
           {activeSection === 'philosophy' && <PhilosophySection />}
           {activeSection === 'colors' && <ColorsSection />}
           {activeSection === 'typography' && <TypographySection />}
           {activeSection === 'spacing' && <SpacingSection />}
-          {activeSection === 'buttons' && <ButtonsSection />}
-          {activeSection === 'patterns' && <PatternsSection />}
+          {activeSection === 'button' && <ButtonSection />}
+          {activeSection === 'card' && <CardSection />}
+          {activeSection === 'form' && <FormSection />}
+          {activeSection === 'chat' && <ChatSection />}
+          {activeSection === 'ai-status' && <AIStatusSection />}
+          {activeSection === 'loading' && <LoadingSection />}
         </main>
+      </div>
+    </div>
+  )
+}
+
+function HomeSection() {
+  return (
+    <div className="space-y-8">
+      <div className="text-center py-12">
+        <h1 className="text-5xl font-bold text-gray-900 mb-4">Lucid UI</h1>
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          Design System for AI Agent Platforms. Clear, consistent visual language with dual themes.
+        </p>
+        <div className="flex gap-4 justify-center mt-8">
+          <Button size="lg">Get Started</Button>
+          <Button variant="outline" size="lg">GitHub</Button>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-3 gap-6">
+        <div className="p-6 border border-gray-200 rounded-lg">
+          <div className="w-10 h-10 bg-rational-100 rounded-lg flex items-center justify-center mb-4">
+            <span className="text-rational-600 font-bold">R</span>
+          </div>
+          <h3 className="font-semibold text-gray-900 mb-2">Rational Blue</h3>
+          <p className="text-sm text-gray-600">For tech-focused interfaces, data analysis, and efficiency tools.</p>
+        </div>
+        <div className="p-6 border border-gray-200 rounded-lg">
+          <div className="w-10 h-10 bg-sentient-100 rounded-lg flex items-center justify-center mb-4">
+            <span className="text-sentient-600 font-bold">S</span>
+          </div>
+          <h3 className="font-semibold text-gray-900 mb-2">Sentient Gold</h3>
+          <p className="text-sm text-gray-600">For creative interfaces, thinking aids, and human-centric products.</p>
+        </div>
+        <div className="p-6 border border-gray-200 rounded-lg">
+          <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+            <span className="text-gray-600 font-bold">W</span>
+          </div>
+          <h3 className="font-semibold text-gray-900 mb-2">White Foundation</h3>
+          <p className="text-sm text-gray-600">Clean visual base for mainstream products. No purple, no dark themes.</p>
+        </div>
       </div>
     </div>
   )
@@ -557,11 +658,11 @@ function SpacingSection() {
   )
 }
 
-function ButtonsSection() {
+function ButtonSection() {
   return (
     <div className="space-y-12">
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 mb-2">Buttons</h2>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-2">Button</h2>
         <p className="text-gray-600 mb-8">
           Clear visual hierarchy through variants. Accessible by default.
         </p>
@@ -627,19 +728,18 @@ function ButtonsSection() {
   )
 }
 
-function PatternsSection() {
+function CardSection() {
   return (
-    <div className="space-y-12">
+    <div className="space-y-8">
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 mb-2">Common Patterns</h2>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-2">Card</h2>
         <p className="text-gray-600 mb-8">
-          Ready-to-use UI patterns for AI applications.
+          Container component for grouping related content.
         </p>
       </div>
 
-      {/* Card Pattern */}
       <div>
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Card</h3>
+        <h3 className="text-lg font-medium text-gray-900 mb-4">Basic Card</h3>
         <div className="max-w-md">
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h4 className="text-lg font-semibold text-gray-900 mb-2">Card Title</h4>
@@ -654,17 +754,108 @@ function PatternsSection() {
         </div>
       </div>
 
-      {/* Chat Bubble Pattern */}
       <div>
-        <h3 className="text-lg font-medium text-gray-900 mb-4">AI Chat Interface</h3>
+        <h3 className="text-lg font-medium text-gray-900 mb-4">Dual Theme Cards</h3>
+        <div className="grid grid-cols-2 gap-6">
+          <div className="bg-gradient-to-br from-rational-50 to-white rounded-xl border-2 border-rational-200 p-6">
+            <div className="bg-white rounded-lg border border-rational-200 p-6 shadow-sm">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 rounded-xl bg-rational-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
+                  R
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">Rational Card</p>
+                  <p className="text-sm text-gray-500">For data & efficiency</p>
+                </div>
+              </div>
+              <p className="text-gray-600 text-sm">
+                Use for technical content, data displays, and efficiency-focused interfaces.
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-br from-sentient-50 to-white rounded-xl border-2 border-sentient-200 p-6">
+            <div className="bg-white rounded-lg border border-sentient-200 p-6 shadow-sm">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 rounded-xl bg-sentient-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
+                  S
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">Sentient Card</p>
+                  <p className="text-sm text-gray-500">For creativity & thought</p>
+                </div>
+              </div>
+              <p className="text-gray-600 text-sm">
+                Use for creative content, thinking aids, and human-centric interfaces.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function FormSection() {
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-2">Form</h2>
+        <p className="text-gray-600 mb-8">
+          Form elements with consistent styling and focus states.
+        </p>
+      </div>
+
+      <div>
+        <h3 className="text-lg font-medium text-gray-900 mb-4">Basic Form</h3>
+        <div className="max-w-md p-6 bg-gray-50 rounded-lg">
+          <form className="space-y-4" onSubmit={e => e.preventDefault()}>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Email
+              </label>
+              <input
+                type="email"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rational-500 focus:border-transparent"
+                placeholder="you@example.com"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Message
+              </label>
+              <textarea
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rational-500 focus:border-transparent resize-none"
+                rows={3}
+                placeholder="Your message..."
+              />
+            </div>
+            <Button className="w-full">Submit</Button>
+          </form>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function ChatSection() {
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-2">Chat Interface</h2>
+        <p className="text-gray-600 mb-8">
+          AI conversation patterns with clear visual distinction between user and AI messages.
+        </p>
+      </div>
+
+      <div>
+        <h3 className="text-lg font-medium text-gray-900 mb-4">Basic Chat</h3>
         <div className="max-w-2xl space-y-4 p-6 bg-gray-50 rounded-lg">
-          {/* User Message */}
           <div className="flex justify-end">
-            <div className="max-w-[80%] bg-primary-500 text-white rounded-2xl rounded-br-md px-4 py-3">
+            <div className="max-w-[80%] bg-rational-500 text-white rounded-2xl rounded-br-md px-4 py-3">
               <p>How do I use this design system?</p>
             </div>
           </div>
-          {/* AI Response */}
           <div className="flex justify-start gap-3">
             <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 text-sm font-medium flex-shrink-0">
               AI
@@ -676,81 +867,86 @@ function PatternsSection() {
               </p>
             </div>
           </div>
-          {/* User Message */}
           <div className="flex justify-end">
-            <div className="max-w-[80%] bg-primary-500 text-white rounded-2xl rounded-br-md px-4 py-3">
+            <div className="max-w-[80%] bg-rational-500 text-white rounded-2xl rounded-br-md px-4 py-3">
               <p>Thanks! That's helpful.</p>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  )
+}
 
-      {/* Form Pattern */}
+function AIStatusSection() {
+  return (
+    <div className="space-y-8">
       <div>
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Form</h3>
-        <div className="max-w-md p-6 bg-gray-50 rounded-lg">
-          <form className="space-y-4" onSubmit={e => e.preventDefault()}>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Email
-              </label>
-              <input
-                type="email"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                placeholder="you@example.com"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Message
-              </label>
-              <textarea
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
-                rows={3}
-                placeholder="Your message..."
-              />
-            </div>
-            <Button className="w-full">Submit</Button>
-          </form>
-        </div>
-      </div>
-
-      {/* AI Status Animations */}
-      <div>
-        <h3 className="text-lg font-medium text-gray-900 mb-4">AI Status Animations</h3>
-        <p className="text-gray-600 text-sm mb-4">
+        <h2 className="text-2xl font-semibold text-gray-900 mb-2">AI Status Animations</h2>
+        <p className="text-gray-600 mb-8">
           Single-color animations for AI thinking/running states. No purple gradients - just clean, branded motion.
         </p>
-        <div className="space-y-6 p-6 bg-gray-50 rounded-lg">
-          {/* Breathing */}
-          <div>
-            <p className="text-sm text-gray-500 mb-2">Breathing (opacity pulse)</p>
-            <div className="flex gap-8">
-              <span className="text-xl font-semibold text-rational-500 animate-breathe-glow">AI Thinking...</span>
-              <span className="text-xl font-semibold text-sentient-500 animate-breathe-glow">Creating...</span>
-            </div>
-          </div>
-          {/* Shimmer */}
-          <div>
-            <p className="text-sm text-gray-500 mb-2">Shimmer (light sweep)</p>
-            <div className="flex gap-8">
-              <span className="text-xl font-semibold animate-shimmer-rational">Running task...</span>
-              <span className="text-xl font-semibold animate-shimmer-sentient">Generating...</span>
-            </div>
+      </div>
+
+      <div>
+        <h3 className="text-lg font-medium text-gray-900 mb-4">Breathing Effect</h3>
+        <p className="text-gray-600 text-sm mb-4">
+          Opacity pulse for "thinking" or "waiting" states.
+        </p>
+        <div className="p-6 bg-gray-50 rounded-lg">
+          <div className="flex gap-8">
+            <span className="text-xl font-semibold text-rational-500 animate-breathe-glow">AI Thinking...</span>
+            <span className="text-xl font-semibold text-sentient-500 animate-breathe-glow">Creating...</span>
           </div>
         </div>
       </div>
 
-      {/* Loading States */}
       <div>
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Loading States</h3>
-        <div className="flex gap-8 p-6 bg-gray-50 rounded-lg">
-          {/* Spinner */}
+        <h3 className="text-lg font-medium text-gray-900 mb-4">Shimmer Effect</h3>
+        <p className="text-gray-600 text-sm mb-4">
+          Light sweep for "running" or "processing" states.
+        </p>
+        <div className="p-6 bg-gray-50 rounded-lg">
+          <div className="flex gap-8">
+            <span className="text-xl font-semibold animate-shimmer-rational">Running task...</span>
+            <span className="text-xl font-semibold animate-shimmer-sentient">Generating...</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="text-lg font-medium text-gray-900 mb-4">Usage</h3>
+        <div className="p-4 bg-gray-900 rounded-lg">
+          <pre className="text-sm text-gray-300 overflow-x-auto"><code>{`<!-- Breathing effect -->
+<span class="animate-breathe-glow text-rational-500">Thinking...</span>
+<span class="animate-breathe-glow text-sentient-500">Creating...</span>
+
+<!-- Shimmer effect -->
+<span class="animate-shimmer-rational">Running...</span>
+<span class="animate-shimmer-sentient">Generating...</span>`}</code></pre>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function LoadingSection() {
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-2">Loading States</h2>
+        <p className="text-gray-600 mb-8">
+          Standard loading indicators for various contexts.
+        </p>
+      </div>
+
+      <div>
+        <h3 className="text-lg font-medium text-gray-900 mb-4">Indicators</h3>
+        <div className="flex gap-12 p-6 bg-gray-50 rounded-lg">
           <div className="text-center">
-            <div className="w-8 h-8 border-2 border-gray-200 border-t-primary-500 rounded-full animate-spin mx-auto mb-2" />
+            <div className="w-8 h-8 border-2 border-gray-200 border-t-rational-500 rounded-full animate-spin mx-auto mb-2" />
             <p className="text-sm text-gray-500">Spinner</p>
           </div>
-          {/* Skeleton */}
           <div className="text-center">
             <div className="space-y-2 mb-2">
               <div className="w-32 h-4 bg-gray-200 rounded animate-pulse" />
@@ -758,19 +954,17 @@ function PatternsSection() {
             </div>
             <p className="text-sm text-gray-500">Skeleton</p>
           </div>
-          {/* Dots */}
           <div className="text-center">
-            <div className="flex gap-1 justify-center mb-2">
-              <div className="w-2 h-2 bg-primary-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-              <div className="w-2 h-2 bg-primary-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-              <div className="w-2 h-2 bg-primary-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+            <div className="flex gap-1 justify-center mb-2 h-8 items-center">
+              <div className="w-2 h-2 bg-rational-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+              <div className="w-2 h-2 bg-rational-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+              <div className="w-2 h-2 bg-rational-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
             </div>
             <p className="text-sm text-gray-500">Dots</p>
           </div>
         </div>
       </div>
 
-      {/* Alert/Status Pattern */}
       <div>
         <h3 className="text-lg font-medium text-gray-900 mb-4">Status Messages</h3>
         <div className="space-y-3 max-w-lg">
