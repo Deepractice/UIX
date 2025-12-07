@@ -64,7 +64,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-2">
-              <img src="/logo.png" alt="Lucid UI" className="w-8 h-8 rounded" />
+              <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Lucid UI" className="w-8 h-8 rounded" />
               <h1 className="text-xl font-semibold">
                 <span className="text-gray-900">Lucid</span>
                 <span className="text-sentient-500 animate-breathe-glow">UI</span>
