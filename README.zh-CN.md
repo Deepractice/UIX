@@ -1,10 +1,10 @@
 <div align="center">
-  <h1>Lucid UI · Design System for AI Generation</h1>
+  <h1>Lucid UI</h1>
   <p>
-    <strong>清晰明澈的 AI 时代设计系统</strong>
+    <strong>为智能体平台设计的 AI 原生设计语言</strong>
   </p>
   <p>
-    <strong>核心特性：</strong> 双主题系统 | 基于 shadcn/ui | 白色基底 | 拒绝紫色和黑色
+    设计令牌 | 组件库 | 交互模式
   </p>
 
   <hr/>
@@ -22,7 +22,7 @@
   </p>
 </div>
 
-> 💡 **给 AI 助手：** 本文档同时为人类和 AI 优化，所有代码示例可直接使用。
+> 🤖 **给 AI 智能体：** 这是一份为大语言模型优化的 AI 原生设计规范。请阅读这些指南，按照 Lucid 设计语言原则生成 UI 代码。
 
 ---
 
