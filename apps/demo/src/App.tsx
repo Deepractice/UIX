@@ -2505,7 +2505,7 @@ function AppShellSection() {
         <div className="text-sm text-gray-500 mb-2">Layout</div>
         <h2 className="text-2xl font-semibold text-gray-900 mb-2">App Shell</h2>
         <p className="text-gray-600">
-          三栏布局是 IM 类应用的经典结构：左侧导航 + 会话列表 + 聊天区域。
+          三栏布局是对话界面的经典结构：左侧导航 + 对话列表 + 对话区域。
         </p>
       </div>
 
@@ -2513,8 +2513,8 @@ function AppShellSection() {
         <h3 className="font-medium text-gray-900 mb-2">设计原则</h3>
         <ul className="text-sm text-gray-600 space-y-1">
           <li>• <strong>固定侧边栏</strong>：48px 宽度的图标导航，简洁不占空间</li>
-          <li>• <strong>会话列表</strong>：280-320px 宽度，展示足够的预览信息</li>
-          <li>• <strong>聊天区域</strong>：flex-1 自适应，始终是视觉焦点</li>
+          <li>• <strong>对话列表</strong>：280-320px 宽度，展示足够的预览信息</li>
+          <li>• <strong>对话区域</strong>：flex-1 自适应，始终是视觉焦点</li>
           <li>• <strong>清晰边界</strong>：使用 border 分隔，不使用阴影</li>
           <li>• <strong>白色基底</strong>：保持整体明亮、专业</li>
         </ul>
@@ -2524,9 +2524,9 @@ function AppShellSection() {
       <div className="p-4 bg-rational-50 border border-rational-200 rounded-lg">
         <h3 className="font-medium text-rational-900 mb-2">📱 移动端变体</h3>
         <ul className="text-sm text-rational-700 space-y-1">
-          <li>• <strong>单栏切换</strong>：会话列表和聊天区各占全屏，通过导航切换</li>
-          <li>• <strong>底部 Tab Bar</strong>：替代侧边栏，包含会话、智能体、发现、我的</li>
-          <li>• <strong>返回按钮</strong>：聊天区左上角显示返回箭头，点击回到会话列表</li>
+          <li>• <strong>单栏切换</strong>：对话列表和对话区各占全屏，通过导航切换</li>
+          <li>• <strong>底部 Tab Bar</strong>：替代侧边栏，包含对话、智能体、发现、我的</li>
+          <li>• <strong>返回按钮</strong>：对话区左上角显示返回箭头，点击回到对话列表</li>
           <li>• <strong>手势支持</strong>：边缘右滑返回上一页</li>
           <li>• <strong>断点</strong>：&lt;768px 启用移动端布局</li>
         </ul>
@@ -2632,9 +2632,9 @@ function AppShellSection() {
         <h3 className="font-medium text-red-800 mb-2">Anti-patterns</h3>
         <ul className="text-sm text-red-700 space-y-1">
           <li>• ❌ 侧边栏使用阴影分隔（应使用 border）</li>
-          <li>• ❌ 会话列表宽度超过 320px（信息过多会分散注意力）</li>
+          <li>• ❌ 对话列表宽度超过 320px（信息过多会分散注意力）</li>
           <li>• ❌ 深色侧边栏（与白色主题不协调）</li>
-          <li>• ❌ 聊天区域使用固定宽度（应自适应）</li>
+          <li>• ❌ 对话区域使用固定宽度（应自适应）</li>
           <li>• ❌ 在 header 区域放置过多按钮</li>
         </ul>
       </div>
@@ -2723,7 +2723,7 @@ function ConversationListSection() {
         <div className="text-sm text-gray-500 mb-2">Layout</div>
         <h2 className="text-2xl font-semibold text-gray-900 mb-2">Conversation List</h2>
         <p className="text-gray-600">
-          会话列表展示所有对话，支持搜索、未读标记和在线状态。
+          对话列表展示所有对话，支持搜索、未读标记和智能体状态。
         </p>
       </div>
 
@@ -3796,9 +3796,9 @@ function ResponsiveSection() {
               <span className="font-medium text-gray-900">Mobile &lt;768px</span>
             </div>
             <div className="bg-gray-100 rounded p-2 text-xs font-mono space-y-1">
-              <div className="bg-white rounded p-1 text-center">会话列表（全屏）</div>
+              <div className="bg-white rounded p-1 text-center">对话列表（全屏）</div>
               <div className="text-center text-gray-400">↕ 页面切换</div>
-              <div className="bg-white rounded p-1 text-center">聊天区（全屏）</div>
+              <div className="bg-white rounded p-1 text-center">对话区（全屏）</div>
               <div className="bg-rational-100 rounded p-1 text-center text-rational-700">底部 Tab Bar</div>
             </div>
           </div>
@@ -3813,8 +3813,8 @@ function ResponsiveSection() {
             </div>
             <div className="bg-gray-100 rounded p-2 text-xs font-mono">
               <div className="flex gap-1">
-                <div className="bg-white rounded p-1 text-center w-1/3">会话列表</div>
-                <div className="bg-white rounded p-1 text-center flex-1">聊天区</div>
+                <div className="bg-white rounded p-1 text-center w-1/3">对话列表</div>
+                <div className="bg-white rounded p-1 text-center flex-1">对话区</div>
               </div>
               <div className="mt-1 text-center text-gray-400 text-xs">侧边栏为抽屉式</div>
             </div>
@@ -3831,8 +3831,8 @@ function ResponsiveSection() {
             <div className="bg-gray-100 rounded p-2 text-xs font-mono">
               <div className="flex gap-1">
                 <div className="bg-gray-300 rounded p-1 text-center w-8">Nav</div>
-                <div className="bg-white rounded p-1 text-center w-1/3">会话列表</div>
-                <div className="bg-white rounded p-1 text-center flex-1">聊天区</div>
+                <div className="bg-white rounded p-1 text-center w-1/3">对话列表</div>
+                <div className="bg-white rounded p-1 text-center flex-1">对话区</div>
               </div>
             </div>
           </div>
@@ -4022,7 +4022,7 @@ function BottomTabBarSection() {
       <div>
         <h2 className="text-2xl font-semibold text-gray-900 mb-2">Bottom Tab Bar</h2>
         <p className="text-gray-600 mb-8">
-          移动端底部导航栏，用于 App 主要功能区域的快速切换，是移动端 IM 应用的核心导航组件。
+          移动端底部导航栏，用于 AI Agent 平台主要功能区域的快速切换，是移动端的核心导航组件。
         </p>
       </div>
 
@@ -4044,7 +4044,7 @@ function BottomTabBarSection() {
         <div className="border border-gray-200 rounded-lg overflow-hidden max-w-sm mx-auto">
           {/* Mock screen content */}
           <div className="h-64 bg-gray-50 flex items-center justify-center text-gray-400">
-            {activeTab === 'chat' && '会话列表'}
+            {activeTab === 'chat' && '对话列表'}
             {activeTab === 'contacts' && '智能体'}
             {activeTab === 'discover' && '发现'}
             {activeTab === 'me' && '我的'}
