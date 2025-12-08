@@ -144,6 +144,7 @@ function App() {
   const [activeSection, setActiveSection] = useState<Section>('home')
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
   // Default: collapse all groups EXCEPT the first one (Home/About should be visible)
   const [collapsedGroups, setCollapsedGroups] = useState<Set<number>>(
     new Set(navigation.map((_, index) => index).filter(i => i !== 0))
@@ -164,11 +165,23 @@ function App() {
       }
       if (e.key === 'Escape' && searchOpen) {
         setSearchOpen(false)
+        setSearchQuery('')
       }
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [searchOpen])
+
+  // Filter search results
+  const filteredNavigation = searchQuery.trim()
+    ? navigation.map(group => ({
+        ...group,
+        items: group.items.filter(item =>
+          item.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          (group.title && group.title.toLowerCase().includes(searchQuery.toLowerCase()))
+        )
+      })).filter(group => group.items.length > 0)
+    : navigation
 
   // Close sidebar when section changes on mobile
   const handleSectionChange = (section: Section) => {
@@ -343,46 +356,77 @@ function App() {
 
       {/* Search Modal */}
       {searchOpen && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-start justify-center pt-20 px-4">
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-start justify-center pt-20 px-4 animate-in fade-in duration-200">
           <div
             className="absolute inset-0"
-            onClick={() => setSearchOpen(false)}
+            onClick={() => {
+              setSearchOpen(false)
+              setSearchQuery('')
+            }}
           />
-          <div className="relative w-full max-w-2xl bg-white rounded-lg shadow-2xl overflow-hidden">
+          <div className="relative w-full max-w-2xl bg-white rounded-lg shadow-2xl overflow-hidden animate-in slide-in-from-top-4 duration-200">
             {/* Search Input */}
             <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-200">
-              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
               <input
                 type="text"
                 placeholder="Search documentation..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 autoFocus
                 className="flex-1 outline-none text-base"
                 onKeyDown={(e) => {
-                  if (e.key === 'Escape') setSearchOpen(false)
+                  if (e.key === 'Escape') {
+                    setSearchOpen(false)
+                    setSearchQuery('')
+                  }
                 }}
               />
               <kbd className="px-2 py-1 bg-gray-100 border border-gray-200 rounded text-xs text-gray-500">ESC</kbd>
             </div>
 
             {/* Search Results */}
-            <div className="max-h-96 overflow-y-auto p-2">
-              <div className="px-3 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">Quick Links</div>
-              {navigation.map((group) =>
-                group.items.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => {
-                      handleSectionChange(item.id)
-                      setSearchOpen(false)
-                    }}
-                    className="w-full text-left px-3 py-2 rounded-md hover:bg-gray-50 text-sm text-gray-700 hover:text-gray-900 transition-colors"
-                  >
-                    <div className="font-medium">{item.label}</div>
-                    {group.title && <div className="text-xs text-gray-500 mt-0.5">{group.title}</div>}
-                  </button>
-                ))
+            <div className="max-h-96 overflow-y-auto">
+              {filteredNavigation.length > 0 ? (
+                <div className="p-2">
+                  {filteredNavigation.map((group, groupIndex) => (
+                    <div key={groupIndex} className="mb-2 last:mb-0">
+                      {group.title && (
+                        <div className="px-3 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                          {group.title}
+                        </div>
+                      )}
+                      <div className="space-y-1">
+                        {group.items.map((item) => (
+                          <button
+                            key={item.id}
+                            onClick={() => {
+                              handleSectionChange(item.id)
+                              setSearchOpen(false)
+                              setSearchQuery('')
+                            }}
+                            className="w-full text-left px-3 py-2 rounded-md hover:bg-rational-50 text-sm text-gray-700 hover:text-rational-600 transition-colors flex items-center justify-between group"
+                          >
+                            <span className="font-medium">{item.label}</span>
+                            <svg className="w-4 h-4 text-gray-400 group-hover:text-rational-500 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="px-4 py-12 text-center">
+                  <svg className="w-12 h-12 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <p className="text-sm text-gray-500">No results found for "{searchQuery}"</p>
+                  <p className="text-xs text-gray-400 mt-1">Try searching with different keywords</p>
+                </div>
               )}
             </div>
 
