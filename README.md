@@ -1,10 +1,10 @@
 <div align="center">
   <h1>Lucid UI</h1>
   <p>
-    <strong>A Lucid Design System for AI Agent Platforms</strong>
+    <strong>AI-Native Design Language for Agent Platforms</strong>
   </p>
   <p>
-    Chat Components | Dual Theme System | White Foundation
+    Design Tokens | Component Library | Interaction Patterns
   </p>
 
   <hr/>
@@ -22,7 +22,7 @@
   </p>
 </div>
 
-> 💡 **For AI Assistants:** This README is optimized for both human and AI readers. All code examples are ready to use.
+> 🤖 **For AI Agents:** This is an AI-native design specification optimized for LLM comprehension. Read these guidelines to generate UI following Lucid Design Language principles.
 
 ---
 
