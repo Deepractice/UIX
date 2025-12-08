@@ -3071,7 +3071,7 @@ function SystemMessageSection() {
         <div className="text-sm text-gray-500 mb-2">Conversation</div>
         <h2 className="text-2xl font-semibold text-gray-900 mb-2">System Message</h2>
         <p className="text-gray-600">
-          系统消息用于显示非用户/非AI产生的提示信息，如会话状态变更、安全提示等。
+          系统消息用于显示非用户/非AI产生的提示信息，如对话状态变更、安全提示等。
         </p>
       </div>
 
@@ -4067,7 +4067,7 @@ function BottomTabBarSection() {
                 </svg>
                 <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
               </div>
-              <span className="text-xs mt-1">会话</span>
+              <span className="text-xs mt-1">对话</span>
             </button>
 
             <button
@@ -4124,7 +4124,7 @@ function BottomTabBarSection() {
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
-              <span className="text-xs mt-1">会话</span>
+              <span className="text-xs mt-1">对话</span>
             </button>
             <button className="flex flex-col items-center justify-center flex-1 h-full text-gray-500">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
