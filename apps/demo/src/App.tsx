@@ -61,81 +61,88 @@ type Section =
   | 'bottom-tab-bar'
   | 'action-sheet'
 
+interface NavItem {
+  id: Section
+  label: string
+  keywords?: string[] // 搜索关键词
+  description?: string // 简短描述
+}
+
 interface NavGroup {
   title: string
-  items: { id: Section; label: string }[]
+  items: NavItem[]
 }
 
 const navigation: NavGroup[] = [
   {
     title: '',
     items: [
-      { id: 'home', label: 'Home' },
-      { id: 'philosophy', label: 'About' },
+      { id: 'home', label: 'Home', keywords: ['首页', 'welcome', 'lucid', 'introduction'], description: 'Welcome to Lucid UI' },
+      { id: 'philosophy', label: 'About', keywords: ['关于', '设计原则', '设计哲学', 'philosophy', 'principles', 'dual theme', '理性', '感性', 'rational', 'sentient'], description: 'Design philosophy and principles' },
     ]
   },
   {
     title: 'Foundation',
     items: [
-      { id: 'colors', label: 'Colors' },
-      { id: 'typography', label: 'Typography' },
-      { id: 'spacing', label: 'Spacing' },
-      { id: 'responsive', label: 'Responsive' },
+      { id: 'colors', label: 'Colors', keywords: ['颜色', '色彩', 'theme', '主题', 'blue', 'gold', '蓝色', '金色'], description: 'Color system and themes' },
+      { id: 'typography', label: 'Typography', keywords: ['字体', '排版', 'font', 'text'], description: 'Typography scale and usage' },
+      { id: 'spacing', label: 'Spacing', keywords: ['间距', 'padding', 'margin', 'gap'], description: 'Spacing system' },
+      { id: 'responsive', label: 'Responsive', keywords: ['响应式', '移动端', 'mobile', 'desktop', 'breakpoint'], description: 'Responsive design patterns' },
     ]
   },
   {
     title: 'Layout',
     items: [
-      { id: 'app-shell', label: 'App Shell' },
-      { id: 'conversation-list', label: 'Conversation List' },
+      { id: 'app-shell', label: 'App Shell', keywords: ['布局', '框架', 'layout', 'header', 'sidebar'], description: 'Application shell layout' },
+      { id: 'conversation-list', label: 'Conversation List', keywords: ['对话列表', '会话列表', 'list'], description: 'Conversation list component' },
     ]
   },
   {
     title: 'Conversation',
     items: [
-      { id: 'chat-bubble', label: 'Chat Bubble' },
-      { id: 'message-list', label: 'Message List' },
-      { id: 'input-bar', label: 'Input Bar' },
-      { id: 'time-divider', label: 'Time Divider' },
-      { id: 'system-message', label: 'System Message' },
-      { id: 'message-status', label: 'Message Status' },
-      { id: 'context-menu', label: 'Context Menu' },
-      { id: 'reply-quote', label: 'Reply Quote' },
+      { id: 'chat-bubble', label: 'Chat Bubble', keywords: ['消息气泡', '对话气泡', 'message', 'bubble'], description: 'Chat message bubbles' },
+      { id: 'message-list', label: 'Message List', keywords: ['消息列表', 'messages'], description: 'Message list display' },
+      { id: 'input-bar', label: 'Input Bar', keywords: ['输入框', '发送', 'input', 'send'], description: 'Message input bar' },
+      { id: 'time-divider', label: 'Time Divider', keywords: ['时间分割', 'divider', '时间'], description: 'Time divider component' },
+      { id: 'system-message', label: 'System Message', keywords: ['系统消息', 'system'], description: 'System message display' },
+      { id: 'message-status', label: 'Message Status', keywords: ['消息状态', 'status', '已读', 'read'], description: 'Message status indicators' },
+      { id: 'context-menu', label: 'Context Menu', keywords: ['右键菜单', '上下文菜单', 'menu'], description: 'Context menu actions' },
+      { id: 'reply-quote', label: 'Reply Quote', keywords: ['引用', '回复', 'reply', 'quote'], description: 'Reply with quote' },
     ]
   },
   {
     title: 'Status',
     items: [
-      { id: 'ai-status', label: 'AI Status' },
-      { id: 'streaming-text', label: 'Streaming Text' },
-      { id: 'error-state', label: 'Error State' },
+      { id: 'ai-status', label: 'AI Status', keywords: ['AI状态', '思考', 'thinking', 'loading'], description: 'AI thinking indicators' },
+      { id: 'streaming-text', label: 'Streaming Text', keywords: ['流式文本', '打字机', 'stream', 'typing'], description: 'Streaming text effect' },
+      { id: 'error-state', label: 'Error State', keywords: ['错误', '异常', 'error', 'failed'], description: 'Error state handling' },
     ]
   },
   {
     title: 'Agent Identity',
     items: [
-      { id: 'agent-avatar', label: 'Agent Avatar' },
-      { id: 'agent-card', label: 'Agent Card' },
+      { id: 'agent-avatar', label: 'Agent Avatar', keywords: ['智能体头像', '头像', 'avatar', 'agent'], description: 'Agent avatar component' },
+      { id: 'agent-card', label: 'Agent Card', keywords: ['智能体卡片', '卡片', 'card', 'agent'], description: 'Agent information card' },
     ]
   },
   {
     title: 'Capability',
     items: [
-      { id: 'tool-call', label: 'Tool Call' },
-      { id: 'code-block', label: 'Code Block' },
+      { id: 'tool-call', label: 'Tool Call', keywords: ['工具调用', 'tool', 'function', 'api'], description: 'Tool calling display' },
+      { id: 'code-block', label: 'Code Block', keywords: ['代码块', 'code', '代码', 'syntax'], description: 'Code block component' },
     ]
   },
   {
     title: 'Interaction',
     items: [
-      { id: 'feedback', label: 'Feedback' },
+      { id: 'feedback', label: 'Feedback', keywords: ['反馈', '点赞', 'like', 'dislike', '评分'], description: 'User feedback component' },
     ]
   },
   {
     title: 'Mobile',
     items: [
-      { id: 'bottom-tab-bar', label: 'Bottom Tab Bar' },
-      { id: 'action-sheet', label: 'Action Sheet' },
+      { id: 'bottom-tab-bar', label: 'Bottom Tab Bar', keywords: ['底部标签栏', '标签栏', 'tab', 'navigation'], description: 'Mobile bottom navigation' },
+      { id: 'action-sheet', label: 'Action Sheet', keywords: ['操作面板', '底部弹窗', 'sheet', 'modal'], description: 'Mobile action sheet' },
     ]
   },
 ]
@@ -172,14 +179,18 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [searchOpen])
 
-  // Filter search results
+  // Filter search results - match label, keywords, description, and group title
   const filteredNavigation = searchQuery.trim()
     ? navigation.map(group => ({
         ...group,
-        items: group.items.filter(item =>
-          item.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          (group.title && group.title.toLowerCase().includes(searchQuery.toLowerCase()))
-        )
+        items: group.items.filter(item => {
+          const query = searchQuery.toLowerCase()
+          const matchLabel = item.label.toLowerCase().includes(query)
+          const matchKeywords = item.keywords?.some(kw => kw.toLowerCase().includes(query))
+          const matchDescription = item.description?.toLowerCase().includes(query)
+          const matchGroup = group.title && group.title.toLowerCase().includes(query)
+          return matchLabel || matchKeywords || matchDescription || matchGroup
+        })
       })).filter(group => group.items.length > 0)
     : navigation
 
@@ -407,10 +418,15 @@ function App() {
                               setSearchOpen(false)
                               setSearchQuery('')
                             }}
-                            className="w-full text-left px-3 py-2 rounded-md hover:bg-rational-50 text-sm text-gray-700 hover:text-rational-600 transition-colors flex items-center justify-between group"
+                            className="w-full text-left px-3 py-2.5 rounded-md hover:bg-rational-50 text-sm hover:text-rational-600 transition-colors flex items-center justify-between group"
                           >
-                            <span className="font-medium">{item.label}</span>
-                            <svg className="w-4 h-4 text-gray-400 group-hover:text-rational-500 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div className="flex-1 min-w-0">
+                              <div className="font-medium text-gray-900 group-hover:text-rational-600">{item.label}</div>
+                              {item.description && (
+                                <div className="text-xs text-gray-500 mt-0.5 truncate">{item.description}</div>
+                              )}
+                            </div>
+                            <svg className="w-4 h-4 text-gray-400 group-hover:text-rational-500 opacity-0 group-hover:opacity-100 transition-opacity ml-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                             </svg>
                           </button>
