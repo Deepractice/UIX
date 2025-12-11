@@ -361,6 +361,41 @@ pnpm tsc --noEmit
 
 ---
 
+## 架构
+
+Lucid UI 是 Deepractice 生态系统的设计基础：
+
+```
+AgentX (产品 / 运行时)
+  ↓ 使用
+@agentxjs/ui (组件实现)
+  ↓ 引用
+Lucid UI (设计语言 / 规范)
+```
+
+- **AgentX** 定义"需要什么组件"（Studio、MessagePane、UserMessage...）—— 产品需求驱动
+- **Lucid UI** 回答"这些组件长什么样、怎么交互" —— 设计的 Source of Truth
+
+---
+
+## 生态系统
+
+**Deepractice AI 开发生态** 的一部分：
+
+| 项目 | 描述 | 关系 |
+|------|------|------|
+| **[AgentX](https://github.com/Deepractice/AgentX)** | AI 智能体开发框架与运行时 | **使用 Lucid UI** 作为组件设计规范 |
+| **[PromptX](https://github.com/Deepractice/PromptX)** | 提示词工程与管理框架 | 生态伙伴 |
+| **[DPML](https://github.com/Deepractice/dpml)** | Deepractice AI 工作流标记语言 | 生态伙伴 |
+| **[DARP](https://github.com/Deepractice/DARP)** | Deepractice 智能体运行时协议 | 生态伙伴 |
+
+### 应用案例
+
+- **[@agentxjs/ui](https://github.com/Deepractice/AgentX/tree/main/packages/ui)** - AgentX 的 React 组件库，实现 Lucid UI 设计规范
+- **[Portagent](https://github.com/Deepractice/AgentX/tree/main/apps/portagent)** - 基于 Lucid 设计语言构建的开箱即用 AI 智能体门户
+
+---
+
 ## 许可证
 
 MIT - 查看 [LICENSE](LICENSE)

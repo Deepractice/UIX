@@ -361,6 +361,41 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
+## Architecture
+
+Lucid UI serves as the design foundation in the Deepractice ecosystem:
+
+```
+AgentX (Product / Runtime)
+  ↓ uses
+@agentxjs/ui (Component Implementation)
+  ↓ references
+Lucid UI (Design Language / Specification)
+```
+
+- **AgentX** defines "what components are needed" (Studio, MessagePane, UserMessage...) - product-driven
+- **Lucid UI** answers "how these components look and behave" - design Source of Truth
+
+---
+
+## Ecosystem
+
+Part of the **Deepractice AI development ecosystem**:
+
+| Project | Description | Relationship |
+|---------|-------------|--------------|
+| **[AgentX](https://github.com/Deepractice/AgentX)** | AI agent development framework and runtime | **Uses Lucid UI** for component design specs |
+| **[PromptX](https://github.com/Deepractice/PromptX)** | Prompt engineering and management framework | Ecosystem partner |
+| **[DPML](https://github.com/Deepractice/dpml)** | Deepractice Markup Language for AI workflows | Ecosystem partner |
+| **[DARP](https://github.com/Deepractice/DARP)** | Deepractice Agent Runtime Protocol | Ecosystem partner |
+
+### Used By
+
+- **[@agentxjs/ui](https://github.com/Deepractice/AgentX/tree/main/packages/ui)** - AgentX's React component library implements Lucid UI design specifications
+- **[Portagent](https://github.com/Deepractice/AgentX/tree/main/apps/portagent)** - Ready-to-use AI agent portal built with Lucid design language
+
+---
+
 ## License
 
 MIT - see [LICENSE](LICENSE)
