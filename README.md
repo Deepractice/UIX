@@ -34,11 +34,11 @@ Based on **shadcn/ui**, we provide a dual theme system for different scenarios:
 
 ### Dual Theme System
 
-**🔷 Rational Theme** - Tech Blue `#3B82F6`
+**🔷 Rational Theme** - Tech Blue `#0284c7`
 - Represents: Efficiency, Precision, Computation
 - Use for: Data analysis, Technical products, Productivity tools
 
-**🔶 Sentient Theme** - Wisdom Gold `#D4A012`
+**🔶 Sentient Theme** - Wisdom Gold `#f59e0b`
 - Represents: Wisdom, Thinking, Humanity, Probability
 - Use for: Creative tools, Human-centric products, Thinking aids
 
@@ -168,9 +168,9 @@ All design tokens are available in `@lucidui/tokens`:
 ```typescript
 import { rational, sentient, colors } from '@lucidui/tokens'
 
-// Dual Theme Colors
-rational[500]   // '#3B82F6' (Rational Blue - default primary)
-sentient[500]   // '#D4A012' (Sentient Gold - creative primary)
+// Dual Theme Colors (aligned with AgentX UI)
+rational[600]   // '#0284c7' (Rational Blue - default primary)
+sentient[500]   // '#f59e0b' (Sentient Gold - creative primary)
 
 // Foundation Colors
 colors.gray[100]     // '#F5F5F5' (Light Gray)
@@ -221,9 +221,9 @@ fontFamily.sans  // ['Inter', ...]
 | `text-foreground` | #171717 | Primary text |
 | `text-muted-foreground` | #737373 | Secondary text |
 | `border-border` | #E5E5E5 | Borders |
-| `bg-primary-500` | #3B82F6 | Rational blue (default) |
-| `bg-rational-500` | #3B82F6 | Tech/efficiency theme |
-| `bg-sentient-500` | #D4A012 | Creative/wisdom theme |
+| `bg-primary-600` | #0284c7 | Rational blue (default) |
+| `bg-rational-600` | #0284c7 | Tech/efficiency theme |
+| `bg-sentient-500` | #f59e0b | Creative/wisdom theme |
 
 ---
 

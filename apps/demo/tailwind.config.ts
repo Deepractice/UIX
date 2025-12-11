@@ -28,7 +28,7 @@ export default {
         muted: colors.gray[100],
         'muted-foreground': colors.gray[600],
         border: colors.gray[200],
-        ring: rational[500],
+        ring: rational[600],  // 与 AgentX 一致
       },
       fontFamily: {
         sans: fontFamily.sans,

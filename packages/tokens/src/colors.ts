@@ -30,36 +30,38 @@ export const gray = {
 
 // ============================================
 // Rational Theme - 理性蓝（科技、效率、精准）
+// 与 AgentX UI 保持一致: primary = blue-600
 // ============================================
 export const rational = {
-  50: '#EFF6FF',   // 极浅蓝
-  100: '#DBEAFE',
-  200: '#BFDBFE',
-  300: '#93C5FD',
-  400: '#60A5FA',
-  500: '#3B82F6',  // 主色 - 科技蓝
-  600: '#2563EB',
-  700: '#1D4ED8',
-  800: '#1E40AF',
-  900: '#1E3A8A',
-  950: '#172554',
+  50: '#f0f9ff',   // 极浅蓝
+  100: '#e0f2fe',
+  200: '#bae6fd',
+  300: '#7dd3fc',
+  400: '#38bdf8',
+  500: '#0ea5e9',
+  600: '#0284c7',  // 主色 - 与 AgentX primary 一致
+  700: '#0369a1',
+  800: '#075985',
+  900: '#0c4a6e',
+  950: '#082f49',
 } as const
 
 // ============================================
 // Sentient Theme - 感性金（智慧、思维、人文）
+// 与 AgentX UI 保持一致: secondary = amber-500
 // ============================================
 export const sentient = {
-  50: '#FFFBEB',   // 极浅金
-  100: '#FEF3C7',
-  200: '#FDE68A',
-  300: '#FCD34D',
-  400: '#FBBF24',
-  500: '#D4A012',  // 主色 - 智慧金（比橙更沉稳）
-  600: '#B8860B',  // 暗金色
-  700: '#92650A',
-  800: '#724F09',
-  900: '#5C4008',
-  950: '#3D2A05',
+  50: '#fffbeb',   // 极浅金
+  100: '#fef3c7',
+  200: '#fde68a',
+  300: '#fcd34d',
+  400: '#fbbf24',
+  500: '#f59e0b',  // 主色 - 与 AgentX secondary 一致
+  600: '#d97706',
+  700: '#b45309',
+  800: '#92400e',
+  900: '#78350f',
+  950: '#451a03',
 } as const
 
 // ============================================
@@ -137,7 +139,7 @@ export const themes = {
     cardForeground: gray[900],
     popover: '#FFFFFF',
     popoverForeground: gray[900],
-    primary: rational[500],
+    primary: rational[600],  // 与 AgentX 一致
     primaryForeground: '#FFFFFF',
     secondary: gray[100],
     secondaryForeground: gray[900],
@@ -149,7 +151,7 @@ export const themes = {
     destructiveForeground: '#FFFFFF',
     border: gray[200],
     input: gray[200],
-    ring: rational[500],
+    ring: rational[600],  // 与 AgentX 一致
   },
   // 感性主题 - 智慧金
   sentient: {
