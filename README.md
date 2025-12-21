@@ -7,8 +7,6 @@
     AI-to-UI Intermediate Representation (IR) Protocol Layer
   </p>
 
-  <hr/>
-
   <p>
     <a href="https://github.com/Deepractice/Lucid-UI"><img src="https://img.shields.io/github/stars/Deepractice/Lucid-UI?style=social" alt="Stars"/></a>
     <img src="https://komarev.com/ghpvc/?username=LucidUI&label=views&color=0e75b6&style=flat&abbreviated=true" alt="Views"/>
