@@ -1,97 +1,66 @@
 /**
- * AgentAvatarGroup - Multi-agent avatar stack component
+ * AvatarGroup - Multi-avatar stack component
  *
- * Displays multiple agent avatars in a stacked layout with overflow handling.
- * Useful for showing which agents are participating in a conversation.
+ * Displays multiple avatars in a stacked layout with overflow handling.
+ * Uses the composable Avatar system.
  *
  * @example Basic usage
  * ```tsx
- * <AgentAvatarGroup
- *   agents={[
- *     { name: 'Claude', src: '/claude.png' },
- *     { name: 'GPT', src: '/gpt.png' },
- *     { name: 'Gemini' }
- *   ]}
- * />
+ * <AvatarGroup>
+ *   <Avatar><AvatarImage src="/a.png" /><AvatarFallback>A</AvatarFallback></Avatar>
+ *   <Avatar><AvatarImage src="/b.png" /><AvatarFallback>B</AvatarFallback></Avatar>
+ * </AvatarGroup>
  * ```
  *
- * @example With active agent highlight
+ * @example With max and overflow
  * ```tsx
- * <AgentAvatarGroup
- *   agents={agents}
- *   activeAgent="Claude"
- *   max={4}
- * />
+ * <AvatarGroup max={3}>
+ *   {agents.map(agent => (
+ *     <Avatar key={agent.id}>
+ *       <AvatarImage src={agent.avatar} />
+ *       <AvatarFallback>{agent.initials}</AvatarFallback>
+ *     </Avatar>
+ *   ))}
+ * </AvatarGroup>
  * ```
  */
 
 import * as React from 'react'
 import { cn } from '../utils'
-import { AgentAvatar, type AvatarVariant } from './AgentAvatar'
+import { Avatar, AvatarFallback, type AvatarSize } from './Avatar'
 
 // ============================================================================
 // Types
 // ============================================================================
 
-export interface AgentAvatarGroupItem {
-  /**
-   * Agent name (required for display and identification)
-   */
-  name: string
-  /**
-   * Avatar image URL
-   */
-  src?: string
-  /**
-   * Color variant
-   */
-  variant?: AvatarVariant
-}
-
-export interface AgentAvatarGroupProps {
-  /**
-   * List of agents to display
-   */
-  agents: AgentAvatarGroupItem[]
+export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Maximum number of avatars to show before overflow
    * @default 4
    */
   max?: number
   /**
-   * Name of the currently active agent (will be highlighted)
-   */
-  activeAgent?: string
-  /**
-   * Avatar size
+   * Avatar size (applied to all children)
    * @default "sm"
    */
-  size?: 'sm' | 'md' | 'lg'
+  size?: AvatarSize
   /**
    * Stack direction
    * @default "left"
    */
   direction?: 'left' | 'right'
-  /**
-   * Additional CSS classes
-   */
-  className?: string
 }
 
 // ============================================================================
 // Constants
 // ============================================================================
 
-const sizeClasses: Record<'sm' | 'md' | 'lg', string> = {
-  sm: 'w-6 h-6 text-xs',
-  md: 'w-8 h-8 text-sm',
-  lg: 'w-10 h-10 text-base',
-}
-
-const overlapClasses: Record<'sm' | 'md' | 'lg', string> = {
+const overlapClasses: Record<AvatarSize, string> = {
+  xs: '-ml-1.5',
   sm: '-ml-2',
   md: '-ml-3',
   lg: '-ml-4',
+  xl: '-ml-5',
 }
 
 // ============================================================================
@@ -99,18 +68,18 @@ const overlapClasses: Record<'sm' | 'md' | 'lg', string> = {
 // ============================================================================
 
 /**
- * AgentAvatarGroup Component
+ * AvatarGroup Component
  *
- * Displays a stack of agent avatars with:
+ * Displays a stack of avatars with:
  * - Overlap effect (later avatars partially cover earlier ones)
  * - Overflow indicator (+N) when exceeding max
- * - Active agent highlighting with ring
  * - Hover effect to show full avatar
  */
-export const AgentAvatarGroup = React.forwardRef<HTMLDivElement, AgentAvatarGroupProps>(
-  ({ agents, max = 4, activeAgent, size = 'sm', direction = 'left', className }, ref) => {
-    const visibleAgents = agents.slice(0, max)
-    const overflowCount = agents.length - max
+export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
+  ({ max = 4, size = 'sm', direction = 'left', className, children, ...props }, ref) => {
+    const childArray = React.Children.toArray(children)
+    const visibleChildren = childArray.slice(0, max)
+    const overflowCount = childArray.length - max
 
     return (
       <div
@@ -121,54 +90,53 @@ export const AgentAvatarGroup = React.forwardRef<HTMLDivElement, AgentAvatarGrou
           className
         )}
         role="group"
-        aria-label={`${agents.length} agents`}
+        aria-label={`${childArray.length} items`}
+        {...props}
       >
-        {visibleAgents.map((agent, index) => {
-          const isActive = agent.name === activeAgent
+        {visibleChildren.map((child, index) => {
           const isFirst = index === 0
+
+          // Clone child to add size and styling
+          const clonedChild = React.isValidElement(child)
+            ? React.cloneElement(child as React.ReactElement<{ size?: AvatarSize; className?: string }>, {
+                size,
+                className: cn(
+                  (child as React.ReactElement<{ className?: string }>).props.className,
+                  'border-2 border-white transition-transform hover:z-10 hover:scale-110'
+                ),
+              })
+            : child
 
           return (
             <div
-              key={agent.name}
+              key={index}
               className={cn(
-                'relative transition-transform hover:z-10 hover:scale-110',
-                !isFirst && (direction === 'left' ? overlapClasses[size] : '-mr-2'),
-                isActive && 'z-10'
+                'relative',
+                !isFirst && (direction === 'left' ? overlapClasses[size] : '-mr-2')
               )}
-              style={{ zIndex: isActive ? 10 : visibleAgents.length - index }}
+              style={{ zIndex: visibleChildren.length - index }}
             >
-              <AgentAvatar
-                name={agent.name}
-                src={agent.src}
-                variant={agent.variant || 'neutral'}
-                size={size}
-                className={cn(
-                  'border-2 border-white',
-                  isActive && 'ring-2 ring-primary-500 ring-offset-1'
-                )}
-              />
+              {clonedChild}
             </div>
           )
         })}
 
         {/* Overflow indicator */}
         {overflowCount > 0 && (
-          <div
+          <Avatar
+            size={size}
             className={cn(
-              'relative flex items-center justify-center rounded-full',
-              'bg-gray-200 text-gray-600 font-medium border-2 border-white',
-              sizeClasses[size],
+              'border-2 border-white',
               direction === 'left' ? overlapClasses[size] : '-mr-2'
             )}
             style={{ zIndex: 0 }}
-            role="img"
-            aria-label={`${overflowCount} more agents`}
+            aria-label={`${overflowCount} more`}
           >
-            +{overflowCount}
-          </div>
+            <AvatarFallback variant="neutral">+{overflowCount}</AvatarFallback>
+          </Avatar>
         )}
       </div>
     )
   }
 )
-AgentAvatarGroup.displayName = 'AgentAvatarGroup'
+AvatarGroup.displayName = 'AvatarGroup'

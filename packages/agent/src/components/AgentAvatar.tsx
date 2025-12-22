@@ -36,8 +36,9 @@ import { cn } from '../utils'
 
 /**
  * Color variants for avatar backgrounds
+ * @deprecated Use AvatarVariant from './Avatar' instead
  */
-export type AvatarVariant =
+type AvatarVariant =
   | 'primary'    // Blue - AI/rational
   | 'secondary'  // Amber/gold - User/sentient
   | 'success'    // Green
@@ -48,8 +49,9 @@ export type AvatarVariant =
 
 /**
  * Image loading status (Radix-style)
+ * @deprecated Use ImageLoadingStatus from './Avatar' instead
  */
-export type ImageLoadingStatus = 'idle' | 'loading' | 'loaded' | 'error'
+type ImageLoadingStatus = 'idle' | 'loading' | 'loaded' | 'error'
 
 export interface AgentAvatarProps {
   /**
@@ -294,7 +296,7 @@ export const AgentAvatar = React.forwardRef<HTMLDivElement, AgentAvatarProps>(
 AgentAvatar.displayName = 'AgentAvatar'
 
 // ============================================================================
-// Utility exports
+// Utility exports (kept for backward compatibility, prefer Avatar.tsx exports)
 // ============================================================================
 
-export { variantClasses as avatarVariantClasses, useImageLoadingStatus }
+export { useImageLoadingStatus }

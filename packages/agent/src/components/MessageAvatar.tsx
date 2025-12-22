@@ -219,7 +219,7 @@ export const MessageAvatar = React.forwardRef<HTMLDivElement, MessageAvatarProps
 MessageAvatar.displayName = 'MessageAvatar'
 
 // ============================================================================
-// Utility exports
+// Utility exports (roleColors and statusAnimations are unique to MessageAvatar)
 // ============================================================================
 
-export { roleSymbols, roleColors, sizeClasses as avatarSizeClasses, statusAnimations }
+export { roleColors, statusAnimations }
