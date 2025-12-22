@@ -26,20 +26,10 @@
 
 import * as React from 'react'
 import { cn } from '../utils'
+import type { MessageRole } from '../types'
 
-// ============================================================================
-// Types
-// ============================================================================
-
-/**
- * Message role types following AgentX convention
- * - user: Human user messages
- * - assistant: AI assistant responses
- * - system: System messages
- * - tool: Tool execution results
- * - error: Error messages
- */
-export type MessageRole = 'user' | 'assistant' | 'system' | 'tool' | 'error'
+// Re-export for convenience
+export type { MessageRole } from '../types'
 
 /**
  * AI-specific dynamic status for avatar animations

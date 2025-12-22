@@ -1,84 +1,86 @@
 /**
- * MentionPopover - @mention agent selector
+ * MentionPopover - @mention agent selector with auto-positioning
  *
  * Popover component for selecting agents when typing @mention.
- * Follows composition pattern with keyboard navigation support.
+ * Uses floating-ui for automatic positioning relative to anchor element.
  *
- * @example Basic usage with ChatInput
+ * @example Basic usage with anchor ref
  * ```tsx
- * const [open, setOpen] = useState(false)
- * const [query, setQuery] = useState('')
- * const [position, setPosition] = useState({ top: 0, left: 0 })
+ * const anchorRef = useRef<HTMLTextAreaElement>(null)
  *
- * <ChatInput
- *   onMentionTrigger={({ query, position }) => {
- *     setQuery(query)
- *     setPosition(position)
- *     setOpen(true)
- *   }}
- *   onMentionClose={() => setOpen(false)}
- * />
+ * <textarea ref={anchorRef} />
  *
  * <MentionPopover
  *   open={open}
+ *   anchorRef={anchorRef}
  *   query={query}
- *   position={position}
  *   agents={agents}
  *   onSelect={(agent) => { insertMention(agent); setOpen(false) }}
  *   onClose={() => setOpen(false)}
  * />
  * ```
  *
+ * @example With virtual anchor (cursor position)
+ * ```tsx
+ * const [virtualAnchor, setVirtualAnchor] = useState<VirtualElement | null>(null)
+ *
+ * // On @ trigger, create virtual anchor at cursor
+ * setVirtualAnchor({
+ *   getBoundingClientRect: () => getCursorRect()
+ * })
+ *
+ * <MentionPopover
+ *   open={open}
+ *   virtualAnchor={virtualAnchor}
+ *   agents={agents}
+ *   onSelect={handleSelect}
+ * />
+ * ```
+ *
  * @example Composable with custom item renderer
  * ```tsx
- * <MentionPopover open={open} agents={agents} onSelect={handleSelect}>
- *   <MentionPopoverContent>
- *     {(filteredAgents) => filteredAgents.map(agent => (
- *       <MentionItem key={agent.id} agent={agent}>
- *         <CustomAgentCard agent={agent} />
- *       </MentionItem>
- *     ))}
- *   </MentionPopoverContent>
+ * <MentionPopover open={open} anchorRef={ref} agents={agents} onSelect={handleSelect}>
+ *   {(filteredAgents) => filteredAgents.map(agent => (
+ *     <MentionItem key={agent.id} agent={agent}>
+ *       <CustomAgentCard agent={agent} />
+ *     </MentionItem>
+ *   ))}
  * </MentionPopover>
  * ```
  */
 
 import * as React from 'react'
+import {
+  useFloating,
+  autoUpdate,
+  offset,
+  flip,
+  shift,
+  size as floatingSize,
+  type UseFloatingReturn,
+  type VirtualElement,
+  type Placement,
+} from '@floating-ui/react'
 import { cn } from '../utils'
 import { Avatar, AvatarImage, AvatarFallback } from './Avatar'
+import type { MentionAgent, PresenceStatus } from '../types'
 
-// ============================================================================
-// Types
-// ============================================================================
+// Re-export for convenience
+export type { MentionAgent, PresenceStatus }
 
-export interface MentionAgent {
-  /**
-   * Unique identifier
-   */
-  id: string
-  /**
-   * Display name
-   */
-  name: string
-  /**
-   * Avatar URL
-   */
-  avatar?: string
-  /**
-   * Description or role
-   */
-  description?: string
-  /**
-   * Online status
-   */
-  status?: 'online' | 'offline' | 'busy'
-}
-
-export interface MentionPopoverProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect'> {
+export interface MentionPopoverProps {
   /**
    * Whether the popover is open
    */
   open: boolean
+  /**
+   * Reference element for positioning
+   */
+  anchorRef?: React.RefObject<HTMLElement>
+  /**
+   * Virtual anchor for custom positioning (e.g., cursor position)
+   */
+  virtualAnchor?: VirtualElement | null
   /**
    * Search query (text after @)
    */
@@ -87,10 +89,6 @@ export interface MentionPopoverProps extends Omit<React.HTMLAttributes<HTMLDivEl
    * Available agents to mention
    */
   agents: MentionAgent[]
-  /**
-   * Position for the popover
-   */
-  position?: { top: number; left: number }
   /**
    * Called when an agent is selected
    */
@@ -105,6 +103,11 @@ export interface MentionPopoverProps extends Omit<React.HTMLAttributes<HTMLDivEl
    */
   maxItems?: number
   /**
+   * Placement preference
+   * @default "bottom-start"
+   */
+  placement?: Placement
+  /**
    * Custom filter function
    */
   filter?: (agent: MentionAgent, query: string) => boolean
@@ -114,9 +117,13 @@ export interface MentionPopoverProps extends Omit<React.HTMLAttributes<HTMLDivEl
    */
   emptyMessage?: string
   /**
-   * Custom children (overrides default rendering)
+   * Custom render function for items
    */
-  children?: React.ReactNode
+  children?: (filteredAgents: MentionAgent[]) => React.ReactNode
+  /**
+   * Additional className for popover
+   */
+  className?: string
 }
 
 export interface MentionItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect'> {
@@ -153,6 +160,63 @@ function useMentionContext() {
     throw new Error('MentionItem must be used within MentionPopover')
   }
   return context
+}
+
+// ============================================================================
+// Hook for external usage
+// ============================================================================
+
+export interface UseMentionPopoverOptions {
+  placement?: Placement
+  offset?: number
+}
+
+export interface UseMentionPopoverReturn {
+  floating: UseFloatingReturn
+  isPositioned: boolean
+}
+
+/**
+ * Hook for manual floating control
+ * Use this when you need more control over positioning
+ */
+export function useMentionPopover(
+  anchorRef: React.RefObject<HTMLElement> | undefined,
+  virtualAnchor: VirtualElement | null | undefined,
+  options: UseMentionPopoverOptions = {}
+): UseMentionPopoverReturn {
+  const { placement = 'bottom-start', offset: offsetValue = 4 } = options
+
+  const floating = useFloating({
+    placement,
+    middleware: [
+      offset(offsetValue),
+      flip({ fallbackPlacements: ['top-start', 'bottom-end', 'top-end'] }),
+      shift({ padding: 8 }),
+      floatingSize({
+        apply({ availableHeight, elements }) {
+          Object.assign(elements.floating.style, {
+            maxHeight: `${Math.min(availableHeight, 320)}px`,
+          })
+        },
+      }),
+    ],
+    whileElementsMounted: autoUpdate,
+  })
+
+  // Update reference element
+  React.useLayoutEffect(() => {
+    if (virtualAnchor) {
+      floating.refs.setReference(virtualAnchor)
+    } else if (anchorRef?.current) {
+      floating.refs.setReference(anchorRef.current)
+    }
+  }, [virtualAnchor, anchorRef, floating.refs])
+
+  return {
+    floating,
+    isPositioned: floating.isPositioned,
+  }
 }
 
 // ============================================================================
@@ -219,27 +283,6 @@ export const MentionItem = React.forwardRef<HTMLDivElement, MentionItemProps>(
 )
 MentionItem.displayName = 'MentionItem'
 
-/**
- * Popover content wrapper
- */
-export const MentionPopoverContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & {
-    children?: React.ReactNode | ((agents: MentionAgent[]) => React.ReactNode)
-  }
->(({ children, className, ...props }, ref) => {
-  return (
-    <div
-      ref={ref}
-      className={cn('py-1', className)}
-      {...props}
-    >
-      {children}
-    </div>
-  )
-})
-MentionPopoverContent.displayName = 'MentionPopoverContent'
-
 // ============================================================================
 // Component
 // ============================================================================
@@ -249,31 +292,36 @@ MentionPopoverContent.displayName = 'MentionPopoverContent'
  *
  * Floating popover for @mention agent selection.
  * Features:
- * - Fuzzy search filtering
+ * - Auto-positioning with floating-ui
  * - Keyboard navigation (↑/↓/Enter/Esc)
  * - Composable item rendering
- * - Accessibility support (listbox pattern)
+ * - Virtual anchor support for cursor positioning
  */
 export const MentionPopover = React.forwardRef<HTMLDivElement, MentionPopoverProps>(
   (
     {
       open,
+      anchorRef,
+      virtualAnchor,
       query = '',
       agents,
-      position,
       onSelect,
       onClose,
       maxItems = 5,
+      placement = 'bottom-start',
       filter,
       emptyMessage = 'No agents found',
       children,
       className,
-      style,
-      ...props
     },
     ref
   ) => {
     const [highlightedIndex, setHighlightedIndex] = React.useState(0)
+
+    // Floating UI setup
+    const { floating, isPositioned } = useMentionPopover(anchorRef, virtualAnchor, {
+      placement,
+    })
 
     // Default filter function
     const defaultFilter = React.useCallback(
@@ -347,40 +395,45 @@ export const MentionPopover = React.forwardRef<HTMLDivElement, MentionPopoverPro
     return (
       <MentionContext.Provider value={contextValue}>
         <div
-          ref={ref}
+          ref={(node) => {
+            floating.refs.setFloating(node)
+            if (typeof ref === 'function') ref(node)
+            else if (ref) ref.current = node
+          }}
           role="listbox"
           aria-label="Select an agent to mention"
           className={cn(
-            'absolute z-50 min-w-[200px] max-w-[300px]',
+            'z-50 min-w-[200px] max-w-[300px]',
             'bg-white rounded-lg shadow-lg border border-gray-200',
-            'overflow-hidden',
+            'overflow-hidden overflow-y-auto',
+            !isPositioned && 'invisible',
             className
           )}
           style={{
-            top: position?.top,
-            left: position?.left,
-            ...style,
+            position: floating.strategy,
+            top: floating.y ?? 0,
+            left: floating.x ?? 0,
           }}
-          {...props}
         >
-          {children || (
-            <MentionPopoverContent>
-              {filteredAgents.length > 0 ? (
-                filteredAgents.map((agent, index) => (
-                  <MentionItem
-                    key={agent.id}
-                    agent={agent}
-                    highlighted={index === highlightedIndex}
-                    onSelect={onSelect}
-                  />
-                ))
-              ) : (
-                <div className="px-3 py-4 text-sm text-gray-500 text-center">
-                  {emptyMessage}
-                </div>
-              )}
-            </MentionPopoverContent>
-          )}
+          {/* Content */}
+          <div className="py-1">
+            {children ? (
+              children(filteredAgents)
+            ) : filteredAgents.length > 0 ? (
+              filteredAgents.map((agent, index) => (
+                <MentionItem
+                  key={agent.id}
+                  agent={agent}
+                  highlighted={index === highlightedIndex}
+                  onSelect={onSelect}
+                />
+              ))
+            ) : (
+              <div className="px-3 py-4 text-sm text-gray-500 text-center">
+                {emptyMessage}
+              </div>
+            )}
+          </div>
 
           {/* Keyboard hint */}
           <div className="border-t border-gray-100 px-3 py-1.5 bg-gray-50">
@@ -400,3 +453,4 @@ MentionPopover.displayName = 'MentionPopover'
 // ============================================================================
 
 export { useMentionContext }
+export type { VirtualElement }

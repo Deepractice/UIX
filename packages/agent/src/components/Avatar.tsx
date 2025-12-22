@@ -39,48 +39,27 @@
 
 import * as React from 'react'
 import { cn } from '../utils'
+import type {
+  AvatarSize,
+  AvatarAnimationStatus,
+  AvatarVariant,
+  ImageLoadingStatus,
+  PresenceStatus,
+} from '../types'
 
-// ============================================================================
-// Types
-// ============================================================================
-
-export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-
-/**
- * AI-specific dynamic status for avatar animations
- */
-export type AvatarAnimationStatus =
-  | 'idle'
-  | 'thinking'      // Pulse animation
-  | 'planning'      // Breathing glow
-  | 'responding'    // Ping ripple
-  | 'tool-calling'  // Spinning ring
+// Re-export types from central source
+export type {
+  AvatarSize,
+  AvatarAnimationStatus,
+  AvatarVariant,
+  ImageLoadingStatus,
+  PresenceStatus,
+} from '../types'
 
 /**
  * Message role for automatic color/symbol mapping
  */
 export type AvatarRole = 'user' | 'assistant' | 'system' | 'tool' | 'error'
-
-/**
- * Color variants for fallback backgrounds
- */
-export type AvatarVariant =
-  | 'primary'
-  | 'secondary'
-  | 'neutral'
-  | 'success'
-  | 'warning'
-  | 'error'
-
-/**
- * Image loading status
- */
-export type ImageLoadingStatus = 'idle' | 'loading' | 'loaded' | 'error'
-
-/**
- * Online/presence status
- */
-export type PresenceStatus = 'online' | 'offline' | 'busy'
 
 // ============================================================================
 // Context

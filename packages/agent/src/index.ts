@@ -39,3 +39,6 @@
 
 export * from './components'
 export { cn } from './utils'
+
+// Unified types - single source of truth
+export * from './types'

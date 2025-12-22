@@ -31,12 +31,10 @@
 
 import * as React from 'react'
 import { cn } from '../utils'
+import type { ThinkingVariant } from '../types'
 
-// ============================================================================
-// Types
-// ============================================================================
-
-export type ThinkingVariant = 'dots' | 'pulse' | 'bounce' | 'wave' | 'spinner'
+// Re-export for convenience
+export type { ThinkingVariant }
 
 export interface ThinkingIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -139,6 +137,7 @@ function BounceAnimation({
 
 /**
  * Wave animation (sequential height change)
+ * Uses animate-wave from Tailwind config (defined in @uix/lucid-tokens)
  */
 function WaveAnimation({
   size,
@@ -154,20 +153,13 @@ function WaveAnimation({
       {[0, 1, 2, 3].map((i) => (
         <span
           key={i}
-          className={cn(barWidth, colorClasses[color], 'rounded-full')}
+          className={cn(barWidth, colorClasses[color], 'rounded-full animate-wave')}
           style={{
-            animation: 'wave 1s ease-in-out infinite',
             animationDelay: `${i * 100}ms`,
             height: '0.5em',
           }}
         />
       ))}
-      <style>{`
-        @keyframes wave {
-          0%, 100% { height: 0.3em; }
-          50% { height: 1em; }
-        }
-      `}</style>
     </span>
   )
 }

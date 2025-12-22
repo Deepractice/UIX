@@ -27,19 +27,21 @@
  *   )}
  * </StreamText>
  * ```
+ *
+ * @example With abort controller
+ * ```tsx
+ * const abortRef = useRef<AbortController>()
+ * <StreamText stream={stream} abortController={abortRef.current} />
+ * <button onClick={() => abortRef.current?.abort()}>Stop</button>
+ * ```
  */
 
 import * as React from 'react'
 import { cn } from '../utils'
+import type { StreamSource } from '../types'
 
-// ============================================================================
-// Types
-// ============================================================================
-
-export type StreamSource =
-  | AsyncIterable<string>
-  | ReadableStream<string>
-  | string
+// Re-export for convenience
+export type { StreamSource } from '../types'
 
 export interface StreamTextProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, 'children' | 'onError'> {
   /**
@@ -74,6 +76,14 @@ export interface StreamTextProps extends Omit<React.HTMLAttributes<HTMLSpanEleme
    */
   onError?: (error: Error) => void
   /**
+   * Called on each text update with current text
+   */
+  onUpdate?: (text: string) => void
+  /**
+   * AbortController for external cancellation
+   */
+  abortController?: AbortController
+  /**
    * Custom render function for advanced use (e.g., markdown rendering)
    */
   children?: (text: string, isStreaming: boolean) => React.ReactNode
@@ -84,25 +94,77 @@ export interface StreamTextProps extends Omit<React.HTMLAttributes<HTMLSpanEleme
 // ============================================================================
 
 /**
- * Hook to consume an async iterable stream
+ * Stable callback ref - stores the latest callback without causing re-renders
  */
-function useAsyncStream(
-  stream: AsyncIterable<string> | ReadableStream<string> | undefined,
-  onComplete?: () => void,
+function useCallbackRef<T extends (...args: never[]) => unknown>(
+  callback: T | undefined
+): React.MutableRefObject<T | undefined> {
+  const ref = React.useRef(callback)
+  React.useLayoutEffect(() => {
+    ref.current = callback
+  })
+  return ref
+}
+
+export interface UseAsyncStreamOptions {
+  onComplete?: () => void
   onError?: (error: Error) => void
-): { text: string; isStreaming: boolean; error: Error | null } {
+  onUpdate?: (text: string) => void
+  abortController?: AbortController
+}
+
+export interface UseAsyncStreamResult {
+  text: string
+  isStreaming: boolean
+  error: Error | null
+  abort: () => void
+}
+
+/**
+ * Hook to consume an async iterable stream
+ *
+ * Uses ref pattern for callbacks to prevent dependency issues.
+ * Supports external abort via AbortController.
+ */
+export function useAsyncStream(
+  stream: AsyncIterable<string> | ReadableStream<string> | undefined,
+  options: UseAsyncStreamOptions = {}
+): UseAsyncStreamResult {
   const [text, setText] = React.useState('')
   const [isStreaming, setIsStreaming] = React.useState(false)
   const [error, setError] = React.useState<Error | null>(null)
+
+  // Use refs for callbacks to avoid dependency issues
+  const onCompleteRef = useCallbackRef(options.onComplete)
+  const onErrorRef = useCallbackRef(options.onError)
+  const onUpdateRef = useCallbackRef(options.onUpdate)
+
+  // Internal abort controller
+  const internalAbortRef = React.useRef<AbortController | null>(null)
+
+  // Abort function exposed to consumers
+  const abort = React.useCallback(() => {
+    internalAbortRef.current?.abort()
+    options.abortController?.abort()
+  }, [options.abortController])
 
   React.useEffect(() => {
     if (!stream) {
       setText('')
       setIsStreaming(false)
+      setError(null)
       return
     }
 
-    let cancelled = false
+    // Create internal abort controller
+    const internalAbort = new AbortController()
+    internalAbortRef.current = internalAbort
+
+    // Combine with external abort controller
+    const externalAbort = options.abortController
+    const isAborted = () =>
+      internalAbort.signal.aborted || (externalAbort?.signal.aborted ?? false)
+
     setIsStreaming(true)
     setText('')
     setError(null)
@@ -114,21 +176,25 @@ function useAsyncStream(
           ? readableStreamToAsyncIterable(stream)
           : stream
 
+        let accumulated = ''
+
         for await (const chunk of iterable) {
-          if (cancelled) break
-          setText((prev) => prev + chunk)
+          if (isAborted()) break
+          accumulated += chunk
+          setText(accumulated)
+          onUpdateRef.current?.(accumulated)
         }
 
-        if (!cancelled) {
+        if (!isAborted()) {
           setIsStreaming(false)
-          onComplete?.()
+          onCompleteRef.current?.()
         }
       } catch (err) {
-        if (!cancelled) {
-          const error = err instanceof Error ? err : new Error(String(err))
-          setError(error)
+        if (!isAborted()) {
+          const streamError = err instanceof Error ? err : new Error(String(err))
+          setError(streamError)
           setIsStreaming(false)
-          onError?.(error)
+          onErrorRef.current?.(streamError)
         }
       }
     }
@@ -136,23 +202,41 @@ function useAsyncStream(
     consume()
 
     return () => {
-      cancelled = true
+      internalAbort.abort()
     }
-  }, [stream, onComplete, onError])
+    // Only re-run when stream changes, NOT when callbacks change
+  }, [stream, options.abortController])
 
-  return { text, isStreaming, error }
+  return { text, isStreaming, error, abort }
+}
+
+export interface UseTypingAnimationOptions {
+  speed?: number
+  onComplete?: () => void
+  onUpdate?: (text: string) => void
+}
+
+export interface UseTypingAnimationResult {
+  displayText: string
+  isTyping: boolean
 }
 
 /**
  * Hook for simulated typing animation
+ *
+ * Uses ref pattern for callbacks to prevent dependency issues.
  */
-function useTypingAnimation(
+export function useTypingAnimation(
   text: string | undefined,
-  speed: number,
-  onComplete?: () => void
-): { displayText: string; isTyping: boolean } {
+  options: UseTypingAnimationOptions = {}
+): UseTypingAnimationResult {
+  const { speed = 30 } = options
   const [displayText, setDisplayText] = React.useState('')
   const [isTyping, setIsTyping] = React.useState(false)
+
+  // Use refs for callbacks
+  const onCompleteRef = useCallbackRef(options.onComplete)
+  const onUpdateRef = useCallbackRef(options.onUpdate)
 
   React.useEffect(() => {
     if (!text) {
@@ -167,17 +251,20 @@ function useTypingAnimation(
     let index = 0
     const timer = setInterval(() => {
       if (index < text.length) {
-        setDisplayText(text.slice(0, index + 1))
+        const newText = text.slice(0, index + 1)
+        setDisplayText(newText)
+        onUpdateRef.current?.(newText)
         index++
       } else {
         clearInterval(timer)
         setIsTyping(false)
-        onComplete?.()
+        onCompleteRef.current?.()
       }
     }, speed)
 
     return () => clearInterval(timer)
-  }, [text, speed, onComplete])
+    // Only depend on text and speed, not callbacks
+  }, [text, speed])
 
   return { displayText, isTyping }
 }
@@ -217,7 +304,7 @@ async function* readableStreamToAsyncIterable(
 /**
  * Blinking cursor component
  */
-const StreamCursor = React.forwardRef<
+export const StreamCursor = React.forwardRef<
   HTMLSpanElement,
   React.HTMLAttributes<HTMLSpanElement> & { char?: string }
 >(({ char = '▋', className, ...props }, ref) => (
@@ -238,6 +325,11 @@ StreamCursor.displayName = 'StreamCursor'
  * Renders streaming text from async sources with optional cursor effect.
  * Supports both real streaming (AsyncIterable/ReadableStream) and
  * simulated typing animation for static text.
+ *
+ * Design notes:
+ * - Uses useCallbackRef pattern to avoid useEffect dependency issues
+ * - Supports external abort via AbortController
+ * - Accumulated text pattern prevents state closure issues
  */
 export const StreamText = React.forwardRef<HTMLSpanElement, StreamTextProps>(
   (
@@ -249,6 +341,8 @@ export const StreamText = React.forwardRef<HTMLSpanElement, StreamTextProps>(
       speed = 30,
       onComplete,
       onError,
+      onUpdate,
+      abortController,
       children,
       className,
       ...props
@@ -260,12 +354,20 @@ export const StreamText = React.forwardRef<HTMLSpanElement, StreamTextProps>(
       text: streamedText,
       isStreaming,
       error,
-    } = useAsyncStream(stream, onComplete, onError)
+    } = useAsyncStream(stream, {
+      onComplete: stream ? onComplete : undefined,
+      onError,
+      onUpdate: stream ? onUpdate : undefined,
+      abortController,
+    })
 
     const { displayText: typedText, isTyping } = useTypingAnimation(
       stream ? undefined : text,
-      speed,
-      stream ? undefined : onComplete
+      {
+        speed,
+        onComplete: stream ? undefined : onComplete,
+        onUpdate: stream ? undefined : onUpdate,
+      }
     )
 
     const displayText = stream ? streamedText : typedText
@@ -302,9 +404,3 @@ export const StreamText = React.forwardRef<HTMLSpanElement, StreamTextProps>(
   }
 )
 StreamText.displayName = 'StreamText'
-
-// ============================================================================
-// Exports
-// ============================================================================
-
-export { StreamCursor, useAsyncStream, useTypingAnimation }

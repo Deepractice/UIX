@@ -21,6 +21,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.27.16",
     "@uix/core": "workspace:*",
     "@uix/lucid-tokens": "workspace:*",
     "@uix/stream": "workspace:*",
