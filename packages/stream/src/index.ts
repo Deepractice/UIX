@@ -1,5 +1,5 @@
 /**
- * @lucidui/stream
+ * @uix/stream
  *
  * Streaming content renderer for AI Agent applications.
  *
@@ -10,7 +10,7 @@
  *
  * @example
  * ```tsx
- * import { StreamMarkdown, StreamText, CodeBlock } from '@lucidui/stream'
+ * import { StreamMarkdown, StreamText, CodeBlock } from '@uix/stream'
  *
  * // Streaming markdown
  * <StreamMarkdown content={response} isStreaming={true} />

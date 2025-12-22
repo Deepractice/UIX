@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss'
-import { lucidPreset } from '@lucidui/tokens/tailwind'
+import { lucidPreset } from '@uix/lucid-tokens/tailwind'
 
 export default {
   presets: [lucidPreset],

@@ -1,48 +1,48 @@
-# ADR-0006: Lucid IR 规范定义
+# ADR-0006: UIX IR 规�?定�?
 
-## 状态
+## ?��?
 
 Accepted
 
-## 日期
+## ?��?
 
 2024-12-21
 
-## 背景
+## ?�景
 
-根据 [ADR-0001](./0001-enterprise-grade-ui-infrastructure.md) 确定的 AI-to-UI 协议层定位，需要定义 Lucid IR (Intermediate Representation) 的核心规范。
+?�据 [ADR-0001](./0001-enterprise-grade-ui-infrastructure.md) 确�???AI-to-UI ?�议层�?位�??�要�?�?UIX IR (Intermediate Representation) ?�核心�??��?
 
-### 设计来源
+### 设计?��?
 
-Lucid IR 的设计从 [AgentX](https://github.com/Deepractice/AgentX) 的 UI 实践中抽象而来：
+UIX IR ?�设计�? [AgentX](https://github.com/Deepractice/AgentX) ??UI 实践中抽象而来�?
 
 ```
-AgentX UI (粗略实现，实验性)
-    ↓ 抽象提炼
-Lucid IR (协议规范)
-    ↓ 实现
-AgentX UI + 其他框架 (遵循规范)
+AgentX UI (粗略实现，�?验�?
+    ???�象?�炼
+UIX IR (?�议规�?)
+    ??实现
+AgentX UI + ?��?框架 (?�循规�?)
 ```
 
-### AgentX 事件系统
+### AgentX 事件系�?
 
-AgentX 采用 4 层事件架构：
+AgentX ?�用 4 层�?件架?��?
 
-| 层级 | 类型 | 示例 |
+| 层级 | 类�? | 示�? |
 |------|------|------|
-| Stream | 原始流事件 | text_delta, tool_use_start |
-| State | 状态变化 | conversation_thinking, tool_executing |
+| Stream | ?��?流�?�?| text_delta, tool_use_start |
+| State | ?�态�???| conversation_thinking, tool_executing |
 | Message | 完整消息 | assistant_message, tool_result_message |
-| Turn | 对话轮次 | turn_complete |
+| Turn | 对�?轮次 | turn_complete |
 
-Lucid IR 需要能够表达这些事件产生的 UI 状态。
+UIX IR ?�要能够表达�?些�?件产?��? UI ?�态�?
 
-## 决策
+## ?��?
 
-### 核心类型定义
+### ?��?类�?定�?
 
 ```typescript
-// 对话容器
+// 对�?容器
 interface LucidConversation {
   id: string
   role: 'user' | 'assistant' | 'system'
@@ -51,40 +51,40 @@ interface LucidConversation {
   timestamp: number
 }
 
-// 内容块
+// ?�容??
 interface LucidBlock {
   id: string
   type: 'text' | 'tool' | 'thinking' | 'image' | 'file' | 'error'
   status: 'streaming' | 'completed' | 'error'
-  content: unknown  // 根据 type 不同
+  content: unknown  // ?�据 type 不�?
 }
 
-// 渲染器接口
+// 渲�??�接??
 interface LucidRenderer<T> {
   render(conversations: LucidConversation[]): T
 }
 ```
 
-### Block 类型规范
+### Block 类�?规�?
 
-| 类型 | 描述 | Content 结构 |
+| 类�? | ?�述 | Content 结�? |
 |------|------|-------------|
-| `text` | 文本内容（支持流式） | `{ text: string }` |
-| `tool` | 工具/函数调用结果 | `{ name, input, output, status }` |
-| `thinking` | AI 推理过程 | `{ reasoning: string }` |
-| `image` | 图片内容 | `{ url, alt, width, height }` |
-| `file` | 文件附件 | `{ name, type, url }` |
-| `error` | 错误信息 | `{ code, message }` |
+| `text` | ?�本?�容（支?��?式�? | `{ text: string }` |
+| `tool` | 工具/?�数调用结�? | `{ name, input, output, status }` |
+| `thinking` | AI ?��?过�? | `{ reasoning: string }` |
+| `image` | ?��??�容 | `{ url, alt, width, height }` |
+| `file` | ?�件?�件 | `{ name, type, url }` |
+| `error` | ?�误信息 | `{ code, message }` |
 
-### Block 详细定义
+### Block 详�?定�?
 
 ```typescript
-// 文本块
+// ?�本??
 interface TextBlockContent {
   text: string
 }
 
-// 工具块
+// 工具??
 interface ToolBlockContent {
   name: string
   input: unknown
@@ -93,12 +93,12 @@ interface ToolBlockContent {
   error?: string
 }
 
-// 思考块
+// ?�考�?
 interface ThinkingBlockContent {
   reasoning: string
 }
 
-// 图片块
+// ?��???
 interface ImageBlockContent {
   url: string
   alt?: string
@@ -106,7 +106,7 @@ interface ImageBlockContent {
   height?: number
 }
 
-// 文件块
+// ?�件??
 interface FileBlockContent {
   name: string
   type: string  // MIME type
@@ -114,7 +114,7 @@ interface FileBlockContent {
   size?: number
 }
 
-// 错误块
+// ?�误??
 interface ErrorBlockContent {
   code: string
   message: string
@@ -122,35 +122,35 @@ interface ErrorBlockContent {
 }
 ```
 
-### 设计原则
+### 设计?��?
 
-1. **Block-Based 渲染**
-   - 文本和工具可以并行出现在同一消息中
-   - 每个 Block 独立渲染，互不影响
+1. **Block-Based 渲�?**
+   - ?�本?�工?�可以并行出?�在?��?消息�?
+   - 每个 Block ?��?渲�?，�?不影??
 
-2. **流式优先**
-   - 所有 Block 都有 `status` 字段
-   - `streaming` 状态下内容可能不完整
-   - 渲染器需要处理不完整内容
+2. **流�?优�?**
+   - ?�??Block ?��? `status` 字段
+   - `streaming` ?�态�??�容?�能不�???
+   - 渲�??��?要�??��?完整?�容
 
-3. **AI 可生成**
-   - JSON 格式，便于 AI 生成
-   - 简单的类型系统，易于理解
-   - 无需复杂的嵌套结构
+3. **AI ?��???*
+   - JSON ?��?，便�?AI ?��?
+   - 简?��?类�?系�?，�?于�?�?
+   - ?��?复�??��?套�???
 
-4. **与 AgentX 事件对应**
+4. **�?AgentX 事件对�?**
 
 ```
-AgentX 事件                    Lucid IR
-─────────────────────────────────────────
-text_delta              →    TextBlock (streaming)
-tool_use_start          →    ToolBlock (status: running)
-tool_result_message     →    ToolBlock (status: success)
-conversation_thinking   →    ThinkingBlock
-assistant_message       →    Conversation (completed)
+AgentX 事件                    UIX IR
+?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+text_delta              ??   TextBlock (streaming)
+tool_use_start          ??   ToolBlock (status: running)
+tool_result_message     ??   ToolBlock (status: success)
+conversation_thinking   ??   ThinkingBlock
+assistant_message       ??   Conversation (completed)
 ```
 
-### 示例
+### 示�?
 
 ```json
 {
@@ -169,7 +169,7 @@ assistant_message       →    Conversation (completed)
       "role": "assistant",
       "status": "streaming",
       "blocks": [
-        { "id": "b2", "type": "text", "status": "streaming", "content": { "text": "你好！我是..." } },
+        { "id": "b2", "type": "text", "status": "streaming", "content": { "text": "你好！�???.." } },
         { "id": "b3", "type": "tool", "status": "running", "content": { "name": "search", "input": { "query": "..." } } }
       ],
       "timestamp": 1703145601000
@@ -178,38 +178,39 @@ assistant_message       →    Conversation (completed)
 }
 ```
 
-## 后果
+## ?��?
 
-### 正面
+### �?��
 
-- 清晰的类型定义
-- 与 AgentX 事件系统对齐
-- 支持流式渲染
-- AI 可生成的格式
+- 清晰?�类?��?�?
+- �?AgentX 事件系�?对�?
+- ?��?流�?渲�?
+- AI ?��??��??��?
 
 ### 负面
 
-- 需要维护类型定义
-- 可能需要随 AgentX 演进而调整
+- ?�要维?�类?��?�?
+- ?�能?�要�? AgentX 演�??��???
 
-### 扩展预留
+### ?��?预�?
 
-未来可能增加的 Block 类型：
+?�来?�能增�???Block 类�?�?
 
-- `audio` - 音频内容
-- `video` - 视频内容
-- `chart` - 图表数据
-- `form` - 表单输入
-- `action` - 可点击操作
+- `audio` - ?��??�容
+- `video` - 视�??�容
+- `chart` - ?�表?�据
+- `form` - 表�?输入
+- `action` - ?�点?��?�?
 
-## 实现路径
+## 实现路�?
 
-1. **@lucidui/ir** - JSON Schema 和 TypeScript 类型
-2. **@lucidui/react** - React 渲染器实现
-3. **AgentX 适配器** - AgentX 事件转 Lucid IR
+1. **@uix/core** - JSON Schema ??TypeScript 类�?
+2. **@uix/lucid-react** - React 渲�??��???
+3. **AgentX ?��???* - AgentX 事件�?UIX IR
 
-## 相关决策
+## ?�关?��?
 
-- [ADR-0001](./0001-enterprise-grade-ui-infrastructure.md) - AI-to-UI 协议层定位
-- [ADR-0002](./0002-defer-protocol-selection.md) - Lucid IR 协议策略
-- [ADR-0005](./0005-streaming-renderer-architecture.md) - 流式渲染器架构
+- [ADR-0001](./0001-enterprise-grade-ui-infrastructure.md) - AI-to-UI ?�议层�?�?
+- [ADR-0002](./0002-defer-protocol-selection.md) - UIX IR ?�议策略
+- [ADR-0005](./0005-streaming-renderer-architecture.md) - 流�?渲�??�架??
+

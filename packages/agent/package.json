@@ -1,7 +1,7 @@
 {
-  "name": "@lucidui/agent",
+  "name": "@uix/agent",
   "version": "0.0.1",
-  "description": "Lucid IR conversation and block renderers - renders LucidConversation and LucidBlock types",
+  "description": "UIX conversation and block renderers - renders LucidConversation and LucidBlock types",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -21,9 +21,9 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@lucidui/ir": "workspace:*",
-    "@lucidui/tokens": "workspace:*",
-    "@lucidui/stream": "workspace:*",
+    "@uix/core": "workspace:*",
+    "@uix/lucid-tokens": "workspace:*",
+    "@uix/stream": "workspace:*",
     "clsx": "^2.1.0",
     "tailwind-merge": "^2.2.0"
   },
@@ -41,16 +41,16 @@
   },
   "keywords": [
     "react",
-    "lucid-ir",
+    "uix",
     "conversation",
     "block-renderer",
-    "lucid-ui",
-    "ai-to-ui"
+    "agent",
+    "declarative-ui"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Deepractice/Lucid-UI.git",
+    "url": "https://github.com/Deepractice/UIX.git",
     "directory": "packages/agent"
   }
 }

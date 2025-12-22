@@ -1,31 +1,32 @@
-# Lucid UI Demo
+# UIX Demo
 
-Lucid UI 协议层的演示应用，展示 Lucid IR 如何通过 React 渲染器呈现。
+UIX ?�议层�?演示应用，�?�?UIX IR 如�??��? React 渲�??��??��?
 
-## 运行
+## 运�?
 
 ```bash
-# 从项目根目录
+# 从项?�根?��?
 pnpm install
 pnpm dev
 ```
 
-## 演示内容
+## 演示?�容
 
-- **Lucid IR 渲染**: 展示 LucidConversation 和 LucidBlock 的渲染
-- **流式内容**: 演示 streaming 状态下的自修复 Markdown
-- **Block 类型**: text、tool、thinking 等 Block 类型的渲染
-- **设计系统**: 双主题色彩（Rational Blue / Sentient Gold）
+- **UIX IR 渲�?**: 展示 LucidConversation ??LucidBlock ?�渲??
+- **流�??�容**: 演示 streaming ?�态�??�自修�? Markdown
+- **Block 类�?**: text?�tool?�thinking �?Block 类�??�渲??
+- **设计系�?**: ?�主题色彩�?Rational Blue / Sentient Gold�?
 
-## 技术栈
+## ?�?��?
 
 - React + TypeScript + Vite
-- @lucidui/react - React 渲染器
-- @lucidui/stream - 流式内容渲染
-- @lucidui/tokens - 设计令牌
+- @uix/lucid-react - React 渲�???
+- @uix/stream - 流�??�容渲�?
+- @uix/lucid-tokens - 设计令�?
 - Tailwind CSS
 
-## 相关链接
+## ?�关?�接
 
-- [Lucid UI 文档](https://github.com/Deepractice/Lucid-UI)
-- [Lucid IR 规范](../../docs/adr/0006-lucid-ir-specification.md)
+- [UIX ?�档](https://github.com/Deepractice/UIX)
+- [UIX IR 规�?](../../docs/adr/0006-lucid-ir-specification.md)
+

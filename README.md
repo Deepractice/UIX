@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>Lucid A2UI</h1>
+  <h1>UIX</h1>
   <p>
     <strong>The Last Mile from AI to Human</strong>
   </p>
@@ -8,10 +8,10 @@
   </p>
 
   <p>
-    <a href="https://github.com/Deepractice/Lucid-UI"><img src="https://img.shields.io/github/stars/Deepractice/Lucid-UI?style=social" alt="Stars"/></a>
-    <img src="https://komarev.com/ghpvc/?username=LucidUI&label=views&color=0e75b6&style=flat&abbreviated=true" alt="Views"/>
-    <a href="LICENSE"><img src="https://img.shields.io/github/license/Deepractice/Lucid-UI?color=blue" alt="License"/></a>
-    <a href="https://www.npmjs.com/package/@lucidui/react"><img src="https://img.shields.io/npm/v/@lucidui/react?color=cb3837&logo=npm" alt="npm"/></a>
+    <a href="https://github.com/Deepractice/UIX"><img src="https://img.shields.io/github/stars/Deepractice/UIX?style=social" alt="Stars"/></a>
+    <img src="https://komarev.com/ghpvc/?username=UIX&label=views&color=0e75b6&style=flat&abbreviated=true" alt="Views"/>
+    <a href="LICENSE"><img src="https://img.shields.io/github/license/Deepractice/UIX?color=blue" alt="License"/></a>
+    <a href="https://www.npmjs.com/package/@uix/lucid-react"><img src="https://img.shields.io/npm/v/@uix/lucid-react?color=cb3837&logo=npm" alt="npm"/></a>
   </p>
 
   <p>
@@ -32,17 +32,17 @@ Human Intent → AI Understanding → AI Generation → ??? → Human Perception
 
 AI can understand human intent, reason, call tools, and generate content. But **how does AI output actually reach the human?** This "last mile" has been broken.
 
-**Lucid A2UI bridges this gap** — a protocol that both AI and UI understand.
+**UIX bridges this gap** — a protocol that both AI and UI understand.
 
 ---
 
-## What is Lucid A2UI?
+## What is UIX?
 
-**Lucid A2UI** is an Intermediate Representation (IR) protocol layer between AI and UI.
+**UIX** is an Intermediate Representation (IR) protocol layer between AI and UI.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      Lucid A2UI                             │
+│                      UIX                             │
 │           "The Last Mile from AI to Human"                  │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
@@ -50,7 +50,7 @@ AI can understand human intent, reason, call tools, and generate content. But **
 │       ↓                                                     │
 │  AI Processing (thinking, tool calls, generation)           │
 │       ↓                                                     │
-│  Lucid IR ← Standardized format AI outputs                  │
+│  UIX IR ← Standardized format AI outputs                  │
 │       ↓                                                     │
 │  UI Rendering ← Components that understand IR               │
 │       ↓                                                     │
@@ -61,15 +61,15 @@ AI can understand human intent, reason, call tools, and generate content. But **
 
 ### Two Consumers, One Protocol
 
-> **Lucid IR is consumed by both AI and UI.**
+> **UIX IR is consumed by both AI and UI.**
 
-- **For AI**: A standardized output format — AI generates Lucid IR directly
-- **For UI**: A standardized input format — UI renders Lucid IR directly
+- **For AI**: A standardized output format — AI generates UIX IR directly
+- **For UI**: A standardized input format — UI renders UIX IR directly
 - **Result**: AI speaks this format, UI understands this format — no translation needed
 
 ---
 
-## Why Lucid A2UI?
+## Why UIX?
 
 ### The Problem
 
@@ -82,15 +82,15 @@ AI can understand human intent, reason, call tools, and generate content. But **
 
 ### The Solution
 
-Lucid UI provides:
-1. **Lucid IR** - A stable internal protocol that works today
+UIX provides:
+1. **UIX IR** - A stable internal protocol that works today
 2. **Adapters** - Future compatibility with A2UI, MCP Apps when they mature
 3. **Reference implementation** - React renderer as default
 
 ```
 AI Agent Events
     ↓
-Lucid IR (stable internal protocol)
+UIX IR (stable internal protocol)
     ↓
     ├── ReactRenderer (works today)
     ├── A2UIRenderer (when A2UI matures)
@@ -99,19 +99,19 @@ Lucid IR (stable internal protocol)
 
 ---
 
-## Lucid IR vs Design Tokens
+## UIX IR vs Design Tokens
 
-> **"Design Tokens let developers stop redefining colors. Lucid IR lets AI stop relearning how to describe UI structure."**
+> **"Design Tokens let developers stop redefining colors. UIX IR lets AI stop relearning how to describe UI structure."**
 
 ### Different Layers, Different Problems
 
 ```
-Lucid IR       = Script (what to perform)
+UIX IR       = Script (what to perform)
 React Components = Actors (how to perform)
 Design Tokens  = Costumes & Props (what to wear)
 ```
 
-| Dimension | Design Tokens | Lucid IR |
+| Dimension | Design Tokens | UIX IR |
 |-----------|---------------|----------|
 | Problem Solved | Design-to-code consistency | AI-output-to-UI standardization |
 | Consumer | Human developers (understands CSS) | AI (needs structured, semantic description) |
@@ -128,11 +128,11 @@ Designer (Figma) → Developer writes code → User sees UI
 
 AI Agent pipeline:
 ```
-AI reasoning → Lucid IR → Renderer → User sees UI
-               ↑ Lucid IR solves this (no one did before)
+AI reasoning → UIX IR → Renderer → User sees UI
+               ↑ UIX IR solves this (no one did before)
 ```
 
-**Design Tokens is "style variables". Lucid IR is "AI's UI expression language"** — completely different layers and purposes.
+**Design Tokens is "style variables". UIX IR is "AI's UI expression language"** — completely different layers and purposes.
 
 ---
 
@@ -142,7 +142,7 @@ AI reasoning → Lucid IR → Renderer → User sees UI
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  Layer 1: Lucid IR (Core)                                   │
+│  Layer 1: UIX IR (Core)                                   │
 │  - JSON Schema definition                                   │
 │  - Block & Conversation standards                           │
 │  - AI-generatable format                                    │
@@ -157,19 +157,19 @@ AI reasoning → Lucid IR → Renderer → User sees UI
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │  Layer 3: Design System                                     │
-│  - @lucidui/tokens (design tokens)                          │
-│  - @lucidui/react (base components)                         │
-│  - @lucidui/stream (streaming renderer)                     │
+│  - @uix/lucid-tokens (design tokens)                          │
+│  - @uix/lucid-react (base components)                         │
+│  - @uix/stream (streaming renderer)                     │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ### Dependency Inversion
 
-All implementations depend on the Lucid IR abstraction:
+All implementations depend on the UIX IR abstraction:
 
 ```
         ┌─────────────────────┐
-        │     Lucid IR        │  ← Abstract protocol
+        │     UIX IR        │  ← Abstract protocol
         │   (JSON Schema)     │
         └──────────┬──────────┘
                    │
@@ -184,7 +184,7 @@ All implementations depend on the Lucid IR abstraction:
 
 ---
 
-## Lucid IR Specification
+## UIX IR Specification
 
 ### Core Types
 
@@ -225,12 +225,12 @@ interface LucidRenderer<T> {
 
 ## Relationship with AgentX
 
-Lucid UI is abstracted from [AgentX](https://github.com/Deepractice/AgentX) practices:
+UIX is abstracted from [AgentX](https://github.com/Deepractice/AgentX) practices:
 
 ```
 AgentX UI (rough implementation, experimental)
     ↓ abstract & refine
-Lucid IR (protocol specification)
+UIX IR (protocol specification)
     ↓ implement
 AgentX UI + Other frameworks (follow the spec)
 ```
@@ -245,7 +245,7 @@ AgentX 4-Layer Events
     │ Message: assistant_message, tool_result_message
     │
     ↓ Transform
-Lucid IR (LucidConversation[])
+UIX IR (LucidConversation[])
     ↓ Render
 React Components
 ```
@@ -256,10 +256,10 @@ React Components
 
 | Package | Layer | Status | Description |
 |---------|-------|--------|-------------|
-| `@lucidui/ir` | Protocol | 🚧 Designing | Lucid IR JSON Schema & TypeScript types |
-| `@lucidui/tokens` | Design System | ✅ Ready | Design tokens (colors, typography, spacing) |
-| `@lucidui/react` | Renderer | ✅ Ready | React renderer & base components |
-| `@lucidui/stream` | Renderer | 🚧 Building | Streaming content renderer |
+| `@uix/core` | Protocol | 🚧 Designing | UIX IR JSON Schema & TypeScript types |
+| `@uix/lucid-tokens` | Design System | ✅ Ready | Design tokens (colors, typography, spacing) |
+| `@uix/lucid-react` | Renderer | ✅ Ready | React renderer & base components |
+| `@uix/stream` | Renderer | 🚧 Building | Streaming content renderer |
 
 ---
 
@@ -268,18 +268,18 @@ React Components
 ### For Developers (React Renderer)
 
 ```bash
-pnpm add @lucidui/react @lucidui/tokens
+pnpm add @uix/lucid-react @uix/lucid-tokens
 ```
 
 ```tsx
-import { Button } from '@lucidui/react'
+import { Button } from '@uix/lucid-react'
 
 function App() {
   return <Button>Click me</Button>
 }
 ```
 
-### For AI Agents (Lucid IR)
+### For AI Agents (UIX IR)
 
 ```json
 {
@@ -335,10 +335,10 @@ function App() {
 - [x] Design token system
 - [x] React base components
 - [x] Streaming renderer
-- [ ] Lucid IR schema definition
+- [ ] UIX IR schema definition
 
 ### Phase 2: Protocol
-- [ ] Lucid IR JSON Schema
+- [ ] UIX IR JSON Schema
 - [ ] TypeScript type definitions
 - [ ] AgentX adapter
 - [ ] Validation tools
@@ -352,14 +352,14 @@ function App() {
 
 ## Why Not Just Wait for A2UI / MCP Apps?
 
-> "A2UI and MCP Apps are future targets. Lucid IR is today's bridge. We're not reinventing the wheel—we're building an adapter that can fit any wheel."
+> "A2UI and MCP Apps are future targets. UIX IR is today's bridge. We're not reinventing the wheel—we're building an adapter that can fit any wheel."
 
 | Approach | Risk |
 |----------|------|
 | Wait for standards | AgentX has no UI, product stalls |
 | Bind to A2UI directly | A2UI changes, major rewrite needed |
 | Bind to MCP Apps directly | Same problem |
-| **Lucid IR + Adapters** | Internal stability, external flexibility |
+| **UIX IR + Adapters** | Internal stability, external flexibility |
 
 ---
 
@@ -378,8 +378,8 @@ Part of the **Deepractice AI development ecosystem**:
 ## Development
 
 ```bash
-git clone https://github.com/Deepractice/Lucid-UI.git
-cd Lucid-UI
+git clone https://github.com/Deepractice/UIX.git
+cd UIX
 pnpm install
 pnpm dev
 ```

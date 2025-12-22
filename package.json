@@ -1,7 +1,7 @@
 {
-  "name": "lucid-ui",
+  "name": "uix",
   "version": "0.0.1",
-  "description": "AI-to-UI Protocol Layer for Agent Applications | 让 AI 生成用户界面的协议层",
+  "description": "UIX - AI-to-UI Protocol",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,27 +9,28 @@
     "dev": "pnpm -r --parallel dev",
     "lint": "eslint . --ext .ts,.tsx",
     "clean": "pnpm -r clean",
-    "storybook": "pnpm --filter @lucidui/docs storybook"
+    "storybook": "pnpm --filter @uix/docs storybook"
   },
   "keywords": [
-    "ai-to-ui",
-    "protocol",
-    "lucid-ir",
+    "uix",
+    "ui-protocol",
+    "declarative-ui",
     "intermediate-representation",
     "react",
     "ui",
     "ai",
     "agent",
     "streaming",
-    "lucid"
+    "lucid",
+    "deepractice"
   ],
   "author": "Deepractice <contact@deepractice.ai>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Deepractice/Lucid-UI.git"
+    "url": "https://github.com/Deepractice/UIX.git"
   },
-  "homepage": "https://github.com/Deepractice/Lucid-UI",
+  "homepage": "https://github.com/Deepractice/UIX",
   "engines": {
     "node": ">=18.0.0",
     "pnpm": ">=8.0.0"

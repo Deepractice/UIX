@@ -1,5 +1,5 @@
 /**
- * Lucid UI React Components
+ * UIX Lucid React Components
  * A Lucid Design System for AI Generation
  *
  * ## Quick Start for AI
@@ -13,12 +13,12 @@
  *
  * ## Installation
  * ```bash
- * pnpm add @lucidui/react @lucidui/tokens
+ * pnpm add @uix/lucid-react @uix/lucid-tokens
  * ```
  *
  * ## Usage
  * ```tsx
- * import { Button } from '@lucidui/react'
+ * import { Button } from '@uix/lucid-react'
  *
  * function App() {
  *   return <Button>Click me</Button>
@@ -28,7 +28,7 @@
  * ## Styling
  * This library uses Tailwind CSS. Add to your tailwind.config.ts:
  * ```ts
- * import { lucidPreset } from '@lucidui/tokens/tailwind'
+ * import { lucidPreset } from '@uix/lucid-tokens/tailwind'
  *
  * export default {
  *   presets: [lucidPreset],

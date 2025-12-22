@@ -12,9 +12,9 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@lucidui/ir": "workspace:*",
-    "@lucidui/react": "workspace:*",
-    "@lucidui/tokens": "workspace:*"
+    "@uix/core": "workspace:*",
+    "@uix/lucid-react": "workspace:*",
+    "@uix/lucid-tokens": "workspace:*"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

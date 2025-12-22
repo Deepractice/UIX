@@ -1,7 +1,7 @@
 /**
- * @lucidui/ir
+ * @uix/core
  *
- * Lucid IR (Intermediate Representation) - The core protocol for AI-to-UI generation.
+ * UIX Core - AI-to-UI Protocol.
  *
  * This package defines the JSON Schema that AI generates, which renderers then
  * convert to actual UI. The consumer is AI, not developers.
@@ -9,7 +9,7 @@
  * ## Core Concept
  *
  * ```
- * AI Agent Events → Lucid IR (this package) → Renderers → UI
+ * AI Agent Events ??UIX Core (this package) ??Renderers ??UI
  * ```
  *
  * ## Main Types
@@ -20,7 +20,7 @@
  *
  * @example
  * ```typescript
- * import type { LucidConversation, LucidBlock } from '@lucidui/ir'
+ * import type { LucidConversation, LucidBlock } from '@uix/core'
  *
  * const conversation: LucidConversation = {
  *   id: 'conv-1',
@@ -33,7 +33,7 @@
  * }
  * ```
  *
- * @see {@link https://github.com/Deepractice/Lucid-UI} for full documentation
+ * @see {@link https://github.com/Deepractice/UIX} for full documentation
  */
 
 // ============================================================================
@@ -244,7 +244,7 @@ export interface LucidConversation {
  *
  * @example
  * ```typescript
- * import type { LucidRenderer, LucidConversation } from '@lucidui/ir'
+ * import type { LucidRenderer, LucidConversation } from '@uix/core'
  *
  * class ReactRenderer implements LucidRenderer<React.ReactNode> {
  *   render(conversations: LucidConversation[]): React.ReactNode {
@@ -334,3 +334,4 @@ export function isCompleted(item: { status: ContentStatus }): boolean {
 export function isError(item: { status: ContentStatus }): boolean {
   return item.status === 'error'
 }
+

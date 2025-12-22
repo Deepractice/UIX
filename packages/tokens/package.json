@@ -1,7 +1,7 @@
 {
-  "name": "@lucidui/tokens",
+  "name": "@uix/lucid-tokens",
   "version": "0.0.1",
-  "description": "Design tokens for Lucid UI - colors, typography, spacing for the design system layer",
+  "description": "Design tokens for Lucid - colors, typography, spacing for the design system layer",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -30,15 +30,15 @@
   },
   "keywords": [
     "design-tokens",
-    "lucid-ui",
+    "uix",
+    "lucid",
     "tailwind",
-    "ai-to-ui",
     "design-system"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Deepractice/Lucid-UI.git",
+    "url": "https://github.com/Deepractice/UIX.git",
     "directory": "packages/tokens"
   }
 }

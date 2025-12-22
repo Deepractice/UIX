@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { colors, spacing, radius, shadows, typography, rational, sentient } from '@lucidui/tokens'
+import { colors, spacing, radius, shadows, typography, rational, sentient } from '@uix/lucid-tokens'
 
 // Custom hook for responsive breakpoints
 function useMediaQuery(query: string): boolean {
@@ -76,7 +76,7 @@ const navigation: NavGroup[] = [
   {
     title: '',
     items: [
-      { id: 'home', label: 'Home', keywords: ['首页', 'welcome', 'lucid', 'introduction'], description: 'Welcome to Lucid UI' },
+      { id: 'home', label: 'Home', keywords: ['首页', 'welcome', 'lucid', 'introduction'], description: 'Welcome to UIX' },
       { id: 'philosophy', label: 'About', keywords: ['关于', '设计原则', '设计哲学', 'philosophy', 'principles', 'dual theme', '理性', '感性', 'rational', 'sentient'], description: 'Design philosophy and principles' },
     ]
   },
@@ -433,7 +433,7 @@ function HomeSection() {
   return (
     <div className="space-y-8 max-w-5xl mx-auto">
       <div className="text-center py-8 md:py-12">
-        <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">Lucid UI</h1>
+        <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">UIX</h1>
         <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4">
           Design System for AI Agent Platforms. Clear, consistent visual language with dual themes.
         </p>
@@ -478,15 +478,15 @@ function PhilosophySection() {
       <div>
         <h1 className="text-3xl font-bold text-gray-900 mb-4">Introduction</h1>
         <p className="text-lg text-gray-600">
-          Welcome to Lucid UI documentation!
+          Welcome to UIX documentation!
         </p>
       </div>
 
-      {/* What is Lucid UI */}
+      {/* What is UIX */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900">What is Lucid UI?</h2>
+        <h2 className="text-xl font-semibold text-gray-900">What is UIX?</h2>
         <p className="text-gray-600 leading-relaxed">
-          Lucid UI is a <strong>Design System for AI Agent Platforms</strong> built on the Model Context Protocol (MCP).
+          UIX is a <strong>Design System for AI Agent Platforms</strong> built on the Model Context Protocol (MCP).
           It enables AI applications to have clear, consistent visual language:
         </p>
         <ul className="space-y-2 text-gray-600">
@@ -605,13 +605,13 @@ function PhilosophySection() {
       <div className="space-y-4">
         <h2 className="text-xl font-semibold text-gray-900">Next Steps</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <a href="https://github.com/Deepractice/Lucid-UI" target="_blank" className="group block p-4 border border-gray-200 rounded-lg hover:border-rational-300 hover:bg-rational-50/50 transition-colors">
+          <a href="https://github.com/Deepractice/UIX" target="_blank" className="group block p-4 border border-gray-200 rounded-lg hover:border-rational-300 hover:bg-rational-50/50 transition-colors">
             <p className="font-medium text-gray-900 group-hover:text-rational-600">GitHub Repository →</p>
             <p className="text-sm text-gray-500">View source code and contribute</p>
           </a>
-          <a href="https://www.npmjs.com/package/@lucidui/react" target="_blank" className="group block p-4 border border-gray-200 rounded-lg hover:border-rational-300 hover:bg-rational-50/50 transition-colors">
+          <a href="https://www.npmjs.com/package/@uix/lucid-react" target="_blank" className="group block p-4 border border-gray-200 rounded-lg hover:border-rational-300 hover:bg-rational-50/50 transition-colors">
             <p className="font-medium text-gray-900 group-hover:text-rational-600">npm Package →</p>
-            <p className="text-sm text-gray-500">Install @lucidui/react</p>
+            <p className="text-sm text-gray-500">Install @uix/lucid-react</p>
           </a>
         </div>
       </div>
@@ -854,7 +854,7 @@ function TypographySection() {
                 style={{ fontSize: size, lineHeight: config.lineHeight }}
                 className="text-gray-900"
               >
-                Lucid UI Design System
+                UIX Design System
               </span>
             </div>
           ))}

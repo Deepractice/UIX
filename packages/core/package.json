@@ -1,7 +1,7 @@
 {
-  "name": "@lucidui/ir",
+  "name": "@uix/core",
   "version": "0.0.1",
-  "description": "Lucid IR - The core protocol types for AI-to-UI generation",
+  "description": "UIX Core - The protocol types for declarative UI generation",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -25,9 +25,9 @@
     "typescript": "^5.3.0"
   },
   "keywords": [
-    "lucid-ir",
+    "uix",
     "protocol",
-    "ai-to-ui",
+    "declarative-ui",
     "json-schema",
     "typescript",
     "intermediate-representation"
@@ -35,7 +35,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Deepractice/Lucid-UI.git",
-    "directory": "packages/ir"
+    "url": "https://github.com/Deepractice/UIX.git",
+    "directory": "packages/core"
   }
 }

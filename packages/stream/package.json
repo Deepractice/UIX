@@ -1,7 +1,7 @@
 {
-  "name": "@lucidui/stream",
+  "name": "@uix/stream",
   "version": "0.0.1",
-  "description": "Streaming content renderer for Lucid IR blocks - handles incomplete markdown and real-time content",
+  "description": "Streaming content renderer for UIX blocks - handles incomplete markdown and real-time content",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -21,8 +21,8 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@lucidui/ir": "workspace:*",
-    "@lucidui/tokens": "workspace:*",
+    "@uix/core": "workspace:*",
+    "@uix/lucid-tokens": "workspace:*",
     "clsx": "^2.1.0",
     "tailwind-merge": "^2.2.0",
     "react-markdown": "^9.0.0",
@@ -46,15 +46,14 @@
     "react",
     "markdown",
     "streaming",
-    "lucid-ui",
-    "lucid-ir",
-    "ai-to-ui",
+    "uix",
+    "declarative-ui",
     "self-healing"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Deepractice/Lucid-UI.git",
+    "url": "https://github.com/Deepractice/UIX.git",
     "directory": "packages/stream"
   }
 }

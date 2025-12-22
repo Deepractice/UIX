@@ -32,19 +32,19 @@ jobs:
           version: 9
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build packages
         run: |
-          pnpm -F @lucidui/ir build
-          pnpm -F @lucidui/tokens build
-          pnpm -F @lucidui/stream build
-          pnpm -F @lucidui/react build
+          pnpm -F @uix/core build
+          pnpm -F @uix/lucid-tokens build
+          pnpm -F @uix/stream build
+          pnpm -F @uix/lucid-react build
 
       - name: Build demo
         run: pnpm -F demo build
         env:
-          BASE_URL: /Lucid-UI/
+          BASE_URL: /UIX/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

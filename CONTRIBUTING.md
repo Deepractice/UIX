@@ -1,31 +1,31 @@
-# Contributing to Lucid UI
+# Contributing to UIX
 
-Thanks for your interest in contributing! Lucid UI is an **AI-to-UI protocol layer**, not a traditional component library.
+Thanks for your interest in contributing! UIX is an **AI-to-UI protocol layer**, not a traditional component library.
 
 ## Core Concept
 
 > **The consumer is AI, not developers.**
 
 When contributing, remember:
-- We're building a protocol that AI can generate (Lucid IR)
-- Components are renderers for Lucid IR types
+- We're building a protocol that AI can generate (UIX IR)
+- Components are renderers for UIX IR types
 - The focus is on AI-generatable JSON, not developer ergonomics
 
 ## Package Structure
 
 | Package | Layer | Purpose |
 |---------|-------|---------|
-| `@lucidui/ir` | Protocol | Lucid IR JSON Schema & TypeScript types |
-| `@lucidui/react` | Renderer | React renderer & base components |
-| `@lucidui/stream` | Renderer | Streaming content (self-healing markdown) |
-| `@lucidui/agent` | Renderer | Conversation & block renderers |
-| `@lucidui/tokens` | Design System | Colors, typography, spacing |
+| `@uix/core` | Protocol | UIX IR JSON Schema & TypeScript types |
+| `@uix/lucid-react` | Renderer | React renderer & base components |
+| `@uix/stream` | Renderer | Streaming content (self-healing markdown) |
+| `@uix/agent` | Renderer | Conversation & block renderers |
+| `@uix/lucid-tokens` | Design System | Colors, typography, spacing |
 
 ---
 
 This guide will help you add new components or improve existing ones.
 
-## ğŸ“‹ Component Development Checklist
+## ?? Component Development Checklist
 
 When creating a new component, ensure it meets these criteria:
 
@@ -36,7 +36,7 @@ When creating a new component, ensure it meets these criteria:
 - [ ] Proper semantic HTML
 
 ### 2. **Design Consistency**
-- [ ] Uses design tokens from `@lucidui/tokens`
+- [ ] Uses design tokens from `@uix/lucid-tokens`
 - [ ] Follows Lucid color philosophy (no AI purple)
 - [ ] Consistent with existing component patterns
 - [ ] Responsive by default
@@ -55,18 +55,18 @@ When creating a new component, ensure it meets these criteria:
 
 ---
 
-## ğŸ—ï¸ Component Structure
+## ??ï¸?Component Structure
 
 ```
 packages/react/src/components/[component-name]/
-â”œâ”€â”€ [component-name].tsx    # Main component file
-â”œâ”€â”€ index.ts                 # Exports
-â””â”€â”€ README.md               # Component-specific docs (optional)
+?œâ??€ [component-name].tsx    # Main component file
+?œâ??€ index.ts                 # Exports
+?”â??€ README.md               # Component-specific docs (optional)
 ```
 
 ---
 
-## ğŸ“ Component Template
+## ?? Component Template
 
 Use this template when creating a new component:
 
@@ -80,7 +80,7 @@ Use this template when creating a new component:
  *
  * ### Basic Usage
  * ```tsx
- * import { ComponentName } from '@lucidui/react'
+ * import { ComponentName } from '@uix/lucid-react'
  *
  * <ComponentName>Content</ComponentName>
  * ```
@@ -147,16 +147,16 @@ export { ComponentName, componentVariants }
 
 ---
 
-## ğŸ¨ Design Token Usage
+## ?¨ Design Token Usage
 
 Always use design tokens, never hardcoded values:
 
-### âœ… Good
+### ??Good
 ```tsx
 className="bg-primary-500 text-white border-border"
 ```
 
-### âŒ Bad
+### ??Bad
 ```tsx
 className="bg-[#0EA5E9] text-[#FFFFFF] border-[#E5E5E5]"
 ```
@@ -164,13 +164,13 @@ className="bg-[#0EA5E9] text-[#FFFFFF] border-[#E5E5E5]"
 ### Semantic Tokens
 Prefer semantic tokens when available:
 ```tsx
-className="bg-background text-foreground" // âœ…
-className="bg-white text-gray-900"        // âš ï¸ Less semantic
+className="bg-background text-foreground" // ??
+className="bg-white text-gray-900"        // ? ï? Less semantic
 ```
 
 ---
 
-## ğŸ§ª Testing Your Component
+## ?§ª Testing Your Component
 
 1. **Build the package:**
 ```bash
@@ -190,7 +190,7 @@ pnpm storybook
 
 ---
 
-## ğŸ“š Documentation Standards
+## ?? Documentation Standards
 
 ### Component File Documentation
 
@@ -220,7 +220,7 @@ asChild?: boolean
 
 ---
 
-## ğŸš€ Submitting Changes
+## ?? Submitting Changes
 
 1. **Fork the repository**
 2. **Create a feature branch:**
@@ -255,22 +255,22 @@ Types:
 
 ---
 
-## ğŸ¯ Contribution Priorities
+## ?¯ Contribution Priorities
 
 We're building in this order:
 
 ### Phase 1: Protocol Core (Current)
-- [ ] Lucid IR JSON Schema definition
+- [ ] UIX IR JSON Schema definition
 - [ ] TypeScript type definitions
 - [x] Design tokens system
 - [x] React base components
 
 ### Phase 2: Block Renderers
-- [x] TextBlock â†’ StreamMarkdown
-- [x] ToolBlock â†’ ToolResult
-- [x] ThinkingBlock â†’ ThinkingIndicator
-- [ ] ImageBlock â†’ Image renderer
-- [ ] FileBlock â†’ File renderer
+- [x] TextBlock ??StreamMarkdown
+- [x] ToolBlock ??ToolResult
+- [x] ThinkingBlock ??ThinkingIndicator
+- [ ] ImageBlock ??Image renderer
+- [ ] FileBlock ??File renderer
 
 ### Phase 3: Renderers & Adapters
 - [x] ReactRenderer (default)
@@ -280,18 +280,18 @@ We're building in this order:
 
 ---
 
-## ğŸ’¡ Best Practices
+## ?’¡ Best Practices
 
 ### 1. Composition over Configuration
 Prefer simple, composable components:
 ```tsx
-// âœ… Good
+// ??Good
 <Card>
   <CardHeader>Title</CardHeader>
   <CardContent>Content</CardContent>
 </Card>
 
-// âŒ Avoid
+// ??Avoid
 <Card title="Title" content="Content" />
 ```
 
@@ -312,20 +312,21 @@ Keep it simple:
 ### 4. Mobile-First
 Always design mobile-first with Tailwind:
 ```tsx
-// âœ… Mobile-first
+// ??Mobile-first
 className="text-sm md:text-base lg:text-lg"
 
-// âŒ Desktop-first
+// ??Desktop-first
 className="text-lg md:text-base sm:text-sm"
 ```
 
 ---
 
-## ğŸ¤” Questions?
+## ?? Questions?
 
-- Open an issue: https://github.com/Deepractice/Lucid-UI/issues
-- Discussion: https://github.com/Deepractice/Lucid-UI/discussions
+- Open an issue: https://github.com/Deepractice/UIX/issues
+- Discussion: https://github.com/Deepractice/UIX/discussions
 
 ---
 
-Made with â¤ï¸ by Deepractice
+Made with ?¤ï? by Deepractice
+

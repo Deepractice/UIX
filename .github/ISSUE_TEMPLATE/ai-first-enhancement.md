@@ -1,41 +1,41 @@
 ---
 name: AI-First Enhancement Roadmap
-about: Enhance Lucid UI as AI-to-UI Protocol Layer
+about: Enhance UIX as AI-to-UI Protocol Layer
 title: '[Roadmap] AI-to-UI Protocol Enhancement'
 labels: enhancement, documentation, protocol
 assignees: ''
 ---
 
-## 背景
+## ?�景
 
-Lucid UI 定位为 **AI-to-UI 协议层**:
-- 消费者是 AI，不是开发者
-- Lucid IR 是 AI 生成 UI 的中间表示
-- 渲染器将 Lucid IR 转换为实际 UI
+UIX 定�?�?**AI-to-UI ?�议�?*:
+- 消费?�是 AI，�??��??��?
+- UIX IR ??AI ?��? UI ?�中?�表�?
+- 渲�??��? UIX IR 转换为�???UI
 
-## 核心洞察
+## ?��?洞�?
 
-> **传统组件库**: 开发者写代码 → 调用组件 → UI
-> **Lucid 协议**: AI 生成 Lucid IR → 系统渲染 → UI
+> **传�?组件�?*: 开?�者�?�?? ??调用组件 ??UI
+> **UIX ?�议**: AI ?��? UIX IR ??系�?渲�? ??UI
 
-## 目标
+## ?��?
 
-让 Lucid UI 成为真正的 AI-to-UI 协议层:
-1. AI 能生成符合 Lucid IR 规范的 JSON
-2. 渲染器能正确渲染所有 Block 类型
-3. 支持流式渲染和自修复内容
+�?UIX ?�为?�正??AI-to-UI ?�议�?
+1. AI ?��??�符??UIX IR 规�???JSON
+2. 渲�??�能�?��渲�??�??Block 类�?
+3. ?��?流�?渲�??�自修�??�容
 
 ---
 
-## 📋 实施计划
+## ?? 实施计�?
 
-### Phase 1: Lucid IR Schema (优先级: ⭐⭐⭐)
+### Phase 1: UIX IR Schema (优�?�? ⭐�?�?
 
-**目标**: 完成 Lucid IR 协议定义
+**?��?**: 完�? UIX IR ?�议定�?
 
-**包含内容**:
+**?�含?�容**:
 
-#### 1.1 核心类型
+#### 1.1 ?��?类�?
 ```typescript
 interface LucidConversation {
   id: string
@@ -53,54 +53,54 @@ interface LucidBlock {
 }
 ```
 
-#### 1.2 Block 类型
+#### 1.2 Block 类�?
 
-| 类型 | 描述 | Content 结构 |
+| 类�? | ?�述 | Content 结�? |
 |------|------|-------------|
-| `text` | 文本内容 | `{ text: string }` |
+| `text` | ?�本?�容 | `{ text: string }` |
 | `tool` | 工具调用 | `{ name, input, output, status }` |
-| `thinking` | 推理过程 | `{ reasoning: string }` |
-| `image` | 图片 | `{ url, alt, width, height }` |
-| `file` | 文件 | `{ name, type, url }` |
-| `error` | 错误 | `{ code, message }` |
+| `thinking` | ?��?过�? | `{ reasoning: string }` |
+| `image` | ?��? | `{ url, alt, width, height }` |
+| `file` | ?�件 | `{ name, type, url }` |
+| `error` | ?�误 | `{ code, message }` |
 
-**验收标准**:
-- [ ] JSON Schema 定义完成
-- [ ] TypeScript 类型导出
-- [ ] @lucidui/ir 包发布
-
----
-
-### Phase 2: Block Renderers (优先级: ⭐⭐⭐)
-
-**目标**: 完成所有 Block 类型的渲染器
-
-**包含内容**:
-
-#### 2.1 已完成
-- [x] TextBlock → StreamMarkdown (带自修复)
-- [x] ToolBlock → ToolResult
-- [x] ThinkingBlock → ThinkingIndicator
-
-#### 2.2 待完成
-- [ ] ImageBlock → 图片渲染器
-- [ ] FileBlock → 文件附件渲染器
-- [ ] ErrorBlock → 错误展示
-
-**验收标准**:
-- [ ] 所有 Block 类型都有对应的渲染器
-- [ ] 渲染器支持 streaming 状态
-- [ ] 渲染器处理 error 状态
+**验收?��?**:
+- [ ] JSON Schema 定�?完�?
+- [ ] TypeScript 类�?导出
+- [ ] @uix/core ?��?�?
 
 ---
 
-### Phase 3: AgentX Adapter (优先级: ⭐⭐)
+### Phase 2: Block Renderers (优�?�? ⭐�?�?
 
-**目标**: 将 AgentX 事件转换为 Lucid IR
+**?��?**: 完�??�??Block 类�??�渲?�器
 
-**事件映射**:
+**?�含?�容**:
 
-| AgentX 事件 | Lucid IR |
+#### 2.1 已�???
+- [x] TextBlock ??StreamMarkdown (带自修�?)
+- [x] ToolBlock ??ToolResult
+- [x] ThinkingBlock ??ThinkingIndicator
+
+#### 2.2 待�???
+- [ ] ImageBlock ???��?渲�???
+- [ ] FileBlock ???�件?�件渲�???
+- [ ] ErrorBlock ???�误展示
+
+**验收?��?**:
+- [ ] ?�??Block 类�??��?对�??�渲?�器
+- [ ] 渲�??�支??streaming ?��?
+- [ ] 渲�??��???error ?��?
+
+---
+
+### Phase 3: AgentX Adapter (优�?�? ⭐�?)
+
+**?��?**: �?AgentX 事件转换�?UIX IR
+
+**事件?��?**:
+
+| AgentX 事件 | UIX IR |
 |------------|----------|
 | text_delta | TextBlock (streaming) |
 | tool_use_start | ToolBlock (status: running) |
@@ -108,57 +108,58 @@ interface LucidBlock {
 | conversation_thinking | ThinkingBlock |
 | assistant_message | Conversation (completed) |
 
-**验收标准**:
-- [ ] AgentX 事件可转换为 Lucid IR
-- [ ] 双向类型安全
-- [ ] 流式事件正确处理
+**验收?��?**:
+- [ ] AgentX 事件?�转?�为 UIX IR
+- [ ] ?��?类�?安全
+- [ ] 流�?事件�?��处�?
 
 ---
 
-## 💡 设计原则
+## ?�� 设计?��?
 
-### 协议层 vs 组件库
-| 维度 | 传统组件库 | Lucid UI |
+### ?�议�?vs 组件�?
+| 维度 | 传�?组件�?| UIX |
 |-----|----------|----------|
-| 消费者 | 开发者 | **AI** |
-| 输入 | 代码调用 | **JSON Schema (Lucid IR)** |
-| 核心价值 | 组件复用 | **协议标准化** |
-| 扩展方式 | 添加组件 | **适配更多渲染目标** |
+| 消费??| 开?��?| **AI** |
+| 输入 | �??调用 | **JSON Schema (UIX IR)** |
+| ?��?价�?| 组件复用 | **?�议?��???* |
+| ?��??��? | 添�?组件 | **?��??��?渲�??��?** |
 
-### 为什么不等 A2UI / MCP Apps 成熟？
-> "A2UI 和 MCP Apps 是未来的目标，Lucid IR 是今天的桥梁。"
+### 为�?么�?�?A2UI / MCP Apps ?��?�?
+> "A2UI ??MCP Apps ?�未?��??��?，Lucid IR ?��?天�?桥�???
 
-| 方案 | 风险 |
+| ?��? | 风险 |
 |------|------|
-| 等标准成熟 | 产品停滞 |
-| 直接绑定 A2UI | A2UI 变了要大改 |
-| **Lucid IR + 适配器** | 内部稳定，外部灵活 |
+| 等�??��???| 产�??��? |
+| ?�接绑�? A2UI | A2UI ?��?要大??|
+| **UIX IR + ?��???* | ?�部稳�?，�??�灵�?|
 
 ---
 
-## 📅 时间规划
+## ?? ?�间规�?
 
-| 阶段 | 工作量 | 状态 |
+| ?�段 | 工�???| ?��?|
 |------|--------|------|
-| Phase 1: Lucid IR Schema | 2天 | 设计中 |
-| Phase 2: Block Renderers | 2天 | 部分完成 |
-| Phase 3: AgentX Adapter | 1.5天 | 待开始 |
+| Phase 1: UIX IR Schema | 2�?| 设计�?|
+| Phase 2: Block Renderers | 2�?| ?��?完�? |
+| Phase 3: AgentX Adapter | 1.5�?| 待�?�?|
 
 ---
 
-## ✅ 完成标准
+## ??完�??��?
 
-- [ ] Lucid IR JSON Schema 定义完整
-- [ ] 所有 Block 类型有渲染器
-- [ ] AgentX 事件可转换为 Lucid IR
-- [ ] 支持流式渲染和自修复
-- [ ] 文档遵循奥卡姆剃刀原则
+- [ ] UIX IR JSON Schema 定�?完整
+- [ ] ?�??Block 类�??�渲?�器
+- [ ] AgentX 事件?�转?�为 UIX IR
+- [ ] ?��?流�?渲�??�自修�?
+- [ ] ?�档?�循奥卡姆�??�?��?
 
 ---
 
-## 🔗 相关资源
+## ?? ?�关资�?
 
-- [Lucid IR 规范](../../docs/adr/0006-lucid-ir-specification.md)
-- [协议层定位](../../docs/adr/0001-enterprise-grade-ui-infrastructure.md)
-- [Demo 站点](https://deepractice.github.io/Lucid-UI/)
+- [UIX IR 规�?](../../docs/adr/0006-lucid-ir-specification.md)
+- [?�议层�?位](../../docs/adr/0001-enterprise-grade-ui-infrastructure.md)
+- [Demo 站点](https://deepractice.github.io/UIX/)
 - [AgentX](https://github.com/Deepractice/AgentX)
+

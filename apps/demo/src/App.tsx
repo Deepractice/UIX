@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, createContext, useContext } from 'react'
-import type { LucidConversation, LucidBlock } from '@lucidui/ir'
+import type { LucidConversation, LucidBlock } from '@uix/core'
 import { ComponentLibrary } from './App.components'
 
 // ============================================================================
@@ -29,7 +29,7 @@ const useView = () => useContext(ViewContext)
 function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('lucid-theme') as Theme
+      const saved = localStorage.getItem('uix-theme') as Theme
       return saved || 'dark'
     }
     return 'dark'
@@ -38,7 +38,7 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
   const toggle = useCallback(() => {
     setTheme(prev => {
       const next = prev === 'dark' ? 'light' : 'dark'
-      localStorage.setItem('lucid-theme', next)
+      localStorage.setItem('uix-theme', next)
       return next
     })
   }, [])
@@ -71,11 +71,11 @@ const mockEvents: Omit<AIEvent, 'id' | 'timestamp'>[] = [
   { type: 'content_block_delta', data: { type: 'thinking_delta', thinking: 'Let me analyze this request...' } },
   { type: 'content_block_stop', data: { index: 0 } },
   { type: 'content_block_start', data: { type: 'tool_use', index: 1, name: 'search', id: 'tool_1' } },
-  { type: 'content_block_delta', data: { type: 'input_json_delta', partial_json: '{"query": "Lucid IR"}' } },
+  { type: 'content_block_delta', data: { type: 'input_json_delta', partial_json: '{"query": "UIX IR"}' } },
   { type: 'content_block_stop', data: { index: 1 } },
   { type: 'content_block_start', data: { type: 'text', index: 2 } },
   { type: 'content_block_delta', data: { type: 'text_delta', text: 'Based on my research, ' } },
-  { type: 'content_block_delta', data: { type: 'text_delta', text: '**Lucid IR** is an intermediate representation ' } },
+  { type: 'content_block_delta', data: { type: 'text_delta', text: '**UIX IR** is an intermediate representation ' } },
   { type: 'content_block_delta', data: { type: 'text_delta', text: 'that bridges AI output and UI rendering.' } },
   { type: 'content_block_stop', data: { index: 2 } },
   { type: 'message_stop', data: {} },
@@ -159,16 +159,16 @@ function IRPanel({ conversation, showHeader = true }: { conversation: LucidConve
   const isDark = theme === 'dark'
   const jsonString = conversation
     ? JSON.stringify(conversation, null, 2)
-    : '// Lucid IR will appear here...'
+    : '// UIX IR will appear here...'
 
   return (
     <div className="flex flex-col h-full">
       {showHeader && (
         <div className={`flex items-center gap-2 px-4 py-3 border-b ${isDark ? 'border-white/10' : 'border-gray-200'}`}>
           <div className="w-2 h-2 rounded-full bg-blue-500" />
-          <h2 className={`text-sm font-medium ${isDark ? 'text-white/90' : 'text-gray-800'}`}>Lucid IR</h2>
+          <h2 className={`text-sm font-medium ${isDark ? 'text-white/90' : 'text-gray-800'}`}>UIX IR</h2>
           <span className={`text-xs ml-auto font-mono ${isDark ? 'text-white/40' : 'text-gray-400'}`}>
-            @lucidui/ir
+            @uix/core
           </span>
         </div>
       )}
@@ -226,7 +226,7 @@ function RenderedPanel({ conversation, showHeader = true }: { conversation: Luci
           <div className="w-2 h-2 rounded-full bg-purple-500" />
           <h2 className={`text-sm font-medium ${isDark ? 'text-white/90' : 'text-gray-800'}`}>Rendered UI</h2>
           <span className={`text-xs ml-auto font-mono ${isDark ? 'text-white/40' : 'text-gray-400'}`}>
-            @lucidui/stream
+            @uix/stream
           </span>
         </div>
       )}
@@ -385,7 +385,7 @@ function AppContent() {
   const [conversation, setConversation] = useState<LucidConversation | null>(null)
   const [isRunning, setIsRunning] = useState(false)
 
-  // Process event and update Lucid IR
+  // Process event and update UIX IR
   const processEvent = useCallback((event: AIEvent) => {
     setConversation(prev => {
       if (!prev) {
@@ -500,10 +500,10 @@ function AppContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-2.5 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 flex-shrink-0">
             <div className={`p-0.5 rounded-lg border shadow-sm ${isDark ? 'border-white/20 bg-white/5' : 'border-gray-200 bg-white'}`}>
-              <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Lucid A2UI" className="w-7 h-7 rounded-md" />
+              <img src={`${import.meta.env.BASE_URL}logo.png`} alt="UIX" className="w-7 h-7 rounded-md" />
             </div>
             <div className="hidden sm:block">
-              <h1 className={`text-lg font-semibold animate-breathe ${isDark ? 'text-white' : 'text-gray-900'}`}>Lucid A2UI</h1>
+              <h1 className={`text-lg font-semibold animate-breathe ${isDark ? 'text-white' : 'text-gray-900'}`}>UIX</h1>
               <p className={`text-xs ${isDark ? 'text-white/50' : 'text-gray-500'}`}>AI-to-UI Intermediate Representation</p>
             </div>
           </div>
@@ -534,7 +534,7 @@ function AppContent() {
 
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <a
-              href="https://github.com/Deepractice/Lucid-UI"
+              href="https://github.com/Deepractice/UIX"
               target="_blank"
               rel="noopener noreferrer"
               className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/10 hover:bg-white/20 text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
@@ -566,7 +566,7 @@ function AppContent() {
               <div className="flex items-center justify-between gap-4">
                 <div className="flex-1">
                   <h2 className={`text-base font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                    Lucid A2UI Protocol Demo
+                    UIX Protocol Demo
                   </h2>
                   <p className={`text-sm ${isDark ? 'text-white/50' : 'text-gray-500'}`}>
                     See how it works: transforming streaming AI events into a structured Intermediate Representation, then rendering into the user interface.
@@ -609,7 +609,7 @@ function AppContent() {
                 <span className={`text-lg ${isDark ? 'text-white/30' : 'text-gray-300'}`}>↓</span>
                 <div className={`flex items-center gap-2 px-4 py-2 rounded-lg ${isDark ? 'bg-blue-500/10' : 'bg-blue-50'}`}>
                   <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
-                  <span className={isDark ? 'text-blue-400' : 'text-blue-700'}>Lucid IR</span>
+                  <span className={isDark ? 'text-blue-400' : 'text-blue-700'}>UIX IR</span>
                 </div>
                 <span className={`text-lg ${isDark ? 'text-white/30' : 'text-gray-300'}`}>↓</span>
                 <div className={`flex items-center gap-2 px-4 py-2 rounded-lg ${isDark ? 'bg-purple-500/10' : 'bg-purple-50'}`}>
@@ -679,7 +679,7 @@ function AppContent() {
                 <div className={`p-3 rounded-lg ${isDark ? 'bg-white/5' : 'bg-gray-50'}`}>
                   <div className="flex items-center gap-2 mb-1">
                     <span>📦</span>
-                    <span className={`font-mono text-sm ${isDark ? 'text-white/80' : 'text-gray-800'}`}>@lucidui/ir</span>
+                    <span className={`font-mono text-sm ${isDark ? 'text-white/80' : 'text-gray-800'}`}>@uix/core</span>
                   </div>
                   <p className={`text-xs ${isDark ? 'text-white/50' : 'text-gray-500'}`}>
                     Core IR types and type guards
@@ -688,7 +688,7 @@ function AppContent() {
                 <div className={`p-3 rounded-lg ${isDark ? 'bg-white/5' : 'bg-gray-50'}`}>
                   <div className="flex items-center gap-2 mb-1">
                     <span>📦</span>
-                    <span className={`font-mono text-sm ${isDark ? 'text-white/80' : 'text-gray-800'}`}>@lucidui/stream</span>
+                    <span className={`font-mono text-sm ${isDark ? 'text-white/80' : 'text-gray-800'}`}>@uix/stream</span>
                   </div>
                   <p className={`text-xs ${isDark ? 'text-white/50' : 'text-gray-500'}`}>
                     Streaming markdown renderer
@@ -697,7 +697,7 @@ function AppContent() {
                 <div className={`p-3 rounded-lg ${isDark ? 'bg-white/5' : 'bg-gray-50'}`}>
                   <div className="flex items-center gap-2 mb-1">
                     <span>📦</span>
-                    <span className={`font-mono text-sm ${isDark ? 'text-white/80' : 'text-gray-800'}`}>@lucidui/react</span>
+                    <span className={`font-mono text-sm ${isDark ? 'text-white/80' : 'text-gray-800'}`}>@uix/lucid-react</span>
                   </div>
                   <p className={`text-xs ${isDark ? 'text-white/50' : 'text-gray-500'}`}>
                     React components library
@@ -706,7 +706,7 @@ function AppContent() {
                 <div className={`p-3 rounded-lg ${isDark ? 'bg-white/5' : 'bg-gray-50'}`}>
                   <div className="flex items-center gap-2 mb-1">
                     <span>📦</span>
-                    <span className={`font-mono text-sm ${isDark ? 'text-white/80' : 'text-gray-800'}`}>@lucidui/tokens</span>
+                    <span className={`font-mono text-sm ${isDark ? 'text-white/80' : 'text-gray-800'}`}>@uix/lucid-tokens</span>
                   </div>
                   <p className={`text-xs ${isDark ? 'text-white/50' : 'text-gray-500'}`}>
                     Design tokens and themes
@@ -730,7 +730,7 @@ function AppContent() {
                   Cliff Yang
                 </a>
                 {' · '}
-                <a href="https://github.com/Deepractice/Lucid-UI/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" className={`transition-colors ${isDark ? 'hover:text-white/60' : 'hover:text-gray-600'}`}>
+                <a href="https://github.com/Deepractice/UIX/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" className={`transition-colors ${isDark ? 'hover:text-white/60' : 'hover:text-gray-600'}`}>
                   MIT License
                 </a>
               </p>
