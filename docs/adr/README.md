@@ -1,50 +1,49 @@
 # Architecture Decision Records (ADR)
 
-?�目录记�?UIX 项目?�关?�架?�决策�?
+本目录记录 UIX 项目的关键架构决策。
 
-## ?��?定�?
+## 核心定位
 
-> **UIX ??AI-to-UI ?�议层�?消费?�是 AI，�??��??�者�?*
+> **UIX 是 AI-to-UI 协议层，消费者是 AI，不是开发者。**
 
-## 什么是 ADR�?
+## 什么是 ADR？
 
-ADR ?�记录�?要架?�决策�?轻�?级�?�?���?�?ADR ?�述一个决策�?�?
-- **?�景** - 为�?么�?要�?这个?��?
-- **?��?** - ?��??�择了�?�?
-- **?��?** - 这个?��?带来?�影??
+ADR 是记录重要架构决策的轻量级文档。每个 ADR 描述一个决策的：
+- **背景** - 为什么需要做这个决策
+- **决策** - 具体选择了什么
+- **后果** - 这个决策带来的影响
 
-## ADR ?��?
+## ADR 状态
 
-- **proposed** - ?�议中�?等�?讨论
-- **accepted** - 已接?��?�?��?��?
-- **deprecated** - 已�?弃�?被新?��??�代
-- **superseded** - 已被?�代，�?见新 ADR
+- **proposed** - 提议中，等待讨论
+- **accepted** - 已接受，正在执行
+- **deprecated** - 已废弃，被新决策取代
+- **superseded** - 已被取代，参见新 ADR
 
-## ?��?
+## 目录
 
-| ADR | ?��? | ?��?| ?��? |
+| ADR | 标题 | 状态 | 日期 |
 |-----|------|------|------|
-| [ADR-0001](./0001-enterprise-grade-ui-infrastructure.md) | AI-to-UI ?�议层�?�?| accepted (v2) | 2024-12-21 |
-| [ADR-0002](./0002-defer-protocol-selection.md) | UIX IR ?�议策略 | accepted | 2024-12-21 |
-| [ADR-0003](./0003-web-first-strategy.md) | Web 优�?策略 | accepted | 2024-12-21 |
-| [ADR-0004](./0004-no-dark-mode.md) | ?��??�模式设计�???| accepted | 2024-12-21 |
-| [ADR-0005](./0005-streaming-renderer-architecture.md) | 流�?渲�??�架??| accepted | 2024-12-21 |
-| [ADR-0006](./0006-lucid-ir-specification.md) | UIX IR 规�?定�? | accepted | 2024-12-21 |
+| [ADR-0001](./0001-enterprise-grade-ui-infrastructure.md) | AI-to-UI 协议层定位 | accepted (v2) | 2024-12-21 |
+| [ADR-0002](./0002-defer-protocol-selection.md) | UIX IR 协议策略 | accepted | 2024-12-21 |
+| [ADR-0003](./0003-web-first-strategy.md) | Web 优先策略 | accepted | 2024-12-21 |
+| [ADR-0004](./0004-no-dark-mode.md) | 无暗色模式设计原则 | accepted | 2024-12-21 |
+| [ADR-0005](./0005-streaming-renderer-architecture.md) | 流式渲染器架构 | accepted | 2024-12-21 |
+| [ADR-0006](./0006-lucid-ir-specification.md) | UIX IR 规范定义 | accepted | 2024-12-21 |
 
-## ?��??��??�系
+## 核心决策关系
 
 ```
-ADR-0001 (?�议层�?�?
-    ??
-ADR-0002 (UIX IR 策略) ?��? ADR-0006 (UIX IR 规�?)
-    ??
-ADR-0003 (Web 优�?) + ADR-0005 (流�?渲�???
-    ??
-ADR-0004 (设计?��?)
+ADR-0001 (协议层定位)
+    ↓
+ADR-0002 (UIX IR 策略) ←→ ADR-0006 (UIX IR 规范)
+    ↓
+ADR-0003 (Web 优先) + ADR-0005 (流式渲染器)
+    ↓
+ADR-0004 (设计原则)
 ```
 
-## ?��?
+## 参考
 
 - [ADR GitHub Organization](https://adr.github.io/)
 - [Michael Nygard's article on ADRs](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
-

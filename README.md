@@ -42,15 +42,15 @@ AI can understand human intent, reason, call tools, and generate content. But **
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      UIX                             │
-│           "The Last Mile from AI to Human"                  │
+│                       UIX                                   │
+│       "The Last Mile from AI to Human"                      │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │  Human Intent                                               │
 │       ↓                                                     │
 │  AI Processing (thinking, tool calls, generation)           │
 │       ↓                                                     │
-│  UIX IR ← Standardized format AI outputs                  │
+│  UIX IR ← Standardized format AI outputs                    │
 │       ↓                                                     │
 │  UI Rendering ← Components that understand IR               │
 │       ↓                                                     │
@@ -142,7 +142,7 @@ AI reasoning → UIX IR → Renderer → User sees UI
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  Layer 1: UIX IR (Core)                                   │
+│  Layer 1: UIX IR (Core)                                     │
 │  - JSON Schema definition                                   │
 │  - Block & Conversation standards                           │
 │  - AI-generatable format                                    │
@@ -157,9 +157,9 @@ AI reasoning → UIX IR → Renderer → User sees UI
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │  Layer 3: Design System                                     │
-│  - @uix/lucid-tokens (design tokens)                          │
-│  - @uix/lucid-react (base components)                         │
-│  - @uix/stream (streaming renderer)                     │
+│  - @uix/lucid-tokens (design tokens)                        │
+│  - @uix/lucid-react (base components)                       │
+│  - @uix/stream (streaming renderer)                         │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -169,8 +169,8 @@ All implementations depend on the UIX IR abstraction:
 
 ```
         ┌─────────────────────┐
-        │     UIX IR        │  ← Abstract protocol
-        │   (JSON Schema)     │
+        │       UIX IR        │  ← Abstract protocol
+        │    (JSON Schema)    │
         └──────────┬──────────┘
                    │
      ┌─────────────┼─────────────┐

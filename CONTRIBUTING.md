@@ -25,7 +25,7 @@ When contributing, remember:
 
 This guide will help you add new components or improve existing ones.
 
-## ?? Component Development Checklist
+## ğŸ“‹ Component Development Checklist
 
 When creating a new component, ensure it meets these criteria:
 
@@ -55,18 +55,18 @@ When creating a new component, ensure it meets these criteria:
 
 ---
 
-## ??ï¸?Component Structure
+## ğŸ—ï¸ Component Structure
 
 ```
 packages/react/src/components/[component-name]/
-?œâ??€ [component-name].tsx    # Main component file
-?œâ??€ index.ts                 # Exports
-?”â??€ README.md               # Component-specific docs (optional)
+â”œâ”€â”€ [component-name].tsx    # Main component file
+â”œâ”€â”€ index.ts                 # Exports
+â””â”€â”€ README.md               # Component-specific docs (optional)
 ```
 
 ---
 
-## ?? Component Template
+## ğŸ“ Component Template
 
 Use this template when creating a new component:
 
@@ -147,16 +147,16 @@ export { ComponentName, componentVariants }
 
 ---
 
-## ?¨ Design Token Usage
+## ğŸ¨ Design Token Usage
 
 Always use design tokens, never hardcoded values:
 
-### ??Good
+### âœ… Good
 ```tsx
 className="bg-primary-500 text-white border-border"
 ```
 
-### ??Bad
+### âŒ Bad
 ```tsx
 className="bg-[#0EA5E9] text-[#FFFFFF] border-[#E5E5E5]"
 ```
@@ -164,13 +164,13 @@ className="bg-[#0EA5E9] text-[#FFFFFF] border-[#E5E5E5]"
 ### Semantic Tokens
 Prefer semantic tokens when available:
 ```tsx
-className="bg-background text-foreground" // ??
-className="bg-white text-gray-900"        // ? ï? Less semantic
+className="bg-background text-foreground" // âœ…
+className="bg-white text-gray-900"        // âš ï¸ Less semantic
 ```
 
 ---
 
-## ?§ª Testing Your Component
+## ğŸ§ª Testing Your Component
 
 1. **Build the package:**
 ```bash
@@ -190,7 +190,7 @@ pnpm storybook
 
 ---
 
-## ?? Documentation Standards
+## ğŸ“š Documentation Standards
 
 ### Component File Documentation
 
@@ -220,7 +220,7 @@ asChild?: boolean
 
 ---
 
-## ?? Submitting Changes
+## ğŸš€ Submitting Changes
 
 1. **Fork the repository**
 2. **Create a feature branch:**
@@ -255,7 +255,7 @@ Types:
 
 ---
 
-## ?¯ Contribution Priorities
+## ğŸ¯ Contribution Priorities
 
 We're building in this order:
 
@@ -266,11 +266,11 @@ We're building in this order:
 - [x] React base components
 
 ### Phase 2: Block Renderers
-- [x] TextBlock ??StreamMarkdown
-- [x] ToolBlock ??ToolResult
-- [x] ThinkingBlock ??ThinkingIndicator
-- [ ] ImageBlock ??Image renderer
-- [ ] FileBlock ??File renderer
+- [x] TextBlock â†’ StreamMarkdown
+- [x] ToolBlock â†’ ToolResult
+- [x] ThinkingBlock â†’ ThinkingIndicator
+- [ ] ImageBlock â†’ Image renderer
+- [ ] FileBlock â†’ File renderer
 
 ### Phase 3: Renderers & Adapters
 - [x] ReactRenderer (default)
@@ -280,18 +280,18 @@ We're building in this order:
 
 ---
 
-## ?’¡ Best Practices
+## ğŸ’¡ Best Practices
 
 ### 1. Composition over Configuration
 Prefer simple, composable components:
 ```tsx
-// ??Good
+// âœ… Good
 <Card>
   <CardHeader>Title</CardHeader>
   <CardContent>Content</CardContent>
 </Card>
 
-// ??Avoid
+// âŒ Avoid
 <Card title="Title" content="Content" />
 ```
 
@@ -312,21 +312,20 @@ Keep it simple:
 ### 4. Mobile-First
 Always design mobile-first with Tailwind:
 ```tsx
-// ??Mobile-first
+// âœ… Mobile-first
 className="text-sm md:text-base lg:text-lg"
 
-// ??Desktop-first
+// âŒ Desktop-first
 className="text-lg md:text-base sm:text-sm"
 ```
 
 ---
 
-## ?? Questions?
+## ğŸ¤” Questions?
 
 - Open an issue: https://github.com/Deepractice/UIX/issues
 - Discussion: https://github.com/Deepractice/UIX/discussions
 
 ---
 
-Made with ?¤ï? by Deepractice
-
+Made with â¤ï¸ by Deepractice
