@@ -1,0 +1,138 @@
+{/* @jsxImportSource react */}
+import { Meta } from '@storybook/addon-docs/blocks'
+import { Avatar, AvatarFallback, ThinkingIndicator } from '@uix/agent'
+
+<Meta title="Foundation/Motion" />
+
+# Motion
+
+Lucid UI 动画系统。所有动画基于实际业务状态设计，保持克制不引起视觉疲劳。
+
+## Avatar 动画状态
+
+`AvatarAnimationStatus`: idle | thinking | planning | responding | tool-calling
+
+<div className="flex items-center gap-8 p-4 bg-white rounded-lg">
+  {['idle', 'thinking', 'planning', 'responding', 'tool-calling'].map((status) => (
+    <div key={status} className="text-center">
+      <Avatar size="lg" status={status}>
+        <AvatarFallback variant="primary">AI</AvatarFallback>
+      </Avatar>
+      <p className="text-xs text-gray-500 mt-2">{status}</p>
+    </div>
+  ))}
+</div>
+
+## Thinking 指示器
+
+`ThinkingVariant`: dots | pulse | bounce | wave | spinner
+
+<div className="flex items-center gap-8 p-4 bg-white rounded-lg">
+  {['dots', 'pulse', 'bounce', 'wave', 'spinner'].map((variant) => (
+    <div key={variant} className="text-center">
+      <div className="h-8 flex items-center justify-center">
+        <ThinkingIndicator variant={variant} />
+      </div>
+      <p className="text-xs text-gray-500 mt-2">{variant}</p>
+    </div>
+  ))}
+</div>
+
+## 消息状态流转
+
+`MessageStatus`: idle → thinking → streaming → complete | error
+
+<div className="flex items-center gap-3 p-4 bg-white rounded-lg">
+  <span className="flex items-center gap-2 px-3 py-1.5 rounded-lg border bg-gray-100 border-gray-200 text-gray-700">
+    <span className="w-2 h-2 rounded-full bg-gray-400" />
+    <span className="text-xs font-medium">idle</span>
+  </span>
+  <span className="text-gray-300">→</span>
+  <span className="flex items-center gap-2 px-3 py-1.5 rounded-lg border bg-blue-50 border-blue-200 text-blue-700">
+    <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+    <span className="text-xs font-medium">thinking</span>
+  </span>
+  <span className="text-gray-300">→</span>
+  <span className="flex items-center gap-2 px-3 py-1.5 rounded-lg border bg-blue-50 border-blue-200 text-blue-700">
+    <span className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
+    <span className="text-xs font-medium">streaming</span>
+  </span>
+  <span className="text-gray-300">→</span>
+  <div className="flex flex-col gap-2">
+    <span className="flex items-center gap-2 px-3 py-1.5 rounded-lg border bg-green-50 border-green-200 text-green-700">
+      <span className="w-2 h-2 rounded-full bg-green-500" />
+      <span className="text-xs font-medium">complete</span>
+    </span>
+    <span className="flex items-center gap-2 px-3 py-1.5 rounded-lg border bg-red-50 border-red-200 text-red-700">
+      <span className="w-2 h-2 rounded-full bg-red-500" />
+      <span className="text-xs font-medium">error</span>
+    </span>
+  </div>
+</div>
+
+## 在线状态
+
+`PresenceStatus`: online | offline | busy
+
+<div className="flex items-center gap-8 p-4 bg-white rounded-lg">
+  <div className="flex items-center gap-3">
+    <div className="relative">
+      <div className="w-10 h-10 rounded-full bg-gray-200" />
+      <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white" />
+    </div>
+    <span className="text-sm">online</span>
+  </div>
+  <div className="flex items-center gap-3">
+    <div className="relative">
+      <div className="w-10 h-10 rounded-full bg-gray-200" />
+      <span className="absolute bottom-0 right-0 w-3 h-3 bg-gray-400 rounded-full border-2 border-white" />
+    </div>
+    <span className="text-sm">offline</span>
+  </div>
+  <div className="flex items-center gap-3">
+    <div className="relative">
+      <div className="w-10 h-10 rounded-full bg-gray-200" />
+      <span className="absolute bottom-0 right-0 w-3 h-3 bg-amber-500 rounded-full border-2 border-white" />
+    </div>
+    <span className="text-sm">busy</span>
+  </div>
+</div>
+
+## 动画时间规范
+
+<table>
+  <thead>
+    <tr>
+      <th>用途</th>
+      <th>时长</th>
+      <th>缓动</th>
+      <th>示例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>微交互</td>
+      <td>150-200ms</td>
+      <td><code>ease-out</code></td>
+      <td>按钮悬停</td>
+    </tr>
+    <tr>
+      <td>状态切换</td>
+      <td>200-300ms</td>
+      <td><code>ease-in-out</code></td>
+      <td>展开/收起</td>
+    </tr>
+    <tr>
+      <td>思考动画</td>
+      <td>1000-1500ms</td>
+      <td><code>ease-in-out</code></td>
+      <td>脉冲效果</td>
+    </tr>
+    <tr>
+      <td>循环动画</td>
+      <td>2000-3000ms</td>
+      <td><code>linear</code></td>
+      <td>旋转/涟漪</td>
+    </tr>
+  </tbody>
+</table>
