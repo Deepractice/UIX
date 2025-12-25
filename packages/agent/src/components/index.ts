@@ -21,3 +21,7 @@ export * from './ThinkingIndicator'
 export * from './ToolResult'
 export * from './MessageList'
 export * from './SourceBlock'
+
+// Layout components
+export * from './ChatWindow'
+export * from './ChatList'

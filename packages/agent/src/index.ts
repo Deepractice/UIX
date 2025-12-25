@@ -38,7 +38,7 @@
  */
 
 export * from './components'
-export { cn } from './utils'
+export { cn, formatRelativeTime } from './utils'
 
 // Unified types - single source of truth
 export * from './types'

@@ -99,3 +99,58 @@ export type StreamSource =
  * Thinking animation variant
  */
 export type ThinkingVariant = 'dots' | 'pulse' | 'bounce' | 'wave' | 'spinner'
+
+// ============================================================================
+// Conversation Types (for ChatList)
+// ============================================================================
+
+/**
+ * Agent associated with a conversation
+ */
+export interface ConversationAgent {
+  id: string
+  name: string
+  avatar?: string
+}
+
+/**
+ * Conversation item data structure
+ */
+export interface Conversation {
+  /** Unique identifier */
+  id: string
+  /** Conversation title */
+  title: string
+  /** Last message preview */
+  lastMessage?: string
+  /** Last active time */
+  lastActiveAt?: Date | string
+  /** Unread message count */
+  unreadCount?: number
+  /** Is pinned */
+  pinned?: boolean
+  /** Associated agent */
+  agent?: ConversationAgent
+  /** Tags */
+  tags?: string[]
+}
+
+// ============================================================================
+// ChatWindow Types
+// ============================================================================
+
+/**
+ * Agent info for ChatWindowHeader
+ */
+export interface ChatWindowAgent {
+  id: string
+  name: string
+  avatar?: string
+  status?: PresenceStatus
+  description?: string
+}
+
+/**
+ * ChatWindow status
+ */
+export type ChatWindowStatus = 'idle' | 'loading' | 'streaming' | 'error'
