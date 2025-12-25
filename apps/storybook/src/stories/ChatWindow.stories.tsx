@@ -13,6 +13,7 @@ import {
   ChatMessageContent,
   ChatMessageSimple,
 } from '@uix/agent'
+import { StreamMarkdown } from '@uix/stream'
 import type { ChatWindowAgent, Message } from '@uix/agent'
 
 const meta: Meta<typeof ChatWindow> = {
@@ -54,7 +55,7 @@ const mockMessages: Message[] = [
 ]
 
 /**
- * 组合模式 - 完整示例
+ * 组合模式 - 完整示例（使用 StreamMarkdown 渲染 Markdown）
  */
 export const Composition: Story = {
   render: () => (
@@ -83,15 +84,22 @@ export const Composition: Story = {
         </ChatWindowHeader>
 
         <ChatWindowMessages>
-          {mockMessages.map((msg) => (
-            <ChatMessageSimple
-              key={msg.id}
-              role={msg.role}
-              content={msg.content}
-              avatar={msg.role === 'assistant' ? mockAgent.avatar : undefined}
-              name={msg.role === 'assistant' ? mockAgent.name : undefined}
-            />
-          ))}
+          {mockMessages.map((msg) =>
+            msg.role === 'user' ? (
+              <ChatMessageSimple
+                key={msg.id}
+                role="user"
+                content={msg.content}
+              />
+            ) : (
+              <ChatMessage key={msg.id} role="assistant">
+                <ChatMessageAvatar src={mockAgent.avatar} name={mockAgent.name} />
+                <ChatMessageContent name={mockAgent.name}>
+                  <StreamMarkdown content={msg.content} />
+                </ChatMessageContent>
+              </ChatMessage>
+            )
+          )}
         </ChatWindowMessages>
 
         <ChatWindowInput
@@ -247,4 +255,66 @@ export const NoAgent: Story = {
       </ChatWindow>
     </div>
   ),
+}
+
+/**
+ * Markdown 渲染示例
+ *
+ * 使用 StreamMarkdown 渲染富文本内容，支持：
+ * - 标题、粗体、斜体
+ * - 列表（有序/无序）
+ * - 代码块（语法高亮）
+ * - 表格
+ */
+export const MarkdownRendering: Story = {
+  render: () => {
+    const markdownContent = `## React 核心概念
+
+React 有几个**核心概念**需要掌握：
+
+### 1. 组件 (Components)
+
+组件是 React 的基本构建块。有两种类型：
+
+- **函数组件** - 推荐使用
+- **类组件** - 传统写法
+
+### 2. JSX
+
+JSX 是 JavaScript 的语法扩展：
+
+\`\`\`jsx
+function Hello({ name }) {
+  return <h1>Hello, {name}!</h1>
+}
+\`\`\`
+
+### 3. Props vs State
+
+| 特性 | Props | State |
+|------|-------|-------|
+| 可变性 | 不可变 | 可变 |
+| 来源 | 父组件 | 组件内部 |
+| 更新 | 父组件更新 | setState |
+
+> 记住：**Props 向下流动，Events 向上冒泡**`
+
+    return (
+      <div className="h-[700px] border border-gray-200 rounded-lg overflow-hidden">
+        <ChatWindow agent={mockAgent} status="idle">
+          <ChatWindowHeader />
+          <ChatWindowMessages>
+            <ChatMessageSimple role="user" content="帮我总结一下 React 的核心概念" />
+            <ChatMessage role="assistant">
+              <ChatMessageAvatar src={mockAgent.avatar} name={mockAgent.name} />
+              <ChatMessageContent name={mockAgent.name}>
+                <StreamMarkdown content={markdownContent} />
+              </ChatMessageContent>
+            </ChatMessage>
+          </ChatWindowMessages>
+          <ChatWindowInput onSend={(msg) => console.log('Send:', msg)} />
+        </ChatWindow>
+      </div>
+    )
+  },
 }

@@ -16,6 +16,9 @@ importers:
       '@uix/lucid-tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
+      '@uix/stream':
+        specifier: workspace:*
+        version: link:../../packages/stream
       react:
         specifier: ^19.1.0
         version: 19.2.3
