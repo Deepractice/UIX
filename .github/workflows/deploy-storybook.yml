@@ -34,8 +34,8 @@ jobs:
           pnpm -F @uix/lucid-tokens build
           pnpm -F @uix/agent build
 
-      - name: Build Demo
-        run: pnpm -F demo build
+      - name: Build Web
+        run: pnpm -F web build
 
       - name: Build Storybook
         run: pnpm -F @uix/storybook build
@@ -43,8 +43,8 @@ jobs:
       - name: Merge builds
         run: |
           mkdir -p dist
-          # Copy Demo to root
-          cp -r apps/demo/dist/* dist/
+          # Copy Web to root
+          cp -r apps/web/dist/* dist/
           # Copy Storybook to /storybook/
           mkdir -p dist/storybook
           cp -r apps/storybook/storybook-static/* dist/storybook/
